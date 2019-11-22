@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name=author content="Bella Virgilio">
+    <title>WMDB Lookup</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
+</head>
+<body>
+
+<form class="search" method="GET" action="/query">
+    <p><label>Search: <input id="searchterm" type="text" required name="q" class="txt"></label>
+    <label>Filter
+        <select class="dropdown" required name="filter">
+            <option value="">Select</option>
+            <option value="album">Album</option>
+            <option value="artist">Artist</option>
+            <option value="year">Year</option>
+            <option value="genre">Genre</option>
+            <option value="track">Track</option>
+        </select>
+    </label>
+    <!-- <input type="submit" value="search" class=txt></p> -->
+    <button id="searchbutton" type="submit" name="submit" value="search">Search</button>
+</form>
+            
+{% block content %}
+
+<h1>Welcome to the WZLY Record Library!</h1>
+
+{% endblock %}
+    
+</body>
+</html>
