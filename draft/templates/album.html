@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if album['spotify_name'] != None %}
+    <h1>{{ album['spotify_name'] }}</h1>
+{% else %}
+    <h1>{{ album['name'] }}</h1>
+{% endif %}
+{% if album['spotify_artist'] != None %}
+    <h1>{{ album['spotify_artist'] }}</h1>
+{% else %}
+    <h1>{{ album['artist'] }}</h1>
+{% endif %}
+
+<button>Check me out!</button><br>
+
+{% if album['art'] != None %}
+    <img src={{ album['art'] }}
+         alt="album art for {{ album['name ']}}"
+         width=400px></img>
+{% endif %}
+
+<ul>
+    {% if album['year'] != None %}
+        <li>Year: {{ album['year'] }}</li>
+    {% endif %}
+    <li>Format: {{ album['fmt']|upper }} </li>
+    {% if album['location'] != None %}
+        <li>Location: {{ album['location'] }}</li>
+    {% endif %}
+    <li>{{ avail }}</li>
+</ul>
+
+{% if album['spotify_album_id'] != None %}
+    <iframe src="https://open.spotify.com/embed/album/{{ album['spotify_album_id'] }}"
+            width="400" height="400" frameborder="0" allowtransparency="true"
+            allow="encrypted-media"></iframe>
+{% endif %}
+
+<!-- show genres -->
+{% if genres != None %}
+    <p>{{ genres }}</p>
+{% endif %}
+
+<!-- show tracks -->
+<!-- if there's no embed but there are tracks, show the tracks -->
+{% if tracks != None %}
+    <p>{{ tracks }}</p>
+{% endif %}
+
+
+{% endblock %}

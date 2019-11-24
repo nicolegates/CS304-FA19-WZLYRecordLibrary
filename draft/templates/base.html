@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name=author content="Bella Virgilio">
+    <title>WZLY Record Library</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
+</head>
+<body>
+
+<ul id="nav">
+    <li><a href='/'>Home</a></li>
+    <li><a href='/login/'>Sign In</a></li>
+    <li><a href='/profile/'>Profile</a></li>
+    <li><a href='/checkin/'>Check in materials</a></li>
+    <li><a href='/admin/'>Admin</a></li>
+</ul>
+
+<form class="search" method="GET" action="/query">
+    <p><label>Search: <input id="searchterm" type="text" required name="q" class="txt"></label>
+    <label>Filter
+        <select class="dropdown" required name="filter">
+            <option value="">Select</option>
+            <option value="album">Album</option>
+            <option value="artist">Artist</option>
+            <option value="year">Year</option>
+            <option value="genre">Genre</option>
+            <option value="track">Track</option>
+        </select>
+    </label>
+    <button id="searchbutton" type="submit" name="submit" value="search">Search</button>
+</form>
+            
+{% block content %}
+
+<h1>Welcome to the WZLY Record Library!</h1>
+
+{% endblock %}
+    
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>{{ kind }}s matching {{ query }}:</p>
+
+<ol>
+    {% for r in results %}
+        <li><a href="/album/{{ r['aid'] }}">{{ r['name'] }} by {{ r['artist'] }}</a></li>
+    {% endfor %}
+</ol>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+/* hwk5 has insert, search by title, select from incomplete */
+
+/* hwk4 has search with filters */
+
+/* hwk6 use search tags? */
+
+/* Authored by Bella Virgilio */
+
+body {
+    background-color: black;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    color: white;
+    padding: 10px;
+}
+
+h1 {
+  font-size: 36px;
+  color: #fcb2a2;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+p {
+  padding: 10px;
+}
+
+a {
+  color: #add8e6
+}
+
+#featured-movie {
+  border: 3px dashed rgb(241, 226, 135);
+  margin: 15px;
+  padding: 20px;
+  line-height: 10px;
+}
+
+#searchterm {
+  width: 150px;
+  padding: 10px 10px;
+  margin: 8px;
+  border-radius: 15px;
+}
+
+button {
+  border-radius: 10px;
+  padding: 5px 5px;
+  margin: 5px;
+}
