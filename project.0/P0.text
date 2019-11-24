@@ -1,7 +1,0 @@
-Bella Virgilio
-
-I would like to build a database of WZLY’s CDs and records. The station’s CDs and records were finally alphabetized and shelved last year, and the name of each album and its artist is in a Google sheet that has been hand compiled over many years by students in WZLY, making the data fairly reliable. I would like to populate a database with this information and also use the Spotify API or something similar to populate the genre, tracklist, release year, and even cover art of these albums where available.
-
-This database will have a front-end that allows users to add new records/CDs and “check out” an item after logging in to their Wellesley account. After an item is checked out, it will no longer be shown as available in the record library. There is a huge need for this in WZLY, as the current system is an editable spreadsheet that is impossible to search through. It would be awesome if this system could email the record librarian about which items have been checked out and which items are late. These notifications could even take the form of a SlackBot (mini software that lives in Slack). I am so excited about this idea!
-
-There is also a convenient gap in the station’s operability right now due to construction, so I could take the time to implement this system and it could possibly be used as soon as next semester.
