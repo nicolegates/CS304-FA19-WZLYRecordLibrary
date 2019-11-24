@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<p>{{ kind }} matching {{ query }}:</p>
+<p>{{ kind }}s matching {{ query }}:</p>
 
 <ol>
     {% for r in results %}
-        <li><a href="/">r['name'] by r['artist'] from r['year']</a></li>
+        <li><a href="/album/{{ r['aid'] }}">{{ r['name'] }} by {{ r['artist'] }}</a></li>
     {% endfor %}
 </ol>
 

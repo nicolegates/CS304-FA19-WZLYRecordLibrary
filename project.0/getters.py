@@ -7,20 +7,17 @@ def getConn(db):
     conn.select_db(db)
     return conn
 
-# TODO: WRITE THESE!!!!!
-def getAlbums(query, conn):
+def searchAlbums(query, conn):
     '''adds tracks and their order
     to track table'''
 
     curs = dbi.dictCursor(conn)
-    curs.execute('insert into track ' +\
-                     '(name, num, spotify_id, aid) ' +\
-                     'values (%s, %s, %s, %s)',
-                     [track[0], track[1], track[2], aid])
+    curs.execute('select * from album where name like %s',
+                ['%' + query + '%'])
 
     return curs.fetchall()
 
-def getArtists(query, conn):
+def searchArtists(query, conn):
     '''returns all artists matching a query'''
 
     curs = dbi.dictCursor(conn)
@@ -29,7 +26,7 @@ def getArtists(query, conn):
                   ['%' + query + '%'])
     return curs.fetchall()
 
-def getYear(query, conn):
+def searchYear(query, conn):
     '''returns all albums from given year'''
 
     curs = dbi.dictCursor(conn)
@@ -38,7 +35,7 @@ def getYear(query, conn):
                   [query])
     return curs.fetchall()
 
-def getGenre(query, conn):
+def searchGenre(query, conn):
     '''returns all albums of a specific genre'''
 
     curs = dbi.dictCursor(conn)
@@ -51,7 +48,7 @@ def getGenre(query, conn):
     return curs.fetchall()
     
 
-def getTrack(query, conn):
+def searchTrack(query, conn):
     '''returns all albums that contain
     the query in their track list'''
 
@@ -61,10 +58,70 @@ def getTrack(query, conn):
                     'on a.aid = t.aid ' +\
                  'where t.name like %s ' +\
                  'group by a.aid;', ['%' + query + '%'])
+
+    return curs.fetchall()
+
+def getAlbumByID(aid, conn):
+    '''returns an album with that id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where aid = %s', [aid])
+    return curs.fetchone()
+    
+def getReservation(aid, conn):
+    '''gets the most recent reservation
+    for a particular album id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from reservation where aid = %s ' +\
+                  'order by due desc limit 1;', [aid])
+    
+    return curs.fetchone()
+
+def getGenres(aid, conn):
+    '''gets genres for an album
+    given album's id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from genre where aid = %s', [aid])
     
     return curs.fetchall()
 
-conn = getConn('cs304reclib_db')
-res = getTrack('lotus', conn)
-print(res)
-print(len(res))
+def getTracks(aid, conn):
+    ''''gets tracks for an album
+    given album's id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from track where aid = %s', [aid])
+    
+    return curs.fetchall()
+
+# use this code to update all rows where this happens
+def fixThe():
+    conn = getConn('cs304reclib_db')
+    curs = dbi.dictCursor(conn)
+    curs.execute("select * from track where name like '%, the%'")
+    albums = curs.fetchall()
+
+    for a in albums:
+        print(a['name'])
+    
+    # name = album['name']
+    # artist = album['artist']
+
+    # if ', the' in artist.lower():
+    #     i = artist.lower().index(', the')
+    #     album['artist'] = 'The ' + artist[:i]
+    # if ',the' in artist.lower():
+    #     i = artist.lower().index(',the')
+    #     album['artist'] = 'The ' + artist[:i]
+    # if ', the' in name.lower():
+    #     i = name.lower().index(', the')
+    #     album['name'] = 'The ' + name[:i]
+    # if ',the' in name.lower():
+    #     i = name.lower().index(',the')
+    #     album['name'] = 'The ' + name[:i]
+    
+    # return album
+
+# conn = getConn('cs304reclib_db')
+# album = getAlbumByID(3045, conn)
+# print(fixThe(album))
+
+fixThe()

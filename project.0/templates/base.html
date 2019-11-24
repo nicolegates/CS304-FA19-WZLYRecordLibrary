@@ -3,10 +3,18 @@
 <head>
     <meta charset='utf-8'>
     <meta name=author content="Bella Virgilio">
-    <title>WMDB Lookup</title>
+    <title>WZLY Record Library</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
 </head>
 <body>
+
+<ul id="nav">
+    <li><a href='/'>Home</a></li>
+    <li><a href='/login/'>Sign In</a></li>
+    <li><a href='/profile/'>Profile</a></li>
+    <li><a href='/checkin/'>Check in materials</a></li>
+    <li><a href='/admin/'>Admin</a></li>
+</ul>
 
 <form class="search" method="GET" action="/query">
     <p><label>Search: <input id="searchterm" type="text" required name="q" class="txt"></label>
@@ -20,7 +28,6 @@
             <option value="track">Track</option>
         </select>
     </label>
-    <!-- <input type="submit" value="search" class=txt></p> -->
     <button id="searchbutton" type="submit" name="submit" value="search">Search</button>
 </form>
             
