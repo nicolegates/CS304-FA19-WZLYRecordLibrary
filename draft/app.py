@@ -10,6 +10,15 @@ import getters
 from dotenv import load_dotenv
 load_dotenv()
 
+# CAS(app)
+
+# app.config['CAS_SERVER'] = 'https://login.wellesley.edu:443'
+# app.config['CAS_AFTER_LOGIN'] = 'logged_in'
+# app.config['CAS_LOGIN_ROUTE'] = '/module.php/casserver/cas.php/login'
+# app.config['CAS_LOGOUT_ROUTE'] = '/module.php/casserver/cas.php/logout'
+# app.config['CAS_AFTER_LOGOUT'] = 'http://cs.wellesley.edu:8343/'
+# app.config['CAS_VALIDATE_ROUTE'] = '/module.php/casserver/serviceValidate.php'
+
 app.secret_key = os.getenv('secret_key')
 app.secret_key = ''.join([ random.choice(('ABCDEFGHIJKLMNOPQRSTUVXYZ' +
                                           'abcdefghijklmnopqrstuvxyz' +
@@ -75,6 +84,30 @@ def album(aid):
 @app.route('/login/')
 def login():
     return redirect(url_for('index'))
+    # print ('Session keys: ',session.keys())
+    # for k in session.keys():
+    #     print (k,' => ',session[k])
+    # if '_CAS_TOKEN' in session:
+    #     token = session['_CAS_TOKEN']
+    # if 'CAS_ATTRIBUTES' in session:
+    #     attribs = session['CAS_ATTRIBUTES']
+    #     print ('CAS_attributes: ')
+    #     for k in attribs:
+    #         print ('\t',k,' => ',attribs[k])
+    # if 'CAS_USERNAME' in session:
+    #     is_logged_in = True
+    #     username = session['CAS_USERNAME']
+    #     print('CAS_USERNAME is: ',username)
+    # else:
+    #     is_logged_in = False
+    #     username = None
+    #     print('CAS_USERNAME is not in the session')
+    # return render_template('base.html', username=username, is_logged_in=is_logged_in)
+
+@app.route('/logged-in/')
+def loggedin():
+    flash('Successfully logged in!')
+    return redirect(url_for('index'))
 
 @app.route('/profile/')
 def profile():
@@ -82,7 +115,25 @@ def profile():
 
 @app.route('/checkin/')
 def checkin():
+    # pseudocode:
+    # if user is not logged in:
+    #   flash('You have to log in before you can check anything in')
+    # else:
+    #   conn = getters.getConn('cs304reclib_db')
+    #   
+
+    return render_template('check-in.html')
+
+@app.route('/checkinAjax/')
+def checkinAjax():
+    # runs SQL statement that changes album's availability
+    # from 'not available' to 'available'
+    conn = getters.getConn('cs304reclib_db')
+    # album = album user has selected to check in
+    # run python code to update album availability
+    print("hello")
     return redirect(url_for('index'))
+    
 
 @app.route('/admin/')
 def admin():
