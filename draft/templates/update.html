@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Select a movie:</h1>
+
+<form method=POST action='/update/'>
+    <label for="menu-aid">{{ total }} albums missing data:</label>
+    <select id="menu-aid" name="menu-aid">
+        <option value="none">Choose One</option>
+        {% for a in albums %}
+        <option value="{{ a['aid'] }}">{{ a['name'] }} by {{ a['artist'] }}</option>    
+        {% endfor %}
+    </select>
+    <input type="submit" name="submit-btn" value="Choose">
+</form>
+
+<!--
+<p>Use "None" to set a field to null.</p>
+
+<form method=POST action="/update/{{ tt }}">
+    <table>
+    <tr>
+        <td><label for="movie-title">Title</label></td>
+        <td><input id="movie-title" name='movie-title' value='{{title}}'></td>
+    </tr>
+    <tr>
+        <td><label for="movie-tt">Movie id</label></td>
+        <td><input id="movie-tt" name='movie-tt' value='{{tt}}'></td>
+    </tr>
+    <tr>
+        <td><label for="movie-release">Release year</label></td>
+        <td><input id="movie-release" name='movie-release' value='{{year}}'></td>
+    </tr>
+    <tr>
+        <td><label for="movie-addedby">Added by</label></td>
+        <td><input id="movie-addedby" name='movie-addedby' value='{{id}}'></td>
+    </tr>
+    <tr>
+        <td><label for="movie-director">Director ID</label></td>
+        <td><input id="movie-director" name='movie-director' value='{{ did }}'></td>
+    </tr>
+    <tr>
+        <td><label>Director</label></td>
+        <td>{{ director }}</td>
+    </tr>
+    </table>
+    <input type="submit" name="submit" value="update">
+    <input type="submit" name="submit" value="delete">
+</form> -->
+
+{% endblock %}
