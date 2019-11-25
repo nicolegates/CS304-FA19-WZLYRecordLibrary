@@ -4,10 +4,19 @@
 
 <p>{{ kind }}s matching {{ query }}:</p>
 
-<ol>
+<ul class="grid">
     {% for r in results %}
-        <li><a href="/album/{{ r['aid'] }}">{{ r['name'] }} by {{ r['artist'] }}</a></li>
+        <li class="tile">
+            <a href="/album/{{ r['aid'] }}">
+                {% if r['art'] != None%}
+                    <img class="cover" src={{ r['art'] }}></img>
+                {% else %}
+                    <img class="cover" src="{{ url_for('static', filename='../static/defaultrecord.png') }}"></img>
+                {% endif %}
+            </a>
+            <p>{{ r['name'] }} by {{ r['artist'] }}</p>
+        </li>
     {% endfor %}
-</ol>
+</ul>
 
 {% endblock %}
