@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Hi {{ user }}!</p>
+
+<form class="check-in" method="GET" action="/checkin/">
+    <p><label>Please select which item you are checking in: 
+        <select required name="kind" id="kind">
+            <option value = "">Select one...</option>
+            <option value = "one">1</option>
+            <option value = "two">2</option>
+            <option value = "three">3</option>
+            
+            <!-- 
+            {% for item in items %}
+                <option value="option">{{ item }}</option>
+            {% endfor %}
+            -->
+
+        </select>
+    </label></p>
+    <button id="checkin-button" type="submit" name="submit" value="checkin">Check In!</button>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
+{% endblock %}
+
+<script>
+
+$(".checkin-button").on("click", function() {
+    alert("success")
+    
+    // $user = "1";
+    // $album = "1";
+    // $.post("/checkinAjax/", {user: $user, album: $album});
+
+    // redirect to a 'successfully checked in page'?
+    
+})
+
+</script>
