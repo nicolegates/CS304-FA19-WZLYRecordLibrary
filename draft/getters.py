@@ -99,5 +99,15 @@ def getArtist(artist, conn):
 
     return curs.fetchall()
 
+def getIncompletes(conn):
+    # gets albums with incomplete info
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where ' +\
+                 'year IS NULL')
+    incompletes = curs.fetchall()
+    return incompletes
+
 # conn = getConn('cs304reclib_db')
-# album = getAlbumByID(3045, conn)
+# incompletes = getIncompletes(conn)
+# print(len(incompletes))
+# print(incompletes[0])
