@@ -1,9 +1,3 @@
-/* hwk5 has insert, search by title, select from incomplete */
-
-/* hwk4 has search with filters */
-
-/* hwk6 use search tags? */
-
 /* Authored by Bella Virgilio */
 
 body {
@@ -11,7 +5,7 @@ body {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 18px;
     color: white;
-    padding: 10px;
+    padding: 20px;
 }
 
 h1 {
@@ -56,4 +50,22 @@ button {
   border-radius: 10px;
   padding: 5px 5px;
   margin: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 20px;
+  list-style: none;
+}
+
+.tile {
+  text-align: center;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.cover {
+  width: 100%;
 }
