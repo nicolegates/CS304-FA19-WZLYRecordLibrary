@@ -16,6 +16,18 @@
     <li><a href='/admin/'>Admin</a></li>
 </ul>
 
+<div id='flashes'>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="messages">
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
 <form class="search" method="GET" action="/query">
     <p><label>Search: <input id="searchterm" type="text" required name="q" class="txt"></label>
     <label>Filter

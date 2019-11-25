@@ -24,6 +24,12 @@ def insertAlbum(name, artist, conn):
     except:
         return False
 
+def deleteAlbum(aid, conn):
+    '''deletes an album from the album table'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('delete from album where aid = %s', [aid])
+
+
 # def insertTracks(track, num, conn):
 #     '''takes a list of tracks and updates
 #     the track table'''
@@ -31,3 +37,4 @@ def insertAlbum(name, artist, conn):
 # def insertGenre(genre, aid, conn):
 #     '''inserts a genre/album pair into
 #     the genre table'''
+

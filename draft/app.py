@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 import sys,os,random
 import getters
+import setters
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -120,6 +121,7 @@ def login():
 
 @app.route('/update/', methods=['GET','POST'])
 def update():
+    '''ADMIN FEATURE'''
     conn = getters.getConn('cs304reclib_db')
     
     # get albums with incomplete fields
@@ -127,12 +129,35 @@ def update():
     
     if request.method == 'POST':
         aid = request.form.get('menu-aid')
+        album = getters.getAlbumByID(aid, conn)
+        form = request.form
 
-        return redirect(url_for('update', 
-                                tt = tt))
+        if 'submit' in form:
+            form = request.form
+            print(form)
+            action = form['submit']
+            aid = form['album-id']
+            print('here in submit')
+        
+            if action == 'delete':
+                print(aid)
+                setters.deleteAlbum(aid, conn)
+                print('here in delete')
+                flash("Album " + str(aid) + " was deleted")
+                # insert into album (aid, name, artist) values (30, 'I Am Ghost', 'Lover's Requiem')
+                return render_template('update.html',
+                                        incompletes = albums,
+                                        a = {},
+                                        total = len(albums))
+
+        return render_template('update.html',
+                                incompletes = albums,
+                                a = album,
+                                total = len(albums))
     
     return render_template('update.html',
-                            albums = albums,
+                            incompletes = albums,
+                            a = {},
                             total = len(albums))
 
 @app.route('/logged-in/')
