@@ -92,36 +92,5 @@ def getTracks(aid, conn):
     
     return curs.fetchall()
 
-# use this code to update all rows where this happens
-def fixThe():
-    conn = getConn('cs304reclib_db')
-    curs = dbi.dictCursor(conn)
-    curs.execute("select * from track where name like '%, the%'")
-    albums = curs.fetchall()
-
-    for a in albums:
-        print(a['name'])
-    
-    # name = album['name']
-    # artist = album['artist']
-
-    # if ', the' in artist.lower():
-    #     i = artist.lower().index(', the')
-    #     album['artist'] = 'The ' + artist[:i]
-    # if ',the' in artist.lower():
-    #     i = artist.lower().index(',the')
-    #     album['artist'] = 'The ' + artist[:i]
-    # if ', the' in name.lower():
-    #     i = name.lower().index(', the')
-    #     album['name'] = 'The ' + name[:i]
-    # if ',the' in name.lower():
-    #     i = name.lower().index(',the')
-    #     album['name'] = 'The ' + name[:i]
-    
-    # return album
-
 # conn = getConn('cs304reclib_db')
 # album = getAlbumByID(3045, conn)
-# print(fixThe(album))
-
-fixThe()

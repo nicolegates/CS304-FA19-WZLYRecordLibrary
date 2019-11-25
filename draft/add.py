@@ -2,8 +2,6 @@ import csv
 import dbi
 from spotify import *
 
-# https://medium.com/@AviGoom/how-to-import-a-csv-file-into-a-mysql-database-ef8860878a68
-
 def addAlbums(conn):
     # reads results.csv and updates appropriate tables
 
@@ -148,8 +146,3 @@ def lowData(row, conn):
 
     curs.execute('select LAST_INSERT_ID();')
     aid = curs.fetchone()['LAST_INSERT_ID()']
-    
-    return aid
-
-conn = getConn('cs304reclib_db')
-addAlbums(conn)
