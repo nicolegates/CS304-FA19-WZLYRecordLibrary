@@ -8,45 +8,76 @@
     <label for="menu-aid">{{ total }} albums missing data:</label>
     <select id="menu-aid" name="menu-aid">
         <option value="none">Choose One</option>
-        {% for a in albums %}
+        {% for a in incompletes %}
         <option value="{{ a['aid'] }}">{{ a['name'] }} by {{ a['artist'] }}</option>    
         {% endfor %}
     </select>
-    <input type="submit" name="submit-btn" value="Choose">
+    <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
 </form>
 
-<!--
-<p>Use "None" to set a field to null.</p>
+<div id="update-form">
+    <p>Use "None" to set a field to null.</p>
 
-<form method=POST action="/update/{{ tt }}">
-    <table>
-    <tr>
-        <td><label for="movie-title">Title</label></td>
-        <td><input id="movie-title" name='movie-title' value='{{title}}'></td>
-    </tr>
-    <tr>
-        <td><label for="movie-tt">Movie id</label></td>
-        <td><input id="movie-tt" name='movie-tt' value='{{tt}}'></td>
-    </tr>
-    <tr>
-        <td><label for="movie-release">Release year</label></td>
-        <td><input id="movie-release" name='movie-release' value='{{year}}'></td>
-    </tr>
-    <tr>
-        <td><label for="movie-addedby">Added by</label></td>
-        <td><input id="movie-addedby" name='movie-addedby' value='{{id}}'></td>
-    </tr>
-    <tr>
-        <td><label for="movie-director">Director ID</label></td>
-        <td><input id="movie-director" name='movie-director' value='{{ did }}'></td>
-    </tr>
-    <tr>
-        <td><label>Director</label></td>
-        <td>{{ director }}</td>
-    </tr>
-    </table>
-    <input type="submit" name="submit" value="update">
-    <input type="submit" name="submit" value="delete">
-</form> -->
+    <form method=POST action="/update/">
+        <table>
+            <tr>
+                <td><label for="album-id">Album ID</label></td>
+                <td><input id="album-id" name='album-id' value="{{ a['aid'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-name">Album</label></td>
+                <td><input id="album-name" name='album-name' value="{{ a['name'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-artist">Artist</label></td>
+                <td><input id="album-artist" name='album-artist' value="{{ a['artist'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-year">Year</label></td>
+                <td><input id="album-year" name='album-year' value="{{ a['year'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-format">Format</label></td>
+                <td><input id="album-format" name='album-format' value="{{ a['fmt'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-location">Location</label></td>
+                <td><input id="album-location" name='album-location' value="{{ a['location'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-art">Album Art</label></td>
+                <td><input id="album-art" name='album-art' value="{{ a['art'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-embed">Spotify Embed</label></td>
+                <td><input id="album-embed" name='album-embed' value="{{ a['embed'] }}"></td>
+            </tr>
+        </table>
+        <input type="submit" name="submit" value="update">
+        <input type="submit" name="submit" value="delete">
+        <input type="submit" name="spotify" value="Spotify">
+        <!-- when "spotify" is clicked, tries to get data from spotify -->
+    </form>
+</div>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+
+// Script to hide the update form until an album is selected
+
+$(document).ready(function() {
+    // hides the featured div by default
+    $('#update-form').hide();
+
+    // when an album is chosen,
+    // populates appropriate fields
+    $(".submit-btn").click(function(){
+        // shows the featured div
+        $("#featured-movie").show();
+    });
+});
+
+</script> -->
 
 {% endblock %}
