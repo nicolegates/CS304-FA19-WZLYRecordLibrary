@@ -92,5 +92,12 @@ def getTracks(aid, conn):
     
     return curs.fetchall()
 
+def getArtist(artist, conn):
+    '''gets all an artist's albums'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where artist = %s;', [artist])
+
+    return curs.fetchall()
+
 # conn = getConn('cs304reclib_db')
 # album = getAlbumByID(3045, conn)
