@@ -146,3 +146,68 @@ def lowData(row, conn):
 
     curs.execute('select LAST_INSERT_ID();')
     aid = curs.fetchone()['LAST_INSERT_ID()']
+    
+    return aid
+
+# conn = getConn('cs304reclib_db')
+# addAlbums(conn)
+
+def updateThe(column, conn):
+    '''Addresses format variations including "the"
+    ex. changes "Beatles, The" to "The Beatles"'''
+    curs = dbi.dictCursor(conn)
+    
+    if column == 'name':
+        curs.execute("select name, aid from album where name like '%the'")
+    if column == 'artist':
+        curs.execute("select artist, aid from album where artist like '%the'")
+    else:
+        print("Please select a valid column")
+        return
+
+    fixes = curs.fetchall()
+    count = 0
+
+    # iterate through all albums where a value ends with 'the'
+    for album in fixes:
+        print("processing " + str(count) + " of " + str(len(fixes)))
+        print(album)
+        
+        fix = album[column]
+        aid = album['aid']
+
+        # check for both formats
+        fix = fixThes(fix, ', the')
+        fix = fixThes(fix, ',the')
+        print(fix)
+        
+        if column == 'name':
+            curs.execute("update album set name = %s where aid = %s", [fix, aid])
+        if column == 'artist':
+            curs.execute("update album set artist = %s where aid = %s", [fix, aid])
+        
+        count += 1
+
+def fixThes(name, phrase):
+    
+    if phrase in name.lower():
+        i = name.lower().rfind(phrase)
+        # the phrase is the last part of the name
+        if i == (len(name) - len(phrase)):
+            name = 'The ' + name[:i]
+    
+    return name
+
+def manualFixes(conn):
+    curs = dbi.dictCursor(conn)
+
+    curs.execute('update album set artist = %s where aid = %s',
+                 ['The Wee Turtles', 951])
+    curs.execute('update album set artist = %s where aid = %s',
+                 ['The Popinjays', 2399])
+    curs.execute('update album set artist = %s where aid = %s',
+                 ['The Popinjays', 2397])
+    curs.execute('update album set artist = %s where aid = %s',
+                 ['The Third Sex', 13343])
+    curs.execute('update album set artist = %s where aid = %s',
+                 ['The Honeydogs', 15218])

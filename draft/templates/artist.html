@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ artist }}</h1>
+
+<ol>
+    {% for a in albums %}
+        {% if a['year'] != None %}
+            <li><a href="/album/{{ a['aid'] }}">{{ a['name'] }} ({{a['year']}})</a></li>
+        {% else %}
+            <li><a href="/album/{{ a['aid'] }}">{{ a['name'] }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ol>
+
+{% endblock %}
