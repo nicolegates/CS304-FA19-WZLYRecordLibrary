@@ -81,6 +81,20 @@ def album(aid):
                             tracks=tracks,
                             genres=genres)
 
+@app.route('/artist/<artist>')
+def artist(artist):
+    conn = getters.getConn('cs304reclib_db')
+    albums = getters.getArtist(artist, conn)
+    
+    if len(albums) > 0:
+        return render_template('artist.html',
+                                artist=artist,
+                                albums=albums )
+    else:
+        # Need to implement error page
+        print('Show error page')
+        return redirect(request.referrer)
+
 @app.route('/login/')
 def login():
     return redirect(url_for('index'))
