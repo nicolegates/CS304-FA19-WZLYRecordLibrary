@@ -118,6 +118,23 @@ def login():
     #     print('CAS_USERNAME is not in the session')
     # return render_template('base.html', username=username, is_logged_in=is_logged_in)
 
+@app.route('/update/', methods=['GET','POST'])
+def update():
+    conn = getters.getConn('cs304reclib_db')
+    
+    # get albums with incomplete fields
+    albums = getters.getIncompletes(conn)
+    
+    if request.method == 'POST':
+        aid = request.form.get('menu-aid')
+
+        return redirect(url_for('update', 
+                                tt = tt))
+    
+    return render_template('update.html',
+                            albums = albums,
+                            total = len(albums))
+
 @app.route('/logged-in/')
 def loggedin():
     flash('Successfully logged in!')
