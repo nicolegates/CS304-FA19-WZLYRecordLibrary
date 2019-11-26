@@ -58,7 +58,7 @@ def query():
                             query=q,
                             kind=kind)
 
-@app.route('/album/<aid>')
+@app.route('/album/<aid>', methods=['GET'])
 def album(aid):
     conn = getters.getConn('cs304reclib_db')
     album = getters.getAlbumByID(aid, conn)
@@ -82,7 +82,7 @@ def album(aid):
                             tracks=tracks,
                             genres=genres)
 
-@app.route('/artist/<artist>')
+@app.route('/artist/<artist>', methods=['GET'])
 def artist(artist):
     conn = getters.getConn('cs304reclib_db')
     albums = getters.getArtist(artist, conn)
@@ -96,7 +96,7 @@ def artist(artist):
         print('Show error page')
         return redirect(request.referrer)
 
-@app.route('/login/')
+@app.route('/login/', methods=['GET','POST'])
 def login():
     return redirect(url_for('index'))
     # print ('Session keys: ',session.keys())
@@ -144,7 +144,6 @@ def update():
                 setters.deleteAlbum(aid, conn)
                 print('here in delete')
                 flash("Album " + str(aid) + " was deleted")
-                # insert into album (aid, name, artist) values (30, 'I Am Ghost', 'Lover's Requiem')
                 return render_template('update.html',
                                         incompletes = albums,
                                         a = {},
@@ -160,16 +159,16 @@ def update():
                             a = {},
                             total = len(albums))
 
-@app.route('/logged-in/')
+@app.route('/logged-in/', methods=['GET','POST'])
 def loggedin():
     flash('Successfully logged in!')
     return redirect(url_for('index'))
 
-@app.route('/profile/')
+@app.route('/profile/', methods=['GET','POST'])
 def profile():
     return redirect(url_for('index'))
 
-@app.route('/checkin/')
+@app.route('/checkin/', methods=['GET','POST'])
 def checkin():
     # pseudocode:
     # if user is not logged in:
@@ -180,7 +179,7 @@ def checkin():
 
     return render_template('check-in.html')
 
-@app.route('/checkinAjax/')
+@app.route('/checkinAjax/', methods=['GET','POST'])
 def checkinAjax():
     # runs SQL statement that changes album's availability
     # from 'not available' to 'available'
@@ -191,9 +190,25 @@ def checkinAjax():
     return redirect(url_for('index'))
     
 
-@app.route('/admin/')
+@app.route('/admin/', methods=['GET','POST'])
 def admin():
     return redirect(url_for('index'))
+
+@app.route('/insert/', methods=['GET','POST'])
+def insert():
+    conn = getters.getConn('cs304reclib_db')
+    
+    if request.method == 'POST':
+        name = request.form.get('album-name')
+        artist = request.form.get('album-artist')
+        print(name, artist)
+        
+        # expand to handle duplicates (if album already exists)
+        res = setters.insertAlbum(name, artist, conn)
+    
+        return render_template('insert.html')
+
+    return render_template('insert.html')
 
 if __name__ == '__main__':
 

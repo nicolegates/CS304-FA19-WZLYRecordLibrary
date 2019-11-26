@@ -66,13 +66,3 @@ def getAlbumName(album_id):
         return spotify.album(album_id)['name']
     except:
         return None
-    
-    
-
-# spotify embed code
-# <iframe src="https://open.spotify.com/embed/album/1XslIirSxfAhhxRdn4Li9t" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-album = getAlbumName('spotify:album:48VaRUNrCOe2mm6v6FnapS')
-artist = getArtistName('spotify:album:48VaRUNrCOe2mm6v6FnapS')
-print(album)
-print(artist)

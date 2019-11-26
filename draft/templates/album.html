@@ -17,7 +17,7 @@
 
 {% if album['art'] != None %}
     <img src={{ album['art'] }}
-         alt="album art for {{ album['name ']}}"
+         alt="album art for {{ album['name']}}"
          width=400px></img>
 {% endif %}
 
@@ -40,14 +40,17 @@
 
 <!-- show genres -->
 {% if genres != None %}
-    <p>{{ genres }}</p>
+    <h1>Genres</h1>
+    {% for g in genres %}
+        <li>{{ g['name'] }}</li>
+    {% endfor %}
 {% endif %}
 
 <!-- show tracks -->
 <!-- if there's no embed but there are tracks, show the tracks -->
-{% if tracks != None %}
+<!-- {% if tracks != None %}
     <p>{{ tracks }}</p>
-{% endif %}
+{% endif %} -->
 
 
 {% endblock %}
