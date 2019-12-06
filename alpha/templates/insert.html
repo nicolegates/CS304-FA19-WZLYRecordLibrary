@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Insert Album</h1>
+
+<form method=post action="/insert/">
+   
+    <fieldset>
+        <legend>Album Data</legend>
+            <table>
+                <tr><td><label for="album-name">Album Name:</label></td>
+                <td><input type="text" name="album-name" id="album-name"></td></tr>
+                <tr><td><label for="album-artist">Artist:</label></td>
+                <td><input type="text" name="album-artist" id="album-artist"></td></tr>
+            </table>
+    </fieldset>
+    
+    <p> <input type='submit' value='Insert Album'> </p>
+        
+</form>
+
+{% endblock %}

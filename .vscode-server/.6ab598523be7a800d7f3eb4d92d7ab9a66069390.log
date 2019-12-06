@@ -1,0 +1,35 @@
+
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+IP Address: 149.130.15.5
+Extension host agent listening on 35089
+
+
+[15:11:35] Extension host agent started.
+[15:11:36] [127.0.0.1][09748b8e][ExtensionHostConnection] New connection established.
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+[15:11:36] [127.0.0.1][5400fe31][ManagementConnection] New connection established.
+[15:11:36] [127.0.0.1][09748b8e][ExtensionHostConnection] <6239> Launched Extension Host Process.
+{ Error: write EPIPE
+    at WriteWrap.afterWrite [as oncomplete] (net.js:788:14) errno: 'EPIPE', code: 'EPIPE', syscall: 'write' }
+Error: Unexpected SIGPIPE
+    at process.on (/students/cs304reclib/.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/out/bootstrap.js:5:192)
+    at process.emit (events.js:182:13)
+Error: Unexpected SIGPIPE
+    at process.on (/students/cs304reclib/.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/out/bootstrap.js:5:192)
+    at process.emit (events.js:182:13)
+[16:51:38] [127.0.0.1][5400fe31][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[19:51:33] [127.0.0.1][09748b8e][ExtensionHostConnection] <6239> Extension Host Process exited with code: 0, signal: null.
+Last EH closed, waiting before shutting down
+[19:51:33] Last EH closed, waiting before shutting down
+[19:51:38] [127.0.0.1][5400fe31][ManagementConnection] The reconnection grace time of 3h has expired, so the connection will be disposed.
+Last EH closed, shutting down
+[19:56:34] Last EH closed, shutting down

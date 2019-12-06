@@ -1,0 +1,9 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :project/templates/base.html
+> git ls-files --stage -- project/templates/
+> git check-ignore -v -z --stdin

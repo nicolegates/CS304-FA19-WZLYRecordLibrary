@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>{{ kind }}s matching {{ query }}:</p>
+
+<ul class="grid">
+    {% for r in results %}
+        <li class="tile">
+            <a href="{{ url_for('album', aid=r['aid']) }}">
+                {% if r['art'] != None%}
+                    <img class="cover" src={{ r['art'] }}></img>
+                {% else %}
+                    <img class="cover" src="{{ url_for('static', filename='../static/defaultrecord.png') }}"></img>
+                {% endif %}
+            </a>
+            <p class="detail">{{ r['name'] }} by {{ r['artist'] }}</p>
+            {% if r['year'] != None %}
+                <p class="year">{{ r['year'] }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

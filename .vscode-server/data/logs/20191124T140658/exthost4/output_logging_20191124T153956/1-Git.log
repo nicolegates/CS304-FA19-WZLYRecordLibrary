@@ -1,0 +1,73 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+fatal: no upstream configured for branch 'master'
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :draft/getters.py
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :public_html/.htaccess
+> git ls-files --stage -- public_html/
+> git show :draft/getters.py
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :draft/venv/dbi.py
+> git ls-files --stage -- draft/venv/
+> git check-ignore -v -z --stdin
+> git show :draft/getters.py
+> git show :draft/venv/dbi.py
+> git ls-files --stage -- draft/venv/
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :draft/getters.py
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :draft/venv/lib/python3.6/site-packages/dbi.py
+> git ls-files --stage -- draft/venv/lib/python3.6/site-packages/
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :draft/venv/lib64/python3.6/site-packages/dbi.py
+> git ls-files --stage -- draft/venv/lib64/python3.6/site-packages/
+> git check-ignore -v -z --stdin
+> git show :draft/getters.py
+> git show :draft/add.py
+> git show :draft/getters.py
+> git show :draft/add.py
+> git show :draft/getters.py
+> git show :draft/add.py
+> git show :draft/getters.py

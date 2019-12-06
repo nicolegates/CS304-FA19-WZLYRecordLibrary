@@ -1,0 +1,40 @@
+
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+IP Address: 149.130.15.5
+Extension host agent listening on 34552
+==> Received a management connection
+==> Received an extension host connection.
+==> Using UI language: en
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+Got start params: { language: 'en',
+  break: undefined,
+  port: undefined,
+  debugId: undefined }
+EXTHOST: PROCESS EXITED
+0
+null
+Last EH closed, waiting before shutting down
+Got delay-shutdown request while in shutdown timeout, delaying
+Cancelling previous shutdown timeout
+==> Received a management connection
+==> Received an extension host connection.
+==> Using UI language: en
+Got start params: { language: 'en',
+  break: undefined,
+  port: undefined,
+  debugId: undefined }
+New EH opened, aborting shutdown
+EXTHOST: PROCESS EXITED
+0
+null
+Last EH closed, waiting before shutting down
+Last EH closed, shutting down

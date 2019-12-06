@@ -1,0 +1,120 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :draft/templates/results.html
+> git show :draft/static/style.css
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git show :draft/templates/base.html
+> git show :draft/templates/results.html
+> git show :draft/templates/base.html
+> git show :draft/templates/results.html
+> git show :draft/templates/base.html
+> git show :draft/templates/results.html
+> git check-ignore -v -z --stdin
+> git show :draft/templates/results.html
+> git check-ignore -v -z --stdin
+> git show :draft/static/style.css
+> git show :draft/templates/results.html
+> git check-ignore -v -z --stdin
+> git show :draft/static/style.css
+> git show :draft/static/style.css
+> git show :draft/static/style.css
+> git show :draft/static/style.css
+> git show :draft/templates/base.html
+> git show :draft/static/style.css
+> git show :draft/getters.py
+> git show :draft/add.py
+> git show :draft/getters.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git check-ignore -v -z --stdin
+> git show :draft/add.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/getters.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git check-ignore -v -z --stdin
+> git show :draft/getters.py
+> git show :draft/add.py
+> git show :draft/getters.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/getters.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/getters.py
+> git show :draft/getters.py
+> git check-ignore -v -z --stdin
+> git show :draft/templates/update.html
+> git ls-files --stage -- draft/templates/
+> git check-ignore -v -z --stdin
+> git show :draft/app.py
+> git show :draft/templates/update.html
+> git ls-files --stage -- draft/templates/
+> git show :draft/app.py
+> git show :draft/templates/update.html
+> git ls-files --stage -- draft/templates/
+> git show :draft/app.py
+> git show :draft/templates/update.html
+> git ls-files --stage -- draft/templates/
+> git show :draft/app.py
+> git show :draft/templates/update.html
+> git ls-files --stage -- draft/templates/
+> git show :draft/app.py
+> git show :draft/templates/update.html
+> git ls-files --stage -- draft/templates/
+> git show :draft/app.py
+> git show :draft/templates/results.html
+> git show :draft/templates/results.html
+> git show :draft/templates/results.html
+> git show :draft/templates/results.html
+> git show :draft/app.py
+> git show :draft/templates/artist.html
+> git show :draft/templates/update.html
+> git show :draft/app.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/app.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/app.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/app.py
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/templates/setters.py
+> git show :draft/templates/update.html
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git ls-files --stage -- draft/
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git show :draft/templates/update.html
+> git show :draft/setters.py
+> git show :draft/templates/update.html
+> git show :draft/setters.py

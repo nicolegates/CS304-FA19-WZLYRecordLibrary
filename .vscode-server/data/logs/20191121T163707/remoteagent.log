@@ -1,0 +1,37 @@
+[2019-11-21 16:37:07.445] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2019-11-21 16:37:07.445] [remoteagent] [info] Extension host agent started.
+[2019-11-21 16:37:08.065] [remoteagent] [info] [127.0.0.1][0924f690][ExtensionHostConnection] New connection established.
+[2019-11-21 16:37:08.090] [remoteagent] [info] [127.0.0.1][b2c4d36d][ManagementConnection] New connection established.
+[2019-11-21 16:37:08.206] [remoteagent] [info] [127.0.0.1][0924f690][ExtensionHostConnection] <10558> Launched Extension Host Process.
+[2019-11-21 16:38:12.496] [remoteagent] [info] [127.0.0.1][b2c4d36d][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 16:38:13.519] [remoteagent] [info] [127.0.0.1][0924f690][ExtensionHostConnection] <10558> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 16:38:13.519] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-11-21 16:38:20.457] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2019-11-21 16:38:20.457] [remoteagent] [info] Cancelling previous shutdown timeout
+[2019-11-21 16:38:20.507] [remoteagent] [info] [127.0.0.1][1d322604][ManagementConnection] New connection established.
+[2019-11-21 16:38:20.513] [remoteagent] [info] [127.0.0.1][ad8b8384][ExtensionHostConnection] New connection established.
+[2019-11-21 16:38:20.522] [remoteagent] [info] [127.0.0.1][ad8b8384][ExtensionHostConnection] <10707> Launched Extension Host Process.
+[2019-11-21 16:43:20.459] [remoteagent] [info] New EH opened, aborting shutdown
+[2019-11-21 17:46:10.102] [remoteagent] [info] [127.0.0.1][1d322604][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2019-11-21 17:46:44.084] [remoteagent] [info] [127.0.0.1][1d322604][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[2019-11-21 17:46:44.085] [remoteagent] [info] [127.0.0.1][30b06f01][ManagementConnection] New connection established.
+[2019-11-21 17:46:44.085] [remoteagent] [info] [127.0.0.1][5938a998][ExtensionHostConnection] New connection established.
+[2019-11-21 17:46:44.094] [remoteagent] [info] [127.0.0.1][5938a998][ExtensionHostConnection] <17430> Launched Extension Host Process.
+[2019-11-21 17:46:46.950] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2019-11-21 17:51:44.086] [remoteagent] [info] [127.0.0.1][1d322604][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[2019-11-21 17:51:45.134] [remoteagent] [info] [127.0.0.1][ad8b8384][ExtensionHostConnection] <10707> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 19:03:31.370] [remoteagent] [info] [127.0.0.1][30b06f01][ManagementConnection] The client has reconnected.
+[2019-11-21 19:03:31.372] [remoteagent] [info] [127.0.0.1][5938a998][ExtensionHostConnection] The client has reconnected.
+[2019-11-21 19:30:54.641] [remoteagent] [info] [127.0.0.1][30b06f01][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 19:30:55.699] [remoteagent] [info] [127.0.0.1][5938a998][ExtensionHostConnection] <17430> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 19:30:55.699] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-11-21 19:35:55.742] [remoteagent] [info] Last EH closed, shutting down

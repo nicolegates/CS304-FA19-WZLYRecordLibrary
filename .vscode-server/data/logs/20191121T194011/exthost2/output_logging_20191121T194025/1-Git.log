@@ -1,0 +1,17 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :.cache/pip/http/0/d/b/9/8/0db98e717359d022b1702015ffeac2410bf2d8d59a1d5782fe49b0f0

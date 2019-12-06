@@ -1,0 +1,49 @@
+
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+IP Address: 149.130.15.5
+Extension host agent listening on 33426
+
+
+[10:14:41] Extension host agent started.
+[10:14:41] [127.0.0.1][004a8377][ExtensionHostConnection] New connection established.
+[10:14:41] [127.0.0.1][8e03d7d5][ManagementConnection] New connection established.
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+[10:14:41] [127.0.0.1][004a8377][ExtensionHostConnection] <10897> Launched Extension Host Process.
+[10:14:51] [127.0.0.1][8e03d7d5][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[10:14:52] [127.0.0.1][004a8377][ExtensionHostConnection] <10897> Extension Host Process exited with code: 0, signal: null.
+Last EH closed, waiting before shutting down
+[10:14:52] Last EH closed, waiting before shutting down
+Got delay-shutdown request while in shutdown timeout, delaying
+[10:15:01] Got delay-shutdown request while in shutdown timeout, delaying
+Cancelling previous shutdown timeout
+[10:15:01] Cancelling previous shutdown timeout
+[10:15:01] [127.0.0.1][d86003b7][ManagementConnection] New connection established.
+[10:15:01] [127.0.0.1][6bdeab21][ExtensionHostConnection] New connection established.
+[10:15:01] [127.0.0.1][6bdeab21][ExtensionHostConnection] <11001> Launched Extension Host Process.
+[10:16:34] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+%c[IPC Library: File Watcher (chokidar)] %cUnhandled Promise Rejection:  color: blue color:  Canceled: Canceled
+    at Object.t.canceled (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/out/vs/platform/files/node/watcher/unix/watcherApp.js:7:362)
+    at u.cancel (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/out/vs/platform/files/node/watcher/unix/watcherApp.js:30:896)
+    at t.ThrottledDelayer.cancel (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/out/vs/platform/files/node/watcher/unix/watcherApp.js:31:270)
+    at Object.stop (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/out/vs/platform/files/node/watcher/unix/watcherApp.js:139:140)
+    at p.stop (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/out/vs/platform/files/node/watcher/unix/watcherApp.js:140:809)
+    at FSWatcher.<anonymous> (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/out/vs/platform/files/node/watcher/unix/watcherApp.js:140:671)
+    at FSWatcher.emit (events.js:200:13)
+    at FSWatcher._handleError (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/index.js:625:10)
+    at NodeFsHandler._boundHandleError (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/lib/nodefs-handler.js:302:43)
+    at createFsWatchInstance (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/lib/nodefs-handler.js:120:5)
+    at setFsWatchListener (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/lib/nodefs-handler.js:165:15)
+    at NodeFsHandler._watchWithNodeFs (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/lib/nodefs-handler.js:330:14)
+    at NodeFsHandler._handleFile (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/lib/nodefs-handler.js:360:23)
+    at NodeFsHandler._addToNodeFs (/students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/node_modules/chokidar/lib/nodefs-handler.js:620:21)
+New EH opened, aborting shutdown
+[10:20:01] New EH opened, aborting shutdown

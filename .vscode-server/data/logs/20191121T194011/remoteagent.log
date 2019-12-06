@@ -1,0 +1,65 @@
+[2019-11-21 19:40:11.576] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2019-11-21 19:40:11.576] [remoteagent] [info] Extension host agent started.
+[2019-11-21 19:40:12.060] [remoteagent] [info] [127.0.0.1][6a5ddbe4][ExtensionHostConnection] New connection established.
+[2019-11-21 19:40:12.078] [remoteagent] [info] [127.0.0.1][254f0a11][ManagementConnection] New connection established.
+[2019-11-21 19:40:12.235] [remoteagent] [info] [127.0.0.1][6a5ddbe4][ExtensionHostConnection] <23828> Launched Extension Host Process.
+[2019-11-21 19:40:19.115] [remoteagent] [info] [127.0.0.1][254f0a11][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 19:40:20.153] [remoteagent] [info] [127.0.0.1][6a5ddbe4][ExtensionHostConnection] <23828> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 19:40:20.154] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-11-21 19:40:25.229] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2019-11-21 19:40:25.229] [remoteagent] [info] Cancelling previous shutdown timeout
+[2019-11-21 19:40:25.283] [remoteagent] [info] [127.0.0.1][16d88e3a][ManagementConnection] New connection established.
+[2019-11-21 19:40:25.284] [remoteagent] [info] [127.0.0.1][aa1d52b2][ExtensionHostConnection] New connection established.
+[2019-11-21 19:40:25.292] [remoteagent] [info] [127.0.0.1][aa1d52b2][ExtensionHostConnection] <23928> Launched Extension Host Process.
+[2019-11-21 19:45:25.234] [remoteagent] [info] New EH opened, aborting shutdown
+[2019-11-21 20:12:02.810] [remoteagent] [info] [127.0.0.1][b26b342b][ManagementConnection] New connection established.
+[2019-11-21 20:12:02.833] [remoteagent] [info] [127.0.0.1][2aa3f37c][ExtensionHostConnection] New connection established.
+[2019-11-21 20:12:02.843] [remoteagent] [info] [127.0.0.1][2aa3f37c][ExtensionHostConnection] <27771> Launched Extension Host Process.
+[2019-11-21 20:12:10.102] [remoteagent] [info] [127.0.0.1][b26b342b][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 20:12:11.132] [remoteagent] [info] [127.0.0.1][2aa3f37c][ExtensionHostConnection] <27771> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 20:12:22.006] [remoteagent] [info] [127.0.0.1][9af975c4][ManagementConnection] New connection established.
+[2019-11-21 20:12:22.012] [remoteagent] [info] [127.0.0.1][69581389][ExtensionHostConnection] New connection established.
+[2019-11-21 20:12:22.020] [remoteagent] [info] [127.0.0.1][69581389][ExtensionHostConnection] <27879> Launched Extension Host Process.
+[2019-11-21 20:12:27.566] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2019-11-21 20:12:45.476] [remoteagent] [info] [127.0.0.1][9af975c4][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 20:12:46.500] [remoteagent] [info] [127.0.0.1][69581389][ExtensionHostConnection] <27879> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 20:13:32.671] [remoteagent] [info] [127.0.0.1][3156bc1e][ManagementConnection] New connection established.
+[2019-11-21 20:13:32.673] [remoteagent] [info] [127.0.0.1][d045098d][ExtensionHostConnection] New connection established.
+[2019-11-21 20:13:32.686] [remoteagent] [info] [127.0.0.1][d045098d][ExtensionHostConnection] <28076> Launched Extension Host Process.
+[2019-11-21 20:13:47.868] [remoteagent] [info] [127.0.0.1][3156bc1e][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 20:13:48.906] [remoteagent] [info] [127.0.0.1][d045098d][ExtensionHostConnection] <28076> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 20:13:55.910] [remoteagent] [info] [127.0.0.1][ae06f4fb][ManagementConnection] New connection established.
+[2019-11-21 20:13:55.911] [remoteagent] [info] [127.0.0.1][2d1af621][ExtensionHostConnection] New connection established.
+[2019-11-21 20:13:55.921] [remoteagent] [info] [127.0.0.1][2d1af621][ExtensionHostConnection] <28212> Launched Extension Host Process.
+[2019-11-21 20:24:15.416] [remoteagent] [info] [127.0.0.1][2d1af621][ExtensionHostConnection] The client has reconnected.
+[2019-11-21 20:31:44.665] [remoteagent] [info] [127.0.0.1][ae06f4fb][ManagementConnection] The client has reconnected.
+[2019-11-21 20:31:44.684] [remoteagent] [info] [127.0.0.1][2d1af621][ExtensionHostConnection] The client has reconnected.
+[2019-11-21 20:33:21.349] [remoteagent] [info] [127.0.0.1][aa1d52b2][ExtensionHostConnection] <23928> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 20:33:31.431] [remoteagent] [info] [127.0.0.1][16d88e3a][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2019-11-21 20:52:11.076] [remoteagent] [info] [127.0.0.1][16d88e3a][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[2019-11-21 20:52:11.077] [remoteagent] [info] [127.0.0.1][8785c4b7][ManagementConnection] New connection established.
+[2019-11-21 20:52:11.097] [remoteagent] [info] [127.0.0.1][0d7735b9][ExtensionHostConnection] New connection established.
+[2019-11-21 20:52:11.107] [remoteagent] [info] [127.0.0.1][0d7735b9][ExtensionHostConnection] <32126> Launched Extension Host Process.
+[2019-11-21 20:52:17.123] [remoteagent] [info] [127.0.0.1][8785c4b7][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 20:52:18.148] [remoteagent] [info] [127.0.0.1][0d7735b9][ExtensionHostConnection] <32126> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 20:52:32.810] [remoteagent] [info] [127.0.0.1][fcc32950][ManagementConnection] New connection established.
+[2019-11-21 20:52:32.813] [remoteagent] [info] [127.0.0.1][2f9626c5][ExtensionHostConnection] New connection established.
+[2019-11-21 20:52:32.823] [remoteagent] [info] [127.0.0.1][2f9626c5][ExtensionHostConnection] <32265> Launched Extension Host Process.
+[2019-11-21 20:52:34.519] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2019-11-21 20:55:49.597] [remoteagent] [info] [127.0.0.1][ae06f4fb][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-11-21 20:55:50.641] [remoteagent] [info] [127.0.0.1][2d1af621][ExtensionHostConnection] <28212> Extension Host Process exited with code: 0, signal: null.
+[2019-11-21 20:57:11.081] [remoteagent] [info] [127.0.0.1][16d88e3a][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[2019-11-21 22:19:49.378] [remoteagent] [info] [127.0.0.1][fcc32950][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2019-11-22 01:19:41.955] [remoteagent] [info] [127.0.0.1][2f9626c5][ExtensionHostConnection] <32265> Extension Host Process exited with code: 0, signal: null.
+[2019-11-22 01:19:41.955] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-11-22 01:19:49.383] [remoteagent] [info] [127.0.0.1][fcc32950][ManagementConnection] The reconnection grace time of 3h has expired, so the connection will be disposed.
+[2019-11-22 01:24:42.017] [remoteagent] [info] Last EH closed, shutting down

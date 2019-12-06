@@ -1,0 +1,18 @@
+# This basic .htaccess file allows all access from 
+# on campus but from off-campus requires the guest password
+# updated for Apache 2.4
+AuthUserFile /var/www/htpasswd-guest
+AuthGroupFile /dev/null
+AuthName "By Invitation Only"
+AuthType Basic
+
+<RequireAny>
+   Require user guest
+   # wellesley.edu
+   Require ip 149.130    
+   # for the validators
+   # w3.org
+   Require ip 128.30.52
+   # webaim.org   
+   Require ip 67.207.157
+</RequireAny>
