@@ -8,6 +8,7 @@ app.secret_key = 'cs304reclib'
 import sys,os,random
 import getters
 import setters
+import datetime
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -192,6 +193,27 @@ def update(aid):
                             incompletes = albums,
                             a = {},
                             total = len(albums))
+
+@app.route('/reservation/', methods=['GET','POST'])
+def reservation():
+
+    conn = getters.getConn('cs304reclib_db')
+    res = getters.getReservations('all', conn)
+    now = datetime.date.today()
+
+    if request.method == 'POST':
+        action = request.form['reservation-view']
+        res = getters.getReservations(action, conn)
+        
+        return render_template('reservation.html',
+                                filter=action.capitalize(),
+                                now = now,
+                                reservations = res)
+
+    return render_template('reservation.html', 
+                            filter='All',
+                            now = now,
+                            reservations = res)
 
 @app.route('/logged-in/', methods=['GET','POST'])
 def loggedin():

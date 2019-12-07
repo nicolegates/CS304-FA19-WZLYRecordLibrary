@@ -76,6 +76,35 @@ def getReservation(aid, conn):
     
     return curs.fetchone()
 
+def getReservations(filter, conn):
+    '''returns reservations according to selected filter'''
+
+    curs = dbi.dictCursor(conn)
+
+    if filter == 'all':
+        curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid;')
+
+    if filter == 'overdue':
+        curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                     'where reservation.due <= CURDATE() ' +\
+                        'and reservation.returned = 0;')
+    
+    return curs.fetchall()
+
 def getGenres(aid, conn):
     '''gets genres for an album
     given album's id'''
@@ -108,6 +137,5 @@ def getIncompletes(conn):
     return incompletes
 
 # conn = getConn('cs304reclib_db')
-# incompletes = getIncompletes(conn)
-# print(len(incompletes))
-# print(incompletes[0])
+# res = getAllReservations('overdue', conn)
+# print(res)
