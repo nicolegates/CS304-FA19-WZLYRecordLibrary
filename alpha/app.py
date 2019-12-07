@@ -3,6 +3,7 @@ from flask import (Flask, render_template, make_response, url_for, request,
                    )
 from werkzeug import secure_filename
 app = Flask(__name__)
+app.secret_key = 'cs304reclib'
 
 import sys,os,random
 import getters
@@ -11,20 +12,24 @@ import setters
 from dotenv import load_dotenv
 load_dotenv()
 
-# CAS(app)
+from flask_cas import CAS
 
-# app.config['CAS_SERVER'] = 'https://login.wellesley.edu:443'
-# app.config['CAS_AFTER_LOGIN'] = 'logged_in'
-# app.config['CAS_LOGIN_ROUTE'] = '/module.php/casserver/cas.php/login'
-# app.config['CAS_LOGOUT_ROUTE'] = '/module.php/casserver/cas.php/logout'
-# app.config['CAS_AFTER_LOGOUT'] = 'http://cs.wellesley.edu:8343/'
-# app.config['CAS_VALIDATE_ROUTE'] = '/module.php/casserver/serviceValidate.php'
+CAS(app)
 
-app.secret_key = os.getenv('secret_key')
-app.secret_key = ''.join([ random.choice(('ABCDEFGHIJKLMNOPQRSTUVXYZ' +
-                                          'abcdefghijklmnopqrstuvxyz' +
-                                          '0123456789'))
-                           for i in range(20) ])
+app.config['CAS_SERVER'] = 'https://login.wellesley.edu:443'
+app.config['CAS_AFTER_LOGIN'] = 'logged_in'
+app.config['CAS_LOGIN_ROUTE'] = '/module.php/casserver/cas.php/login'
+app.config['CAS_LOGOUT_ROUTE'] = '/module.php/casserver/cas.php/logout'
+# need to figure out which port we can use
+app.config['CAS_AFTER_LOGOUT'] = 'http://cs.wellesley.edu:1943/'
+app.config['CAS_VALIDATE_ROUTE'] = '/module.php/casserver/serviceValidate.php'
+# app.config['CAS_AFTER_LOGOUT'] = 'after_logout'
+
+# app.secret_key = os.getenv('secret_key')
+# app.secret_key = ''.join([ random.choice(('ABCDEFGHIJKLMNOPQRSTUVXYZ' +
+#                                           'abcdefghijklmnopqrstuvxyz' +
+#                                           '0123456789'))
+#                            for i in range(20) ])
 
 app.config['TRAP_BAD_REQUEST_ERRORS'] = True
 
@@ -98,61 +103,90 @@ def artist(artist):
 
 @app.route('/login/', methods=['GET','POST'])
 def login():
-    return redirect(url_for('index'))
-    # print ('Session keys: ',session.keys())
-    # for k in session.keys():
-    #     print (k,' => ',session[k])
-    # if '_CAS_TOKEN' in session:
-    #     token = session['_CAS_TOKEN']
-    # if 'CAS_ATTRIBUTES' in session:
-    #     attribs = session['CAS_ATTRIBUTES']
-    #     print ('CAS_attributes: ')
-    #     for k in attribs:
-    #         print ('\t',k,' => ',attribs[k])
-    # if 'CAS_USERNAME' in session:
-    #     is_logged_in = True
-    #     username = session['CAS_USERNAME']
-    #     print('CAS_USERNAME is: ',username)
-    # else:
-    #     is_logged_in = False
-    #     username = None
-    #     print('CAS_USERNAME is not in the session')
-    # return render_template('base.html', username=username, is_logged_in=is_logged_in)
+    # return redirect(url_for('index'))
+    print('Session keys: ',list(session.keys()))
+    for k in list(session.keys()):
+        print(k,' => ',session[k])
+    if '_CAS_TOKEN' in session:
+        token = session['_CAS_TOKEN']
+    if 'CAS_ATTRIBUTES' in session:
+        attribs = session['CAS_ATTRIBUTES']
+        print('CAS_attributes: ')
+        for k in attribs:
+            print('\t',k,' => ',attribs[k])
+    if 'CAS_USERNAME' in session:
+        is_logged_in = True
+        username = session['CAS_USERNAME']
+        print(('CAS_USERNAME is: ',username))
+    else:
+        is_logged_in = False
+        username = None
+        print('CAS_USERNAME is not in the session')
+    return render_template('login.html',
+                           username = username,
+                           is_logged_in = is_logged_in,
+                           cas_attributes = session.get('CAS_ATTRIBUTES'))
 
-@app.route('/update/', methods=['GET','POST'])
-def update():
+@app.route('/update/<aid>', methods=['GET','POST'])
+@app.route('/update/', defaults={'aid': None}, methods=['GET','POST'])
+def update(aid):
     '''ADMIN FEATURE'''
     conn = getters.getConn('cs304reclib_db')
     
     # get albums with incomplete fields
     albums = getters.getIncompletes(conn)
-    
-    if request.method == 'POST':
-        aid = request.form.get('menu-aid')
+
+    # if there's an AID in the route (coming from insert page)
+    if request.method == 'GET' and aid != None:
         album = getters.getAlbumByID(aid, conn)
+        return render_template('update.html',
+                                incompletes = albums,
+                                a = album,
+                                total = len(albums))
+
+    if request.method == 'POST':
         form = request.form
 
-        if 'submit' in form:
-            form = request.form
-            print(form)
-            action = form['submit']
-            aid = form['album-id']
-            print('here in submit')
+        # selecting an album
+        if 'submit-btn' in form and form['submit-btn'] == 'Choose':
+            aid = request.form.get('menu-aid')
         
+        album = getters.getAlbumByID(aid, conn)
+
+        if 'submit' in form:
+            action = form['submit']
+
+            # updating an album
+            if action == 'update':
+                conn = getters.getConn('cs304reclib_db')
+                res = setters.updateAlbum(
+                                aid, form['album-name'],
+                                form['album-artist'],
+                                form['album-year'],
+                                form['album-format'],
+                                form['album-location'],
+                                form['album-art'],
+                                form['album-embed'],
+                                conn)
+
+                if res == True:
+                    flash(form['album-name'] + ' successfully updated.')
+
+                album = getters.getAlbumByID(aid, conn)
+
+                return render_template('update.html',
+                                        incompletes = albums,
+                                        a = album,
+                                        total = len(albums))
+
+            # deleting an album
             if action == 'delete':
-                print(aid)
                 setters.deleteAlbum(aid, conn)
-                print('here in delete')
                 flash("Album " + str(aid) + " was deleted")
                 return render_template('update.html',
                                         incompletes = albums,
                                         a = {},
                                         total = len(albums))
-
-        return render_template('update.html',
-                                incompletes = albums,
-                                a = album,
-                                total = len(albums))
     
     return render_template('update.html',
                             incompletes = albums,
@@ -201,12 +235,17 @@ def insert():
     if request.method == 'POST':
         name = request.form.get('album-name')
         artist = request.form.get('album-artist')
-        print(name, artist)
         
         # expand to handle duplicates (if album already exists)
         res = setters.insertAlbum(name, artist, conn)
+        aid = res['aid']
+
+        if res == None:
+            flash("Unable to insert album. Please try again.")
+        else:
+            flash("Album " + name + " by artist " + artist + " successfully inserted.")
     
-        return render_template('insert.html')
+        return redirect(url_for('update', aid=aid))
 
     return render_template('insert.html')
 

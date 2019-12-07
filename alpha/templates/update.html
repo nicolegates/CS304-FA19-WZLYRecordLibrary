@@ -2,28 +2,24 @@
 
 {% block content %}
 
-<h1>Select an album to update:</h1>
+<h1>Search for an album to update:</h1>
 
 <form method=POST action='/update/'>
     <label for="menu-aid">{{ total }} albums missing data:</label>
     <select id="menu-aid" name="menu-aid">
         <option value="none">Choose One</option>
         {% for a in incompletes %}
-        <option value="{{ a['aid'] }}">{{ a['name'] }} by {{ a['artist'] }}</option>    
+            <option value="{{ a['aid'] }}">{{ a['name'] }} by {{ a['artist'] }}</option>    
         {% endfor %}
     </select>
     <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
 </form>
 
 <div id="update-form">
-    <p>Use "None" to set a field to null.</p>
+    <p>Use "None" to set a field to null. Format must be set to 'cd' or 'record.'</p>
 
-    <form method=POST action="/update/">
+    <form method=POST action="/update/{{ a['aid'] }}">
         <table>
-            <tr>
-                <td><label for="album-id">Album ID</label></td>
-                <td><input id="album-id" name='album-id' value="{{ a['aid'] }}"></td>
-            </tr>
             <tr>
                 <td><label for="album-name">Album</label></td>
                 <td><input id="album-name" name='album-name' value="{{ a['name'] }}"></td>
@@ -60,24 +56,30 @@
     </form>
 </div>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
 
-// Script to hide the update form until an album is selected
+// // NOT WORKING: Script to hide the update form until an album is selected
 
-$(document).ready(function() {
-    // hides the featured div by default
-    $('#update-form').hide();
+// $(document).ready(function() {
+//     // hides the featured div by default
+//     $('#update-form').hide();
 
-    // when an album is chosen,
-    // populates appropriate fields
-    $(".submit-btn").click(function(){
-        // shows the featured div
-        $("#featured-movie").show();
-    });
-});
+//     var show = false
 
-</script> -->
+//     // when an album is chosen,
+//     // populates appropriate fields
+//     $(".submit-btn").click(function(){
+//         // shows the featured div
+//         show = true
+//     });
+
+//     if (show == true) {
+//         $("#update-form").show();
+//     }
+// });
+
+// </script>
 
 {% endblock %}
