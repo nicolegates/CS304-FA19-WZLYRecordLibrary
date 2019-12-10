@@ -1,0 +1,28 @@
+[2019-12-09 16:50:47.174] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2019-12-09 16:50:47.174] [remoteagent] [info] Extension host agent started.
+[2019-12-09 16:50:47.531] [remoteagent] [info] [127.0.0.1][dcabc107][ExtensionHostConnection] New connection established.
+[2019-12-09 16:50:47.556] [remoteagent] [info] [127.0.0.1][b357fd10][ManagementConnection] New connection established.
+[2019-12-09 16:50:47.715] [remoteagent] [info] [127.0.0.1][dcabc107][ExtensionHostConnection] <12737> Launched Extension Host Process.
+[2019-12-09 16:51:10.825] [remoteagent] [info] [127.0.0.1][b357fd10][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2019-12-09 16:51:11.847] [remoteagent] [info] [127.0.0.1][dcabc107][ExtensionHostConnection] <12737> Extension Host Process exited with code: 0, signal: null.
+[2019-12-09 16:51:11.848] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-12-09 16:51:17.978] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2019-12-09 16:51:17.979] [remoteagent] [info] Cancelling previous shutdown timeout
+[2019-12-09 16:51:18.034] [remoteagent] [info] [127.0.0.1][a4b71139][ManagementConnection] New connection established.
+[2019-12-09 16:51:18.037] [remoteagent] [info] [127.0.0.1][4148dc18][ExtensionHostConnection] New connection established.
+[2019-12-09 16:51:18.044] [remoteagent] [info] [127.0.0.1][4148dc18][ExtensionHostConnection] <13099> Launched Extension Host Process.
+[2019-12-09 16:51:26.972] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2019-12-09 16:56:17.980] [remoteagent] [info] New EH opened, aborting shutdown
+[2019-12-09 17:34:34.229] [remoteagent] [info] [127.0.0.1][a4b71139][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2019-12-09 19:16:46.928] [remoteagent] [info] [127.0.0.1][a4b71139][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[2019-12-09 19:16:46.929] [remoteagent] [info] [127.0.0.1][a4b71139][ManagementConnection] The client has reconnected.
+[2019-12-09 19:16:46.935] [remoteagent] [info] [127.0.0.1][4148dc18][ExtensionHostConnection] The client has reconnected.

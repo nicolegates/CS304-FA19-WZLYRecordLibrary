@@ -1,0 +1,107 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :alpha/templates/reservation.html
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :alpha/static/style.css
+> git show :alpha/templates/reservation.html
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/templates/update.html
+> git show :alpha/templates/album.html
+> git show :alpha/templates/artist.html
+> git show :alpha/templates/base.html
+> git show :alpha/setters.py
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/templates/update.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/templates/update.html
+> git show :alpha/templates/album.html
+> git show :alpha/templates/update.html
+> git show :alpha/templates/album.html
+> git show :alpha/templates/update.html
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/reservation.html
+> git show :alpha/templates/update.html
+> git show :alpha/app.py
+> git show :alpha/templates/reservation.html
+> git show :alpha/templates/album.html
+> git show :alpha/templates/update.html
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/setters.py
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/setters.py
+> git show :alpha/app.py
+> git show :alpha/setters.py
+> git show :alpha/results.csv
+> git show :alpha/setters.py
+> git show :alpha/add.py
+> git show :alpha/results.csv
+> git show :alpha/add.py
+> git show :alpha/setters.py
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/setters.py
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/templates/base.html
+> git show :alpha/templates/album.html
+> git show :alpha/static/style.css
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/templates/album.html
+> git show :alpha/templates/album.html
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template

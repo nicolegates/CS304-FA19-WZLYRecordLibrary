@@ -149,3 +149,8 @@ Open repository: /students/cs304reclib
 > git ls-files --stage -- alpha/templates/
 > git show :alpha/static/style.css
 > git ls-files --stage -- alpha/static/
+> git show :alpha/static/style.css
+> git show :alpha/static/style.css
+> git show :alpha/static/style.css
+> git show :alpha/templates/insert.html
+> git show :alpha/templates/album.html

@@ -692,3 +692,307 @@ find ~ -name dbi.py
 deactivate 
 source venv/bin/activate
 python app.py 
+git status
+git add .
+git status
+git add .
+git commit -m "(Bella) Fixed hrefs and linked artist mentions to artist detail pages, closes #29"
+git push origin master
+cd alpha
+rm -r venv
+cp -r draft alpha
+source venv/bin/activate
+python app.py
+cd alpha
+python app.py
+cd ..
+cd draft
+ls venv
+ls venv/lib64/python3.6
+deactivate
+source venv/bin/activate
+cd ../alpha
+python app.p
+python app.py
+ls
+cd draft/
+source ../venv/bin/activate
+ls
+python app.py 
+deactivate 
+source venv/bin/activate
+python app.py 
+printenv | grep secret
+printenv | grep -i secret
+ls
+echo $client_id
+echo $secret
+echo $CLIENT_ID
+grep -i client ~/.bashrc 
+pydoc dotenv
+python
+ls -A
+more .env 
+more .gitignore 
+ls
+cd alpha
+ls
+python app.py
+ls
+cd alpha
+ls
+python app.py
+cd ..
+source venv/bin/activate
+cd alpha
+python app.py 1943
+quit
+q
+quit() ;
+python app.py 1943
+ls
+cd alpha
+ls
+cd alpha
+source venv/bin/activate
+cd ..
+source venv/bin/activate
+cd alpha
+python app.py 1943
+cd ..
+cd draft
+python app.py
+cd ..
+cd alpha
+ls
+cd venv
+ls
+source venv/bin/activate
+cd ..
+source venv/bin/activate
+python app.py 1943
+cd templates
+touch login/html
+touch login.html
+code login.html
+cd ..
+python app.py 1943
+cd ..
+pip install flask_cas
+cd alpha
+python app.py 1943
+python app.py 1945
+python app.py 1944
+python app.py
+python app.py 1943
+python app.py 1944
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+bash install-scott-routing.sh
+ls
+ls -l
+cd venv
+ls -l
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+cd ..
+pip install flask_cas
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+cd venv
+ls
+vd lib
+ls
+cd lib
+ls
+cd python3.6/
+ls
+cd site-packages/
+ls
+cd flask_cas
+pip install flask_cas
+deactive
+deactivate
+cd ..
+source venv/bin/activate
+python app.py 1944
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+pip install flask_cas
+cd ..
+cd draft
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+cd ..
+cd alpha
+pip install flask_cas
+(venv)New CentOS 7 [cs304reclib@tempest alpha]$ pip install flask_cas
+Requirement already satisfied: flask_cas in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (1.0.0)
+Requirement already satisfied: Flask in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from flask_cas) (1.1.1)
+Requirement already satisfied: xmltodict in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from flask_cas) (0.12.0)
+Requirement already satisfied: itsdangerous>=0.24 in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from Flask->flask_cas) (1.1.0)
+Requirement already satisfied: click>=5.1 in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from Flask->flask_cas) (7.0)
+Requirement already satisfied: Jinja2>=2.10.1 in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from Flask->flask_cas) (2.10.3)
+Requirement already satisfied: Werkzeug>=0.15 in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from Flask->flask_cas) (0.16.0)
+Requirement already satisfied: MarkupSafe>=0.23 in /students/cs304reclib/draft/venv/lib/python3.6/site-packages (from Jinja2>=2.10.1->Flask->flask_cas) (1.1.1)
+(venv)New CentOS 7 [cs304reclib@tempest alpha]$ cd ..
+(venv)New CentOS 7 [cs304reclib@tempest ~]$ cd draft
+(venv)New CentOS 7 [cs304reclib@tempest draft]$ ls -l ../venv/lib/python3.6/site-packages/flask_cas
+pip install flask_cas
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+bash install-scott-routing.sh
+cd ..
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+cd draft
+ls
+source venv/bin/activate
+cd ..
+cd alpha
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+cd ..
+cd draft
+pip install flask_cas
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+cd venv
+cd lib
+cd python3.6
+cd site-packages
+ls
+cd flask_cas
+ls
+bash install-scott-routing.sh
+cd .. 
+cd ..
+bash install-scott-routing.sh
+ls -l
+ls -l ../venv/lib/python3.6/site-packages/flask_cas
+deactivate
+bash install-scott-routing.sh
+cd draft
+bash install-scott-routing.sh
+cd venv
+bash install-scott-routing.sh
+ls
+find . -name "routing.py.scott"
+find . -name "routing.py"
+find . -name "routing*"
+find . -name "*scott*"
+find . -name "*flask_cas*"
+ls alpha/
+find . -name "venv"
+cd project
+cd draft
+cd ..
+cd alpha
+source venv/bin/activate
+python app.py
+python setters.py
+rm -r alpha
+rm -r venv
+cd ..
+cd draft
+source venv/bin/activate
+deactivate
+source venv/bin/activate
+cd ../alpha
+python app.py
+git status
+git add .
+git commit -m "(Bella) Finish update and insert implementation closes #25, #14"
+git push origin master
+python app.py
+python getters.py
+python app.py
+git status
+git add .
+git commit -m "Added admin reservations view, closes #13"
+git push origin master
+mysql
+cd alpha
+mysql
+cd draft
+source venv/bin/activate
+python setters.py
+cd ..
+cd alpha
+python setters.py
+python getters.py
+cp -r ~cs304/pub/downloads/cas cas
+cd alpha
+bash install-scott-routing.sh
+cd ..
+bash install-scott-routing.sh
+cd cas
+bash install-scott-routing.sh
+cd ..
+cd alpha
+source venv/bin/activate
+cd ..
+source venv/bin/activate
+cd cas
+python -V
+cd ..
+deactivate
+source draft
+cd draft
+source venv/bin/activate
+python -V
+cd ..
+cd cas
+bash install-scott-routing.sh
+cd ..
+cd alpha
+ls
+python app.py 1943
+python app.py 1944
+cd alpha
+python app.py 1944
+cd ..
+cd draft
+source venv/bin/activate
+cd ..
+cd alpha
+python app.py 1944
+source venv/bin/activate
+python app.py
+cd cs304reclib
+ls
+cd alpha
+python app.py
+deactivate
+cd /
+ls
+cd ~
+ls
+cd draft
+source venv/bin/activate
+cd ~
+cd alpha
+python app.py
+yarn add uikit
+git clone git://github.com/uikit/uikit.git
+git clone https://github.com/app-generator/flask-now-ui-kit.git
+cd flask-now-ui-kit
+pip3 install -r requirements.txt
+set FLASK_APP=run.py
+flask shell
+virtualenv --no-site-packages env
+.\env\Scripts\activate.bat
+source env/bin/activate
+pip3 install -r requirements.txt
+cd alpha
+cd
+cd alpha
+source venv/bin/activate
+cd draft
+cd
+cd draft
+source venv/bin/activate
+cd
+cd alpha
+pip install Flask-UIkit==0.0.3
+cd draft
+source venv/bin/activate
+cd ..
+cd alpha
+python app.py
+cd draft
+source venv/bin/activate
+cd
+cd alpha
+python app.py

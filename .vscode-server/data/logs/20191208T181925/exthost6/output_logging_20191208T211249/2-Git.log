@@ -1,0 +1,131 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :alpha/uikit-3.2.4/js/uikit.js
+> git ls-files --stage -- alpha/uikit-3.2.4/js/
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :alpha/templates/base.html
+> git show :alpha/templates/artist.html
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/templates/check-in.html
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git check-ignore -v -z --stdin
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git check-ignore -v -z --stdin
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :alpha/flask-now-ui-kit/app/common.py
+> git ls-files --stage -- alpha/flask-now-ui-kit/app/
+> git show :alpha/flask-now-ui-kit/run.py
+> git ls-files --stage -- alpha/flask-now-ui-kit/
+> git show :alpha/templates/base.html
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :alpha/uikit/dist/css/uikit.min.css
+> git ls-files --stage -- alpha/uikit/dist/css/
+> git show :alpha/uikit/README.md
+> git ls-files --stage -- alpha/uikit/
+> git show :alpha/templates/base.html
+> git show :alpha/uikit/dist/css/uikit.css
+> git ls-files --stage -- alpha/uikit/dist/css/
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/uikit/dist/css/uikit.css
+> git ls-files --stage -- alpha/uikit/dist/css/
+> git show :alpha/static/style.css
+> git show :alpha/uikit/dist/css/uikit.css
+> git ls-files --stage -- alpha/uikit/dist/css/
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git check-ignore -v -z --stdin
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git check-ignore -v -z --stdin
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/templates/base.html
+> git show :alpha/app.py
+> git show :alpha/templates/base.html
+> git show :alpha/static/style.css
+> git show :alpha/app.py
+> git show :alpha/static/style.css

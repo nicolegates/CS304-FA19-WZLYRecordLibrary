@@ -1,23 +1,30 @@
 <!doctype html>
 <html lang='en'>
 <head>
-    <meta charset='utf-8'>
-    <meta name=author content="Bella Virgilio">
     <title>WZLY Record Library</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
 </head>
 <body>
 
-<ul id="nav">
-    <li><a href='/'>Home</a></li>
-    <li><a href='/login/'>Sign In</a></li>
-    <li><a href='/profile/'>Profile</a></li>
-    <li><a href='/checkin/'>Check in materials</a></li>
-    <!-- <li><a href='/admin/'>Admin</a></li> -->
-    <li><a href='/insert/'>Admin: Insert Album</a></li>
-    <li><a href='/update/'>Admin: Delete/Update Album</a></li>
-    <li><a href='/reservation/'>Admin: View Reservations</a></li>
-</ul>
+<div class="topnav">
+    <a class="active" href='/'>Home</a>
+    <a href='/login/'>Sign In</a>
+    <a href='/logout/'>Sign Out</a>
+    <a href='/profile/'>Profile</a>
+    <a href='/checkin/'>Check in materials</a>
+    <div class="dropdown">
+        <button class="dropbtn">Admin
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href='/insert/'>Insert Album</a>
+            <a href='/update/'>Delete/Update Album</a>
+            <a href='/reservation/'>View Reservations</a>
+        </div>
+      </div>
+
+</div>
 
 <div id='flashes'>
     {% with messages = get_flashed_messages() %}
@@ -48,7 +55,9 @@
             
 {% block content %}
 
-<h1>Welcome to the WZLY Record Library!</h1>
+    <h1 class="uk-heading-divider">Welcome to the WZLY Record Library!</h1>
+
+
 
 {% endblock %}
     

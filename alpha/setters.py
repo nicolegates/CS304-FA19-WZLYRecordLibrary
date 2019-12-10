@@ -1,5 +1,7 @@
 import dbi
 from add import *
+from datetime import date
+from datetime import timedelta
 
 def getConn(db):
     '''Returns a database connection for that db'''
@@ -47,6 +49,21 @@ def deleteAlbum(aid, conn):
     curs = dbi.dictCursor(conn)
     curs.execute('delete from album where aid = %s', [aid])
 
+def checkout(aid, bid, conn):
+    '''given an album ID and a banner ID, adds a reservation
+    to the reservation table and returns the due date'''
+    today = date.today()
+    due = today + timedelta(30)
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('insert into reservation (checkout, due, returned, aid, bid) ' +\
+                 'values (%s, %s, %s, %s, %s)', [today, due, 0, aid, bid])
+    
+    curs.execute('select due from reservation where rid = LAST_INSERT_ID()')
+    due = curs.fetchone()
+    
+    return due['due']
+    
 
 # def insertTracks(track, num, conn):
 #     '''takes a list of tracks and updates
@@ -56,6 +73,6 @@ def deleteAlbum(aid, conn):
 #     '''inserts a genre/album pair into
 #     the genre table'''
 
-# conn = getConn('cs304reclib_db')
-# res = updateAlbum(18423, 'dumb album 1', 'dumb artist 1', 1997, 'cd', 'dumbloc', 'dumbart', 'embed', conn)
-# print(res)
+conn = getConn('cs304reclib_db')
+res = checkout(1107, 'B20844116', conn)
+print(res)

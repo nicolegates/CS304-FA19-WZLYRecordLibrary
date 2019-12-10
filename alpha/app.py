@@ -105,28 +105,36 @@ def artist(artist):
 @app.route('/login/', methods=['GET','POST'])
 def login():
     # return redirect(url_for('index'))
-    print('Session keys: ',list(session.keys()))
-    for k in list(session.keys()):
-        print(k,' => ',session[k])
     if '_CAS_TOKEN' in session:
         token = session['_CAS_TOKEN']
-    if 'CAS_ATTRIBUTES' in session:
-        attribs = session['CAS_ATTRIBUTES']
-        print('CAS_attributes: ')
-        for k in attribs:
-            print('\t',k,' => ',attribs[k])
     if 'CAS_USERNAME' in session:
         is_logged_in = True
         username = session['CAS_USERNAME']
-        print(('CAS_USERNAME is: ',username))
-    else:
-        is_logged_in = False
-        username = None
-        print('CAS_USERNAME is not in the session')
     return render_template('login.html',
                            username = username,
                            is_logged_in = is_logged_in,
                            cas_attributes = session.get('CAS_ATTRIBUTES'))
+
+@app.route('/logout/', methods=['GET','POST'])
+def logout():
+    is_logged_in = False
+    username = None
+    return render_template('login.html',
+                           username = username,
+                           is_logged_in = is_logged_in,
+                           cas_attributes = session.get('CAS_ATTRIBUTES'))
+
+@app.route('/logged_in/', methods=['GET', 'POST'])
+def logged_in():
+    flash('Successfully logged in!')
+    return redirect(url_for('index'))
+    # return redirect(request.referrer)
+
+@app.route('/after_logout/')
+def after_logout():
+    flash('Successfully logged out!')
+    return redirect(url_for('index'))
+    # return redirect(request.referrer)
 
 @app.route('/update/<aid>', methods=['GET','POST'])
 @app.route('/update/', defaults={'aid': None}, methods=['GET','POST'])
@@ -215,11 +223,6 @@ def reservation():
                             now = now,
                             reservations = res)
 
-@app.route('/logged-in/', methods=['GET','POST'])
-def loggedin():
-    flash('Successfully logged in!')
-    return redirect(url_for('index'))
-
 @app.route('/profile/', methods=['GET','POST'])
 def profile():
     return redirect(url_for('index'))
@@ -234,6 +237,23 @@ def checkin():
     #   
 
     return render_template('check-in.html')
+
+@app.route("/checkout/", methods=['POST'])
+def checkout():
+    '''Checks out a movie (using Ajax) and
+    sends confirmation as JSON response'''
+
+    conn = getters.getConn('cs304reclib_db')
+
+    aid = request.form.get('aid')
+    bid = request.form.get('user')
+    due = setters.checkout(aid, bid, conn)
+    due = due.strftime("%m/%d/%Y")
+    
+    return jsonify(due=due)
+    # if not logged_in:
+    #     flash('Please log in first.')
+    #     return redirect(request.referrer)
 
 @app.route('/checkinAjax/', methods=['GET','POST'])
 def checkinAjax():
