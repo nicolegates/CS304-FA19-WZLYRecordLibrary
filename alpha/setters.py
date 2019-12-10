@@ -63,7 +63,28 @@ def checkout(aid, bid, conn):
     due = curs.fetchone()
     
     return due['due']
+
+def checkin(rid, conn):
+    '''given a reservation ID, updates
+    a reservation as having been returned. Returns
+    the name of the album returned.'''
+
+    curs = dbi.dictCursor(conn)
     
+    try:
+        curs.execute('update reservation ' +\
+                        'set returned = 1 where rid = %s;',
+                        [rid])
+        curs.execute('select ' +\
+                        'album.name ' +\
+                        'from reservation ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                        'where reservation.rid = %s;', [rid])
+        album = curs.fetchone()
+        return album['name']
+    except:
+        return None
 
 # def insertTracks(track, num, conn):
 #     '''takes a list of tracks and updates
@@ -74,5 +95,4 @@ def checkout(aid, bid, conn):
 #     the genre table'''
 
 conn = getConn('cs304reclib_db')
-res = checkout(1107, 'B20844116', conn)
-print(res)
+print(checkin(49, conn))

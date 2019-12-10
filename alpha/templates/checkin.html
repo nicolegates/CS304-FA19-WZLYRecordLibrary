@@ -4,20 +4,12 @@
 
 <p>Hi {{ user }}!</p>
 
-<form class="check-in" method="GET" action="/checkin/">
+<form class="check-in" method="POST" action="/checkin/">
     <p><label>Please select which item you are checking in: 
-        <select required name="kind" id="kind">
-            <option value = "">Select one...</option>
-            <option value = "one">1</option>
-            <option value = "two">2</option>
-            <option value = "three">3</option>
-            
-            <!-- 
-            {% for item in items %}
-                <option value="option">{{ item }}</option>
+        <select required name="rid" id="rid">
+            {% for r in reservations %}
+                <option value="{{ r['rid'] }}">{{ r['album_name'] }}</option>
             {% endfor %}
-            -->
-
         </select>
     </label></p>
     <button id="checkin-button" type="submit" name="submit" value="checkin">Check In!</button>

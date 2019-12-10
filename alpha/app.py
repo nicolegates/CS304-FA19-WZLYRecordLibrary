@@ -227,17 +227,31 @@ def reservation():
 def profile():
     return redirect(url_for('index'))
 
+# TODO
+# Implement logged in/not logged in
 @app.route('/checkin/', methods=['GET','POST'])
 def checkin():
-    # pseudocode:
-    # if user is not logged in:
-    #   flash('You have to log in before you can check anything in')
-    # else:
-    #   conn = getters.getConn('cs304reclib_db')
-    #   
+    conn = getters.getConn('cs304reclib_db')
+    
+    # Hardcoded to Bella's BID for now
+    # in the future, needs to come from the session
+    bid = "B20844116"
+    reservations = getters.getActiveReservationsByID(bid, conn)
 
-    return render_template('check-in.html')
+    if request.method == 'POST':
+        rid = request.form.get('rid')
+        print(rid)
+        conn = getters.getConn('cs304reclib_db')
+        album = setters.checkin(rid, conn)
+        if album is not None:
+            flash(album + " was successfully checked in.")
+        else:
+            flash("An error occurred.")
 
+    return render_template('checkin.html', reservations = reservations)
+
+# TODO
+# Implement logged in/not logged in
 @app.route("/checkout/", methods=['POST'])
 def checkout():
     '''Checks out a movie (using Ajax) and
@@ -251,20 +265,6 @@ def checkout():
     due = due.strftime("%m/%d/%Y")
     
     return jsonify(due=due)
-    # if not logged_in:
-    #     flash('Please log in first.')
-    #     return redirect(request.referrer)
-
-@app.route('/checkinAjax/', methods=['GET','POST'])
-def checkinAjax():
-    # runs SQL statement that changes album's availability
-    # from 'not available' to 'available'
-    conn = getters.getConn('cs304reclib_db')
-    # album = album user has selected to check in
-    # run python code to update album availability
-    print("hello")
-    return redirect(url_for('index'))
-    
 
 @app.route('/admin/', methods=['GET','POST'])
 def admin():
@@ -278,7 +278,7 @@ def insert():
         name = request.form.get('album-name')
         artist = request.form.get('album-artist')
         
-        # expand to handle duplicates (if album already exists)
+        # expand to handle duplicates? (if album already exists)
         res = setters.insertAlbum(name, artist, conn)
         aid = res['aid']
 

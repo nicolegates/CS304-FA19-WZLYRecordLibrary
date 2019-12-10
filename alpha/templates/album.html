@@ -56,7 +56,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
     $(".checkout").click(function(){
-        if (confirm("Do you want to check out {{ album['name'] }}")) {
+        if (confirm("Do you want to check out {{ album['name'] }}?")) {
             var aid = "{{ album['aid'] }}"
 
             // creates a dictionary of the user's input and ID

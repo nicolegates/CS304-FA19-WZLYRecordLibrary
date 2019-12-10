@@ -129,12 +129,36 @@ def getArtist(artist, conn):
     return curs.fetchall()
 
 def getIncompletes(conn):
-    # gets albums with incomplete info
+    '''returns all albums with incomplete info'''
     curs = dbi.dictCursor(conn)
     curs.execute('select * from album where ' +\
                  'year IS NULL')
     incompletes = curs.fetchall()
     return incompletes
+
+def getActiveReservationsByID(bid, conn):
+    '''returns all active reservations for a particular user'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                     'where person.bid = %s ' +\
+                        'and reservation.returned = 0', [bid])
+    res = curs.fetchall()
+    return res
+
+def getAllReservationsByID(bid, conn):
+    '''returns all reservations ever made by a particular user'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from reservation where ' +\
+                 'bid = %s', [bid])
+    res = curs.fetchall()
+    return res
 
 # conn = getConn('cs304reclib_db')
 # res = getAllReservations('overdue', conn)
