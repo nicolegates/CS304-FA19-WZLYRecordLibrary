@@ -1,0 +1,1223 @@
+from flask import (Flask, render_template, make_response, url_for, request,
+                   redirect, flash, session, send_from_directory, jsonify
+                   )
+from werkzeug import secure_filename
+app = Flask(__name__)
+app.secret_key = 'cs304reclib'
+
+import sys,os,random
+import getters
+import setters
+import datetime
+
+from dotenv import load_dotenv
+load_dotenv()
+
+from flask_cas import CAS
+
+CAS(app)
+
+app.config['CAS_SERVER'] = 'https://login.wellesley.edu:443'
+app.config['CAS_AFTER_LOGIN'] = 'logged_in'
+app.config['CAS_LOGIN_ROUTE'] = '/module.php/casserver/cas.php/login'
+app.config['CAS_LOGOUT_ROUTE'] = '/module.php/casserver/cas.php/logout'
+# need to figure out which port we can use
+app.config['CAS_AFTER_LOGOUT'] = 'http://cs.wellesley.edu:1943/'
+app.config['CAS_VALIDATE_ROUTE'] = '/module.php/casserver/serviceValidate.php'
+# app.config['CAS_AFTER_LOGOUT'] = 'after_logout'
+
+# app.secret_key = os.getenv('secret_key')
+# app.secret_key = ''.join([ random.choice(('ABCDEFGHIJKLMNOPQRSTUVXYZ' +
+#                                           'abcdefghijklmnopqrstuvxyz' +
+#                                           '0123456789'))
+#                            for i in range(20) ])
+
+app.config['TRAP_BAD_REQUEST_ERRORS'] = True
+
+@app.route('/')
+def index():
+    return render_template('base.html')
+
+@app.route('/query', methods=['GET','POST'])
+def query():
+    conn = getters.getConn('cs304reclib_db')
+    args = request.args
+
+    if 'q' in args:
+        q = args['q']
+    if 'filter' in args:
+        kind = args['filter']
+
+    if kind == 'album':
+        results = getters.searchAlbums(q, conn)
+    if kind == 'artist':
+        results = getters.searchArtists(q, conn)
+    if kind == 'year':
+        results = getters.searchYear(q, conn)
+    if kind == 'genre':
+        results = getters.searchGenre(q, conn)
+    if kind == 'track':
+        results = getters.searchTrack(q, conn)
+
+    return render_template('results.html',
+                            results=results,
+                            query=q,
+                            kind=kind)
+
+@app.route('/album/<aid>', methods=['GET'])
+def album(aid):
+    conn = getters.getConn('cs304reclib_db')
+    album = getters.getAlbumByID(aid, conn)
+    
+    res = getters.getReservation(aid, conn)
+    tracks = getters.getTracks(aid, conn)
+    genres = getters.getGenres(aid, conn)
+    
+    # if the album has been returned
+    if res is None or res['returned'] == 1:
+        avail = 'Available'
+    # if not, pass the due date to the template
+    else:
+        avail = 'Due back ' + res['due'].strftime('%m/%d/%Y')
+
+    print(album['location'])
+
+    return render_template('album.html',
+                            album=album,
+                            avail=avail,
+                            tracks=tracks,
+                            genres=genres)
+
+@app.route('/artist/<artist>', methods=['GET'])
+def artist(artist):
+    conn = getters.getConn('cs304reclib_db')
+    albums = getters.getArtist(artist, conn)
+    
+    if len(albums) > 0:
+        return render_template('artist.html',
+                                artist=artist,
+                                albums=albums )
+    else:
+        # Need to implement error page
+        print('Show error page')
+        return redirect(request.referrer)
+
+@app.route('/login/', methods=['GET','POST'])
+def login():
+    # return redirect(url_for('index'))
+    if '_CAS_TOKEN' in session:
+        token = session['_CAS_TOKEN']
+    if 'CAS_USERNAME' in session:
+        is_logged_in = True
+        username = session['CAS_USERNAME']
+    return render_template('login.html',
+                           username = username,
+                           is_logged_in = is_logged_in,
+                           cas_attributes = session.get('CAS_ATTRIBUTES'))
+
+@app.route('/logout/', methods=['GET','POST'])
+def logout():
+    is_logged_in = False
+    username = None
+    return render_template('login.html',
+                           username = username,
+                           is_logged_in = is_logged_in,
+                           cas_attributes = session.get('CAS_ATTRIBUTES'))
+
+@app.route('/logged_in/', methods=['GET', 'POST'])
+def logged_in():
+    flash('Successfully logged in!')
+
+    conn = getters.getConn('cs304reclib_db')
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    name = session['CAS_ATTRIBUTES']['cas:givenName'] +\
+            ' ' + session['CAS_ATTRIBUTES']['cas:sn']
+    username = session['CAS_USERNAME']
+
+    setters.checkUser(bid, name, username, conn)
+    return redirect(url_for('index'))
+    # return redirect(request.referrer)
+
+@app.route('/after_logout/')
+def after_logout():
+    flash('Successfully logged out!')
+    return redirect(url_for('index'))
+    # return redirect(request.referrer)
+
+@app.route('/update/<aid>', methods=['GET','POST'])
+@app.route('/update/', defaults={'aid': None}, methods=['GET','POST'])
+def update(aid):
+    '''ADMIN FEATURE'''
+    conn = getters.getConn('cs304reclib_db')
+    
+    # get albums with incomplete fields
+    albums = getters.getIncompletes(conn)
+
+    # if there's an AID in the route (coming from insert page)
+    if request.method == 'GET' and aid != None:
+        album = getters.getAlbumByID(aid, conn)
+        return render_template('update.html',
+                                incompletes = albums,
+                                a = album,
+                                total = len(albums))
+
+    if request.method == 'POST':
+        form = request.form
+
+        # selecting an album
+        if 'submit-btn' in form and form['submit-btn'] == 'Choose':
+            aid = request.form.get('menu-aid')
+        
+        album = getters.getAlbumByID(aid, conn)
+
+        if 'submit' in form:
+            action = form['submit']
+
+            # updating an album
+            if action == 'update':
+                conn = getters.getConn('cs304reclib_db')
+                res = setters.updateAlbum(
+                                aid, form['album-name'],
+                                form['album-artist'],
+                                form['album-year'],
+                                form['album-format'],
+                                form['album-location'],
+                                form['album-art'],
+                                form['album-embed'],
+                                conn)
+
+                if res == True:
+                    flash(form['album-name'] + ' successfully updated.')
+
+                album = getters.getAlbumByID(aid, conn)
+
+                return render_template('update.html',
+                                        incompletes = albums,
+                                        a = album,
+                                        total = len(albums))
+
+            # deleting an album
+            if action == 'delete':
+                setters.deleteAlbum(aid, conn)
+                flash("Album " + str(aid) + " was deleted")
+                return render_template('update.html',
+                                        incompletes = albums,
+                                        a = {},
+                                        total = len(albums))
+    
+    return render_template('update.html',
+                            incompletes = albums,
+                            a = {},
+                            total = len(albums))
+
+@app.route('/reservation/', methods=['GET','POST'])
+def reservation():
+
+    conn = getters.getConn('cs304reclib_db')
+    res = getters.getReservations('all', conn)
+    now = datetime.date.today()
+
+    if request.method == 'POST':
+        action = request.form['reservation-view']
+        res = getters.getReservations(action, conn)
+        
+        return render_template('reservation.html',
+                                filter=action.capitalize(),
+                                now = now,
+                                reservations = res)
+
+    return render_template('reservation.html', 
+                            filter='All',
+                            now = now,
+                            reservations = res)
+
+@app.route('/profile/', methods=['GET','POST'])
+def profile():
+    conn = getters.getConn('cs304reclib_db')
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    name = session['CAS_ATTRIBUTES']['cas:givenName']
+    res = getters.getActiveReservationsByID(bid, conn)
+    now = datetime.date.today()
+
+    return render_template('profile.html',
+                            reservations = res,
+                            name = name,
+                            now = now)
+
+# TODO
+# Implement logged in/not logged in
+@app.route('/checkin/', methods=['GET','POST'])
+def checkin():
+    conn = getters.getConn('cs304reclib_db')
+    
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    name = session['CAS_ATTRIBUTES']['cas:givenName']
+    reservations = getters.getActiveReservationsByID(bid, conn)
+
+    if request.method == 'POST':
+        rid = request.form.get('rid')
+        print(rid)
+        conn = getters.getConn('cs304reclib_db')
+        album = setters.checkin(rid, conn)
+        if album is not None:
+            flash(album + " was successfully checked in.")
+        else:
+            flash("An error occurred.")
+
+    return render_template('checkin.html',
+                           reservations = reservations,
+                           name = name)
+
+# TODO
+# Implement logged in/not logged in
+@app.route("/checkout/", methods=['POST'])
+def checkout():
+    '''Checks out a movie (using Ajax) and
+    sends confirmation as JSON response'''
+
+    conn = getters.getConn('cs304reclib_db')
+
+    aid = request.form.get('aid')
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    due = setters.checkout(aid, bid, conn)
+    due = due.strftime("%m/%d/%Y")
+    
+    return jsonify(due=due)
+
+@app.route('/admin/', methods=['GET','POST'])
+def admin():
+    return redirect(url_for('index'))
+
+@app.route('/insert/', methods=['GET','POST'])
+def insert():
+    conn = getters.getConn('cs304reclib_db')
+    
+    if request.method == 'POST':
+        name = request.form.get('album-name')
+        artist = request.form.get('album-artist')
+        
+        # expand to handle duplicates? (if album already exists)
+        res = setters.insertAlbum(name, artist, conn)
+        aid = res['aid']
+
+        if res == None:
+            flash("Unable to insert album. Please try again.")
+        else:
+            flash("Album " + name + " by artist " + artist + " successfully inserted.")
+    
+        return redirect(url_for('update', aid=aid))
+
+    return render_template('insert.html')
+
+if __name__ == '__main__':
+
+    if len(sys.argv) > 1:
+        # arg, if any, is the desired port number
+        port = int(sys.argv[1])
+        assert(port>1024)
+    else:
+        port = os.getuid()
+    app.debug = True
+    app.run('0.0.0.0',port)import dbi
+from add import *
+from datetime import date
+from datetime import timedelta
+
+def getConn(db):
+    '''Returns a database connection for that db'''
+    dsn = dbi.read_cnf()
+    conn = dbi.connect(dsn)
+    conn.select_db(db)
+    return conn
+
+def insertAlbum(name, artist, conn):
+    '''takes a user-inputted album and
+    adds it to the album table'''
+    
+    try:
+        name = fixThes(name, ', the')
+        name = fixThes(name, ',the')
+        artist = fixThes(artist, ',the')
+        artist = fixThes(artist, ', the')
+
+        curs = dbi.dictCursor(conn)
+        curs.execute('insert into album (name, artist, fmt) ' +\
+                     'values (%s, %s, %s)', [name, artist, 'cd'])
+        curs.execute('select aid from album where ' +\
+                     'name = %s and artist = %s;', [name, artist])
+        aid = curs.fetchone()
+        return aid
+    except:
+        return None
+
+def updateAlbum(aid, name, artist, year, fmt, location, art, embed, conn):
+    '''Updates an album. Returns True if successful, False if not.'''
+    curs = dbi.dictCursor(conn)
+    
+    try:
+        curs.execute('update album ' +\
+                    'set name = %s, artist = %s, year = %s, ' +\
+                    'fmt = %s, location = %s, art = %s, embed = %s ' +\
+                    'where aid = %s;',
+                    [name, artist, year, fmt, location, art, embed, aid])
+        return True
+    except:
+        return False
+    
+def deleteAlbum(aid, conn):
+    '''deletes an album from the album table'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('delete from album where aid = %s', [aid])
+
+def checkout(aid, bid, conn):
+    '''given an album ID and a banner ID, adds a reservation
+    to the reservation table and returns the due date'''
+    today = date.today()
+    due = today + timedelta(30)
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('insert into reservation (checkout, due, returned, aid, bid) ' +\
+                 'values (%s, %s, %s, %s, %s)', [today, due, 0, aid, bid])
+    
+    curs.execute('select due from reservation where rid = LAST_INSERT_ID()')
+    due = curs.fetchone()
+    
+    return due['due']
+
+def checkin(rid, conn):
+    '''given a reservation ID, updates
+    a reservation as having been returned. Returns
+    the name of the album returned.'''
+
+    curs = dbi.dictCursor(conn)
+    
+    try:
+        curs.execute('update reservation ' +\
+                        'set returned = 1 where rid = %s;',
+                        [rid])
+        curs.execute('select ' +\
+                        'album.name ' +\
+                        'from reservation ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                        'where reservation.rid = %s;', [rid])
+        album = curs.fetchone()
+        return album['name']
+    except:
+        return None
+
+def checkUser(bid, name, username, conn):
+    curs = dbi.dictCursor(conn)
+
+    curs.execute('select * from person where bid = %s', [bid])
+    res = curs.fetchone()
+    if res is not None:
+        return False
+    else:
+        curs.execute('insert into person (bid, name, username, is_admin)' +\
+                     'values (%s, %s, %s, 0)', [bid, name, username])
+        return True
+    
+
+# def insertTracks(track, num, conn):
+#     '''takes a list of tracks and updates
+#     the track table'''
+
+# def insertGenre(genre, aid, conn):
+#     '''inserts a genre/album pair into
+#     the genre table'''
+
+conn = getConn('cs304reclib_db')
+res = checkUser("B20844129", "Fake User2", "fuser2", conn)
+print(res)import dbi
+
+def getConn(db):
+    '''Returns a database connection for that db'''
+    dsn = dbi.read_cnf()
+    conn = dbi.connect(dsn)
+    conn.select_db(db)
+    return conn
+
+def searchAlbums(query, conn):
+    '''adds tracks and their order
+    to track table'''
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where name like %s',
+                ['%' + query + '%'])
+
+    return curs.fetchall()
+
+def searchArtists(query, conn):
+    '''returns all artists matching a query'''
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album ' +\
+                 'where artist like %s',
+                  ['%' + query + '%'])
+    return curs.fetchall()
+
+def searchYear(query, conn):
+    '''returns all albums from given year'''
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album ' +\
+                 'where year = %s',
+                  [query])
+    return curs.fetchall()
+
+def searchGenre(query, conn):
+    '''returns all albums of a specific genre'''
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album a ' +\
+                 'inner join genre g ' +\
+                    'on a.aid = g.aid ' +\
+                 'where g.name like %s ' +\
+                 'group by a.aid;', ['%' + query + '%'])
+    
+    return curs.fetchall()
+    
+
+def searchTrack(query, conn):
+    '''returns all albums that contain
+    the query in their track list'''
+
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album a ' +\
+                 'inner join track t ' +\
+                    'on a.aid = t.aid ' +\
+                 'where t.name like %s ' +\
+                 'group by a.aid;', ['%' + query + '%'])
+
+    return curs.fetchall()
+
+def getAlbumByID(aid, conn):
+    '''returns an album with that id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where aid = %s', [aid])
+    return curs.fetchone()
+    
+def getReservation(aid, conn):
+    '''gets the most recent reservation
+    for a particular album id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from reservation where aid = %s ' +\
+                  'order by due desc limit 1;', [aid])
+    
+    return curs.fetchone()
+
+def getReservations(filter, conn):
+    '''returns reservations according to selected filter'''
+
+    curs = dbi.dictCursor(conn)
+
+    if filter == 'all':
+        curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid;')
+
+    if filter == 'overdue':
+        curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                     'where reservation.due <= CURDATE() ' +\
+                        'and reservation.returned = 0;')
+    
+    return curs.fetchall()
+
+def getGenres(aid, conn):
+    '''gets genres for an album
+    given album's id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from genre where aid = %s', [aid])
+    
+    return curs.fetchall()
+
+def getTracks(aid, conn):
+    ''''gets tracks for an album
+    given album's id'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from track where aid = %s', [aid])
+    
+    return curs.fetchall()
+
+def getArtist(artist, conn):
+    '''gets all an artist's albums'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where artist = %s;', [artist])
+
+    return curs.fetchall()
+
+def getIncompletes(conn):
+    '''returns all albums with incomplete info'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from album where ' +\
+                 'year IS NULL')
+    incompletes = curs.fetchall()
+    return incompletes
+
+def getActiveReservationsByID(bid, conn):
+    '''returns all active reservations for a particular user'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                     'where person.bid = %s ' +\
+                        'and reservation.returned = 0', [bid])
+    res = curs.fetchall()
+    return res
+
+def getAllReservationsByID(bid, conn):
+    '''returns all reservations ever made by a particular user'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select * from reservation where ' +\
+                 'bid = %s', [bid])
+    res = curs.fetchall()
+    return res
+
+# conn = getConn('cs304reclib_db')
+# res = getAllReservations('overdue', conn)
+# print(res){% extends "base.html" %}
+
+{% block content %}
+
+{% if album['spotify_name'] != None %}
+    <h1>{{ album['spotify_name'] }}</h1>
+{% else %}
+    <h1>{{ album['name'] }}</h1>
+{% endif %}
+{% if album['spotify_artist'] != None %}
+    <h1><a href="{{ url_for('artist', artist=album['artist']) }}">{{ album['spotify_artist'] }}</a></h1>
+{% else %}
+    <h1><a href="{{ url_for('artist', artist=album['artist']) }}">{{ album['artist'] }}</a></h1>
+{% endif %}
+
+<!-- this button should not be visible if the resource is not available -->
+<button name="checkout" class="checkout" id="checkout">Check me out!</button><br>
+
+{% if album['art'] != None %}
+    <img src={{ album['art'] }}
+         alt="album art for {{ album['name']}}"
+         width=400px></img>
+{% endif %}
+
+<ul>
+    {% if album['year'] != None %}
+        <li>Year: {{ album['year'] }}</li>
+    {% endif %}
+    <li>Format: {{ album['fmt']|upper }} </li>
+    {% if album['location'] != None %}
+        <li>Location: {{ album['location'] }}</li>
+    {% endif %}
+    <li id="available">{{ avail }}</li>
+</ul>
+
+{% if album['spotify_album_id'] != None %}
+    <iframe src="https://open.spotify.com/embed/album/{{ album['spotify_album_id'] }}"
+            width="400" height="400" frameborder="0" allowtransparency="true"
+            allow="encrypted-media"></iframe>
+{% endif %}
+
+<!-- show genres -->
+{% if genres != None %}
+    <h1>Genres</h1>
+    {% for g in genres %}
+        <li>{{ g['name'] }}</li>
+    {% endfor %}
+{% endif %}
+
+<!-- show tracks -->
+<!-- if there's no embed but there are tracks, show the tracks -->
+<!-- {% if tracks != None %}
+    <p>{{ tracks }}</p>
+{% endif %} -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(".checkout").click(function(){
+        if (confirm("Do you want to check out {{ album['name'] }}?")) {
+            var aid = "{{ album['aid'] }}"
+
+            // creates a dictionary of the user's input and ID
+            json_dict = { aid: aid }
+
+            // POSTs the user's input to Ajax route
+            $.post('/checkout/', json_dict, function(data) {
+                due = data['due']
+                $("#available").text("Due back " + due)
+                var msg = "Check-out confirmed. {{ album['name'] }} " +
+                          "is due on " + due + ". Please pick up your materials from the library. Enjoy!"
+                alert(msg)
+            }, 'json');
+        } else {
+            console.log("nooooooo")
+        }
+    }); 
+</script>
+
+
+{% endblock %}
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ artist }}</h1>
+
+<!-- list view -->
+<!-- <ol>
+    {% for a in albums %}
+        {% if a['year'] != None %}
+            <li><a href="{{ url_for('album', aid=a['aid']) }}">{{ a['name'] }} ({{a['year']}})</a></li>
+        {% else %}
+            <li><a href="{{ url_for('album', aid=a['aid']) }}">{{ a['name'] }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ol> -->
+
+<ul class="grid">
+    {% for a in albums %}
+        <li class="tile">
+            <a href="{{ url_for('album', aid=a['aid']) }}">
+                {% if a['art'] != None%}
+                    <img class="cover" src={{ a['art'] }}></img>
+                {% else %}
+                    <img class="cover" src="{{ url_for('static', filename='../static/defaultrecord.png') }}"></img>
+                {% endif %}
+            </a>
+            <p class="detail">{{ a['name'] }} by {{ a['artist'] }}</p>
+            {% if a['year'] != None %}
+                <p class="year">{{ a['year'] }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}<!doctype html>
+<html lang='en'>
+<head>
+    <title>WZLY Record Library</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+    <a class="active" href='/'>Home</a>
+    <a href='/login/'>Sign In</a>
+    <a href='/logout/'>Sign Out</a>
+    <a href='/profile/'>Profile</a>
+    <a href='/checkin/'>Check in materials</a>
+    <div class="dropdown">
+        <button class="dropbtn">Admin
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href='/insert/'>Insert Album</a>
+            <a href='/update/'>Delete/Update Album</a>
+            <a href='/reservation/'>View Reservations</a>
+        </div>
+      </div>
+
+</div>
+
+<div id='flashes'>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="messages">
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<form class="search" method="GET" action="/query">
+    <p><label>Search: <input id="searchterm" type="text" required name="q" class="txt"></label>
+    <label>Filter
+        <select class="dropdown" required name="filter">
+            <option value="">Select</option>
+            <option value="album">Album</option>
+            <option value="artist">Artist</option>
+            <option value="year">Year</option>
+            <option value="genre">Genre</option>
+            <option value="track">Track</option>
+        </select>
+    </label>
+    <button id="searchbutton" type="submit" name="submit" value="search">Search</button>
+</form>
+            
+{% block content %}
+
+    <h1 class="uk-heading-divider">Welcome to the WZLY Record Library!</h1>
+
+
+
+{% endblock %}
+    
+</body>
+</html>{% extends "base.html" %}
+
+{% block content %}
+
+<p>Hi {{ name }}!</p>
+
+<form class="check-in" method="POST" action="/checkin/">
+    <p><label>Please select which item you are checking in: 
+        <select required name="rid" id="rid">
+            {% for r in reservations %}
+                <option value="{{ r['rid'] }}">{{ r['album_name'] }}</option>
+            {% endfor %}
+        </select>
+    </label></p>
+    <button id="checkin-button" type="submit" name="submit" value="checkin">Check In!</button>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
+{% endblock %}
+
+<script>
+
+$(".checkin-button").on("click", function() {
+    alert("success")
+    
+    // $user = "1";
+    // $album = "1";
+    // $.post("/checkinAjax/", {user: $user, album: $album});
+
+    // redirect to a 'successfully checked in page'?
+    
+})
+
+</script>{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Insert Album</h1>
+
+<form method=post action="/insert/">
+   
+    <fieldset>
+        <legend>Album Data</legend>
+            <table>
+                <tr><td><label for="album-name">Album Name:</label></td>
+                <td><input type="text" name="album-name" id="album-name"></td></tr>
+                <tr><td><label for="album-artist">Artist:</label></td>
+                <td><input type="text" name="album-artist" id="album-artist"></td></tr>
+            </table>
+    </fieldset>
+    
+    <p> <input type='submit' value='Insert Album'></p>
+        
+</form>
+
+{% endblock %}<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name=author content="Scott D. Anderson">
+    <title>{{ page_title }}</title>
+    {% block head_stuff %} {% endblock %}
+</head>
+<body>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div id="messages">
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+            
+{% if username %}
+        <!-- route defined by CAS; dunno why they don't use url_for() -->
+   <form method="GET" action="/logout/"><button>logout {{username}}</button></form>
+   <p>CAS username: {{username}}</p>
+   <p>CAS attributes:</p>
+   <ul>
+       {% for key,val in cas_attributes.items() %}
+       <li>{{key}} &rArr; {{val}}</li>
+       {% endfor %}
+   </ul>
+
+{% else %}
+        <!-- route defined by CAS; dunno why they don't use url_for() -->
+   <form method="GET" action="/login/"><button>login</button></form>
+{% endif %}   
+
+{% block main_content %}
+<h1>Welcome!</h1>
+{% endblock %}
+
+</body>
+</html>{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Showing reservations for {{ name }}:</h1>
+
+<!-- <form method=POST action='/profile/'>
+    <label for="reservation-view">Choose a view:</label>
+    <select id="reservation-view" name="reservation-view">
+        <option value="all">All</option>
+        <option value="overdue">Overdue</option>
+    </select>
+    <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
+</form> -->
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Album</th>
+        <th>Status</th>
+        <th>Checkout Date</th>
+        <th>Due Date</th>
+        <th>Reservation ID</th>
+    </tr>
+    {% for r in reservations %}
+        <tr>
+            <td>{{ r['name'] }}</td>
+            <td>{{ r['album_name'] }} by {{ r['artist'] }}</td>
+            {% if r['returned'] == 0 and r['due'] < now %}
+                <td>Overdue</td>
+            {% elif r['returned'] == 0 and r['due'] >= now %}
+                <td>Checked Out</td>
+            {% else %}
+                <td>Returned</td>
+            {% endif %}
+            <td>{{ r['checkout'] }}</td>
+            <td>{{ r['due'] }}</td>
+            <td>{{ r['rid'] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+      
+{% endblock %}{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ filter }} Reservations:</h1>
+
+<form method=POST action='/reservation/'>
+    <label for="reservation-view">Choose a view:</label>
+    <select id="reservation-view" name="reservation-view">
+        <option value="all">All</option>
+        <option value="overdue">Overdue</option>
+    </select>
+    <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
+</form>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Album</th>
+        <th>Status</th>
+        <th>Checkout Date</th>
+        <th>Due Date</th>
+        <th>Reservation ID</th>
+    </tr>
+    {% for r in reservations %}
+        <tr>
+            <td>{{ r['name'] }}</td>
+            <td>{{ r['album_name'] }} by {{ r['artist'] }}</td>
+            {% if r['returned'] == 0 and r['due'] < now %}
+                <td>Overdue</td>
+            {% elif r['returned'] == 0 and r['due'] >= now %}
+                <td>Checked Out</td>
+            {% else %}
+                <td>Returned</td>
+            {% endif %}
+            <td>{{ r['checkout'] }}</td>
+            <td>{{ r['due'] }}</td>
+            <td>{{ r['rid'] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+      
+{% endblock %}{% extends "base.html" %}
+
+{% block content %}
+
+<p>{{ kind }}s matching {{ query }}:</p>
+
+<ul class="grid">
+    {% for r in results %}
+        <li class="tile">
+            <a href="{{ url_for('album', aid=r['aid']) }}">
+                {% if r['art'] != None%}
+                    <img class="cover" src={{ r['art'] }}></img>
+                {% else %}
+                    <img class="cover" src="{{ url_for('static', filename='../static/defaultrecord.png') }}"></img>
+                {% endif %}
+            </a>
+            <p class="detail">{{ r['name'] }} by {{ r['artist'] }}</p>
+            {% if r['year'] != None %}
+                <p class="year">{{ r['year'] }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Search for an album to update:</h1>
+
+<form method=POST action='/update/'>
+    <label for="menu-aid">{{ total }} albums missing data:</label>
+    <select id="menu-aid" name="menu-aid">
+        <option value="none">Choose One</option>
+        {% for a in incompletes %}
+            <option value="{{ a['aid'] }}">{{ a['name'] }} by {{ a['artist'] }}</option>    
+        {% endfor %}
+    </select>
+    <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
+</form>
+
+<div id="update-form">
+    <p>Use "None" to set a field to null. Format must be set to 'cd' or 'record.'</p>
+
+    <form method=POST action="/update/{{ a['aid'] }}">
+        <table>
+            <tr>
+                <td><label for="album-name">Album</label></td>
+                <td><input id="album-name" name='album-name' value="{{ a['name'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-artist">Artist</label></td>
+                <td><input id="album-artist" name='album-artist' value="{{ a['artist'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-year">Year</label></td>
+                <td><input id="album-year" name='album-year' value="{{ a['year'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-format">Format</label></td>
+                <td><input id="album-format" name='album-format' value="{{ a['fmt'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-location">Location</label></td>
+                <td><input id="album-location" name='album-location' value="{{ a['location'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-art">Album Art</label></td>
+                <td><input id="album-art" name='album-art' value="{{ a['art'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="album-embed">Spotify Embed</label></td>
+                <td><input id="album-embed" name='album-embed' value="{{ a['embed'] }}"></td>
+            </tr>
+        </table>
+        <input type="submit" name="submit" value="update">
+        <input type="submit" name="submit" value="delete">
+        <input type="submit" name="spotify" value="Spotify">
+        <!-- when "spotify" is clicked, tries to get data from spotify -->
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+
+// // NOT WORKING: Script to hide the update form until an album is selected
+
+// $(document).ready(function() {
+//     // hides the featured div by default
+//     $('#update-form').hide();
+
+//     var show = false
+
+//     // when an album is chosen,
+//     // populates appropriate fields
+//     $(".submit-btn").click(function(){
+//         // shows the featured div
+//         show = true
+//     });
+
+//     if (show == true) {
+//         $("#update-form").show();
+//     }
+// });
+
+// </script>
+
+{% endblock %}/* Authored by Bella Virgilio */
+
+body {
+    background-color: white;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    color: black;
+    padding: 20px;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #f7d0c7;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #9e9e9e;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #9e9e9e;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color:#fcb2a2;
+  color: #9e9e9e ;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #9e9e9e;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+h1 {
+  font-size: 36px;
+  color: #fcb2a2;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+p {
+  padding: 10px;
+}
+
+a {
+  color: #add8e6
+}
+
+#featured-movie {
+  border: 3px dashed rgb(241, 226, 135);
+  margin: 15px;
+  padding: 20px;
+  line-height: 10px;
+}
+
+#searchterm {
+  width: 150px;
+  padding: 10px 10px;
+  margin: 8px;
+  border-radius: 15px;
+}
+
+button, .dropdown {
+  border-radius: 10px;
+  padding: 5px 5px;
+  margin: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 20px;
+  list-style: none;
+}
+
+.tile {
+  text-align: center;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.cover {
+  width: 100%;
+}
+
+.year {
+  font-size: 12px;
+  padding: 0px;
+  margin-top: 0px;
+  color: gray;
+}
+
+.detail {
+  margin-bottom: 3px;
+  padding: 0px;
+}

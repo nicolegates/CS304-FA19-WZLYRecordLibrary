@@ -127,6 +127,14 @@ def logout():
 @app.route('/logged_in/', methods=['GET', 'POST'])
 def logged_in():
     flash('Successfully logged in!')
+
+    conn = getters.getConn('cs304reclib_db')
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    name = session['CAS_ATTRIBUTES']['cas:givenName'] +\
+            ' ' + session['CAS_ATTRIBUTES']['cas:sn']
+    username = session['CAS_USERNAME']
+
+    setters.checkUser(bid, name, username, conn)
     return redirect(url_for('index'))
     # return redirect(request.referrer)
 
@@ -225,7 +233,16 @@ def reservation():
 
 @app.route('/profile/', methods=['GET','POST'])
 def profile():
-    return redirect(url_for('index'))
+    conn = getters.getConn('cs304reclib_db')
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    name = session['CAS_ATTRIBUTES']['cas:givenName']
+    res = getters.getActiveReservationsByID(bid, conn)
+    now = datetime.date.today()
+
+    return render_template('profile.html',
+                            reservations = res,
+                            name = name,
+                            now = now)
 
 # TODO
 # Implement logged in/not logged in
@@ -233,9 +250,8 @@ def profile():
 def checkin():
     conn = getters.getConn('cs304reclib_db')
     
-    # Hardcoded to Bella's BID for now
-    # in the future, needs to come from the session
-    bid = "B20844116"
+    bid = session['CAS_ATTRIBUTES']['cas:id']
+    name = session['CAS_ATTRIBUTES']['cas:givenName']
     reservations = getters.getActiveReservationsByID(bid, conn)
 
     if request.method == 'POST':
@@ -248,7 +264,9 @@ def checkin():
         else:
             flash("An error occurred.")
 
-    return render_template('checkin.html', reservations = reservations)
+    return render_template('checkin.html',
+                           reservations = reservations,
+                           name = name)
 
 # TODO
 # Implement logged in/not logged in
@@ -260,7 +278,7 @@ def checkout():
     conn = getters.getConn('cs304reclib_db')
 
     aid = request.form.get('aid')
-    bid = request.form.get('user')
+    bid = session['CAS_ATTRIBUTES']['cas:id']
     due = setters.checkout(aid, bid, conn)
     due = due.strftime("%m/%d/%Y")
     

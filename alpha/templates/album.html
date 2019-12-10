@@ -60,9 +60,7 @@
             var aid = "{{ album['aid'] }}"
 
             // creates a dictionary of the user's input and ID
-            // using Bella's (B20844116) as default for now
-            // TODO: change to ID from session
-            json_dict = { aid: aid, user: 'B20844116' }
+            json_dict = { aid: aid }
 
             // POSTs the user's input to Ajax route
             $.post('/checkout/', json_dict, function(data) {

@@ -86,6 +86,19 @@ def checkin(rid, conn):
     except:
         return None
 
+def checkUser(bid, name, username, conn):
+    curs = dbi.dictCursor(conn)
+
+    curs.execute('select * from person where bid = %s', [bid])
+    res = curs.fetchone()
+    if res is not None:
+        return False
+    else:
+        curs.execute('insert into person (bid, name, username, is_admin)' +\
+                     'values (%s, %s, %s, 0)', [bid, name, username])
+        return True
+    
+
 # def insertTracks(track, num, conn):
 #     '''takes a list of tracks and updates
 #     the track table'''
@@ -95,4 +108,5 @@ def checkin(rid, conn):
 #     the genre table'''
 
 conn = getConn('cs304reclib_db')
-print(checkin(49, conn))
+res = checkUser("B20844129", "Fake User2", "fuser2", conn)
+print(res)
