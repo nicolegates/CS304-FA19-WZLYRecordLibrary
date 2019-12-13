@@ -9,6 +9,8 @@ import sys,os,random
 import getters
 import setters
 import datetime
+import spotify
+import add
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -194,6 +196,10 @@ def update(aid):
             # updating an album
             if action == 'Update Album' or action == "Update All":
                 conn = getters.getConn('cs304reclib_db')
+                try:
+                    album_id = form['album-embed'].split(":")[2]
+                except:
+                    album_id = None
                 res = setters.updateAlbum(
                                 aid, form['album-name'],
                                 form['album-artist'],
@@ -202,6 +208,7 @@ def update(aid):
                                 form['album-location'],
                                 form['album-art'],
                                 form['album-embed'],
+                                album_id,
                                 conn)
 
                 if res == True:
@@ -215,7 +222,26 @@ def update(aid):
                                         total = len(albums))
             
             if action == "Autocomplete with Spotify":
-                print('use spotify')
+                conn = getters.getConn('cs304reclib_db')
+                artistnm = form['album-artist']
+                albumnm = form['album-name']
+                fmt = form['album-format']
+                spotifyres = spotify.getAlbum(artistnm, albumnm)
+                props = spotify.getProps(spotifyres)
+                album_id = props['embed'].split(":")[2]
+                result = setters.updateAlbum(aid, albumnm, artistnm,
+                                             props['released'], fmt, None,
+                                             props['art'], props['embed'], album_id,
+                                             conn)
+                add.insertTracks(props['tracks'], aid, conn)
+                add.insertGenres(props['genres'], aid, conn)
+                
+                if (result == True):
+                    album = getters.getAlbumByID(aid, conn)
+                    return render_template('update.html',
+                                            incompletes = albums,
+                                            a = album,
+                                            total = len(albums))
 
             # deleting an album
             if action == 'Delete Album':

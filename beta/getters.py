@@ -165,3 +165,15 @@ def getAllReservationsByID(bid, conn):
                  'bid = %s', [bid])
     res = curs.fetchall()
     return res
+
+def getOverdueEmails(conn):
+    '''returns all usernames who have overdue items'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select ' \
+                    ' username ' +\
+                 'from person ' +\
+                    'inner join reservation ' +\
+                        'on reservation.bid = person.bid ' +\
+                 'where reservation.due <= CURDATE() ' +\
+                    'and reservation.returned = 0;')
+    return curs.fetchall()

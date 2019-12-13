@@ -30,16 +30,19 @@ def insertAlbum(name, artist, conn):
     except:
         return None
 
-def updateAlbum(aid, name, artist, year, fmt, location, art, embed, conn):
+def updateAlbum(aid, name, artist, year, fmt,
+                location, art, embed, spotify_album_id, conn):
     '''Updates an album. Returns True if successful, False if not.'''
     curs = dbi.dictCursor(conn)
     
     try:
         curs.execute('update album ' +\
                     'set name = %s, artist = %s, year = %s, ' +\
-                    'fmt = %s, location = %s, art = %s, embed = %s ' +\
+                    'fmt = %s, location = %s, art = %s, embed = %s, ' +\
+                    'spotify_album_id = %s ' +\
                     'where aid = %s;',
-                    [name, artist, year, fmt, location, art, embed, aid])
+                    [name, artist, year, fmt, location,
+                    art, embed, spotify_album_id, aid])
         return True
     except:
         return False
