@@ -1,0 +1,202 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :alpha/app-all.text.
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git show :alpha/app.py
+> git check-ignore -v -z --stdin
+> git show :alpha/setters.py
+> git check-ignore -v -z --stdin
+> git show :alpha/setters.py
+> git check-ignore -v -z --stdin
+> git show :alpha/getters.py
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :alpha/templates/album.html
+> git show :alpha/app.py
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git check-ignore -v -z --stdin
+> git show :beta/templates/album.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/album.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/spotify.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/album.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/album.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/album.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/album.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/getters.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/getters.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/getters.py
+> git ls-files --stage -- beta/
+> git show :beta/getters.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/getters.py
+> git ls-files --stage -- beta/
+> git show :beta/setters.py
+> git ls-files --stage -- beta/
+> git show :beta/getters.py
+> git ls-files --stage -- beta/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git status -z -u
+> git show :beta/app.py
+> git ls-files --stage -- beta/
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/templates/update.html
+> git ls-files --stage -- beta/templates/
+> git status -z -u
+> git show :beta/app.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template

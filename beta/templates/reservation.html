@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ filter }} Reservations:</h1>
+
+<form method=POST action='/reservation/'>
+    <label for="reservation-view">Choose a view:</label>
+    <select id="reservation-view" name="reservation-view">
+        <option value="all">All</option>
+        <option value="overdue">Overdue</option>
+    </select>
+    <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
+</form>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Album</th>
+        <th>Status</th>
+        <th>Checkout Date</th>
+        <th>Due Date</th>
+        <th>Reservation ID</th>
+    </tr>
+    {% for r in reservations %}
+        <tr>
+            <td>{{ r['name'] }}</td>
+            <td>{{ r['album_name'] }} by {{ r['artist'] }}</td>
+            {% if r['returned'] == 0 and r['due'] < now %}
+                <td>Overdue</td>
+            {% elif r['returned'] == 0 and r['due'] >= now %}
+                <td>Checked Out</td>
+            {% else %}
+                <td>Returned</td>
+            {% endif %}
+            <td>{{ r['checkout'] }}</td>
+            <td>{{ r['due'] }}</td>
+            <td>{{ r['rid'] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+      
+{% endblock %}

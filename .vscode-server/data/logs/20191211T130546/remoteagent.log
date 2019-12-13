@@ -1,0 +1,26 @@
+[2019-12-11 13:05:47.167] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2019-12-11 13:05:47.167] [remoteagent] [info] Extension host agent listening on 45671
+[2019-12-11 13:05:47.388] [remoteagent] [info] ==> Received an extension host connection.
+[2019-12-11 13:05:47.388] [remoteagent] [info] ==> Using UI language: en
+[2019-12-11 13:05:47.422] [remoteagent] [info] ==> Received a management connection
+[2019-12-11 13:05:47.460] [remoteagent] [info] Scanning extensions using UI language: en
+[2019-12-11 13:06:03.201] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-12-11 13:06:09.941] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2019-12-11 13:06:09.941] [remoteagent] [info] Cancelling previous shutdown timeout
+[2019-12-11 13:06:10.049] [remoteagent] [info] ==> Received a management connection
+[2019-12-11 13:06:10.051] [remoteagent] [info] ==> Received an extension host connection.
+[2019-12-11 13:06:10.051] [remoteagent] [info] ==> Using UI language: en
+[2019-12-11 13:06:10.110] [remoteagent] [info] Scanning extensions using UI language: en
+[2019-12-11 13:06:23.005] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2019-12-11 13:11:09.944] [remoteagent] [info] New EH opened, aborting shutdown
+[2019-12-11 13:30:44.392] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-12-11 13:35:44.493] [remoteagent] [info] Last EH closed, shutting down

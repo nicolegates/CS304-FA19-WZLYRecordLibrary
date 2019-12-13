@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <title>WZLY Record Library</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+    <a id="active"class="active" href='/'>Home</a>
+    <a id="signin" href='/login/'>Sign In</a>
+    <a id="logout" href='/logout/'>Sign Out</a>
+    <a id="profile" href='/profile/'>Profile</a>
+    <a id="checkin" href='/checkin/'>Check in materials</a>
+    <div class="dropdown">
+        <button class="dropbtn">Admin
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href='/insert/'>Insert Album</a>
+            <a href='/update/'>Delete/Update Album</a>
+            <a href='/reservation/'>View Reservations</a>
+        </div>
+      </div>
+
+</div>
+
+<div id='flashes'>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="messages">
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<form class="search" method="GET" action="/query">
+    <p><label>Search: <input id="searchterm" type="text" required name="q" class="txt"></label>
+    <label>Filter
+        <select class="dropdown" required name="filter">
+            <option value="">Select</option>
+            <option value="album">Album</option>
+            <option value="artist">Artist</option>
+            <option value="year">Year</option>
+            <option value="genre">Genre</option>
+            <option value="track">Track</option>
+        </select>
+    </label>
+    <button id="searchbutton" type="submit" name="submit" value="search">Search</button>
+</form>
+
+<!-- checks to see if the user is logged in -->
+<input type="hidden" id="logged_in" value="{{is_logged_in}}">
+            
+{% block content %}
+
+    <h1 class="uk-heading-divider">Welcome to the WZLY Record Library!</h1>
+
+    <p>Check out these albums:</p>
+
+    <ul class="grid">
+            {% for r in results %}
+                <li class="tile">
+                    <a href="{{ url_for('album', aid=r['aid']) }}">
+                        {% if r['art'] != None%}
+                            <img class="cover" src={{ r['art'] }}></img>
+                        {% else %}
+                            <img class="cover" src="{{ url_for('static', filename='../static/defaultrecord.png') }}"></img>
+                        {% endif %}
+                    </a>
+                    <p class="detail">{{ r['name'] }} by {{ r['artist'] }}</p>
+                    {% if r['year'] != None %}
+                        <p class="year">{{ r['year'] }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+{% endblock %}
+
+{% block footer %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+
+        var login = document.getElementById('logged_in')['value'];
+
+        if (login == 'False') {
+            $(".dropbtn").hide();
+            $("#logout").hide();
+            $("#profile").hide();
+            $("#checkin").hide();
+            $("#signin").show();
+        }
+        else {
+            $("#signin").hide();
+            $("#logout").show();
+            $("#profile").show();
+            $("#checkin").show();
+            $(".dropbtn").show();
+        }
+
+    </script>
+
+{% endblock %}
+
+</body>
+</html>

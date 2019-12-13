@@ -9,7 +9,7 @@
 
 
 IP Address: 149.130.15.5
-Extension host agent listening on 34552
+Extension host agent listening on 42914
 ==> Received a management connection
 ==> Received an extension host connection.
 ==> Using UI language: en
@@ -19,20 +19,6 @@ Got start params: { language: 'en',
   break: undefined,
   port: undefined,
   debugId: undefined }
-EXTHOST: PROCESS EXITED
-0
-null
-Last EH closed, waiting before shutting down
-Got delay-shutdown request while in shutdown timeout, delaying
-Cancelling previous shutdown timeout
-==> Received a management connection
-==> Received an extension host connection.
-==> Using UI language: en
-Got start params: { language: 'en',
-  break: undefined,
-  port: undefined,
-  debugId: undefined }
-New EH opened, aborting shutdown
 EXTHOST: PROCESS EXITED
 0
 null

@@ -1,0 +1,14 @@
+[2019-12-10 10:39:47.264] [exthost] [info] extension host started
+[2019-12-10 10:39:47.315] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":false,"extensionId":{"value":"vscode.emmet","_lower":"vscode.emmet"},"activationEvent":"onLanguage:html"}
+[2019-12-10 10:39:47.315] [exthost] [info] ExtensionService#loadCommonJSModule file:///students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/extensions/emmet/dist/extension
+[2019-12-10 10:39:47.357] [exthost] [info] ExtensionService#_doActivateExtension vscode.html-language-features {"startup":false,"extensionId":{"value":"vscode.html-language-features","_lower":"vscode.html-language-features"},"activationEvent":"onLanguage:html"}
+[2019-12-10 10:39:47.358] [exthost] [info] ExtensionService#loadCommonJSModule file:///students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/extensions/html-language-features/client/dist/htmlMain
+[2019-12-10 10:39:47.414] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"extensionId":{"value":"vscode.debug-auto-launch","_lower":"vscode.debug-auto-launch"},"activationEvent":"*"}
+[2019-12-10 10:39:47.414] [exthost] [info] ExtensionService#loadCommonJSModule file:///students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/extensions/debug-auto-launch/dist/extension
+[2019-12-10 10:39:47.423] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"extensionId":{"value":"vscode.git","_lower":"vscode.git"},"activationEvent":"*"}
+[2019-12-10 10:39:47.423] [exthost] [info] ExtensionService#loadCommonJSModule file:///students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/extensions/git/dist/main
+[2019-12-10 10:39:47.498] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"extensionId":{"value":"vscode.merge-conflict","_lower":"vscode.merge-conflict"},"activationEvent":"*"}
+[2019-12-10 10:39:47.499] [exthost] [info] ExtensionService#loadCommonJSModule file:///students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/extensions/merge-conflict/dist/extension
+[2019-12-10 10:39:47.518] [exthost] [info] eager extensions activated
+[2019-12-10 10:57:01.258] [exthost] [info] ExtensionService#_doActivateExtension vscode.python {"startup":false,"extensionId":{"value":"vscode.python","_lower":"vscode.python"},"activationEvent":"onLanguage:python"}
+[2019-12-10 10:57:01.259] [exthost] [info] ExtensionService#loadCommonJSModule file:///students/cs304reclib/.vscode-server/bin/86405ea23e3937316009fc27c9361deee66ffbf5/extensions/python/dist/pythonMain

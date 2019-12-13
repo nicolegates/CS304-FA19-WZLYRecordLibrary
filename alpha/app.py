@@ -144,6 +144,10 @@ def after_logout():
     return redirect(url_for('index'))
     # return redirect(request.referrer)
 
+@app.route('/user_logged_in/')
+def user_logged_in():
+    return getters.isLoggedIn(session['CAS_ATTRIBUTES']['cas:id'])
+
 @app.route('/update/<aid>', methods=['GET','POST'])
 @app.route('/update/', defaults={'aid': None}, methods=['GET','POST'])
 def update(aid):

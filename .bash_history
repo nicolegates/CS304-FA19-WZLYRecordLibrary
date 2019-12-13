@@ -1,60 +1,3 @@
-scp venv ivirgili@cs.wellesley.edu:cs304/venv
-scp -r venv ivirgili@cs.wellesley.edu:cs304/venv
-cd ..
-scp -r venv ivirgili@cs.wellesley.edu:cs304/venv
-scp -r venv ivirgili@cs.wellesley.edu:~/cs304/venv
-mkdir venv
-scp -r venv ivirgili@cs.wellesley.edu:~/cs304/venv
-source venv/bin/activate
-mysql
-cd project
-mysql < create.sql
-mysql
-mysql < create.sql
-show tables;
-mysql
-mysql < create.sql
-mysql
-mysql < create.sql
-mysql
-mysql < create.sql
-mysl
-mysql
-mysql < create.sql
-mysql
-source venv/bin/activate
-cd project
-python add.py
-python
-mysql
-mysql < create_track.sql
-mysql
-mysql < create_album.sql
-drop table album;
-mysql
-mysql < create_album.sql
-mysql < create_genre.sql
-mysql < create_person.sql
-mysql < create_reservation.sql
-mysql < create_track.sql
-mysql
-mysql < create_album.sql
-mysql < create_track.sql
-mysql < create_person.sql
-mysql < create_reservation.sql
-mysql < create_genre.sql
-mysql
-python spotify.py
-deactivate
-source venv/bin/activate
-python spotify.py
-cd project
-source venv/bin/activate
-python spotify.py
-mysql
-mysql < create_album.sql
-mysql < create_person.sql
-mysql < create_genre.sql
 mysql < create_track.sq
 mysql < create_track.sql
 mysql < create_reservation.sql
@@ -996,3 +939,62 @@ source venv/bin/activate
 cd
 cd alpha
 python app.py
+python
+git status
+git add .
+git rm --cached alpha/uikit
+git rm -f --cached alpha/uikit
+git status
+git commit -m "Implemented check-out, closes #37"
+git push origin master
+git status
+git add .
+git commit -m "(Bella) implemented checkin, closes #40"
+git push origin master
+cat app.py getters.py setters.py templates/*.html static/*.css < app-all.text
+cat app.py getters.py setters.py templates/*.html static/*.css > app-all.text
+cd alpha
+cat app.py getters.py setters.py templates/*.html static/*.css > app-all.text
+mysql
+cd draft
+source venv/bin/activate
+cd ..
+cd alpha
+python app.py
+python setters.py
+python app.py
+python setters.py
+python app.py
+python app.py 1963
+python app.py
+cd draft
+source venv/bin/activate
+cd ../alpha
+python app.py 1963
+python app.py 1943
+cat app.py getters.py setters.py templates/*.html static/*.css > app-all.text
+cd draft
+source venv/bin/activate
+cd ../alpha
+python app.py 1963
+python app.py 1943
+python setters.py
+python app.py 1943
+cat app.py setters.py getters.py templates/*.html static/*.css > app-all.text.
+python app.py 1943
+git add .
+git commit -m "(Bella) closes #6, closes #41"
+git push origin master
+cd alpha
+cd draft
+source venv/bin/activate
+cd ..
+cd alpha
+code app.py
+cd draft
+souce venv/bin/activate
+source venv/bin/activate
+cd
+cd alpha
+python app.py
+python app.py 1943

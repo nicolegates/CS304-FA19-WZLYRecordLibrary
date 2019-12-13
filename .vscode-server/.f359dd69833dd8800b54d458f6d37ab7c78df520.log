@@ -9,57 +9,22 @@
 
 
 IP Address: 149.130.15.5
-Extension host agent listening on 36297
+Extension host agent listening on 39941
 
 
-[16:50:47] Extension host agent started.
-[16:50:47] [127.0.0.1][dcabc107][ExtensionHostConnection] New connection established.
+[15:15:18] Extension host agent started.
+[15:15:19] [127.0.0.1][43ea8a94][ManagementConnection] New connection established.
+[15:15:19] [127.0.0.1][3ffd1b8d][ExtensionHostConnection] New connection established.
 bash: cannot set terminal process group (-1): Inappropriate ioctl for device
 bash: no job control in this shell
-[16:50:47] [127.0.0.1][b357fd10][ManagementConnection] New connection established.
-[16:50:47] [127.0.0.1][dcabc107][ExtensionHostConnection] <12737> Launched Extension Host Process.
-[16:51:10] [127.0.0.1][b357fd10][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
-[16:51:11] [127.0.0.1][dcabc107][ExtensionHostConnection] <12737> Extension Host Process exited with code: 0, signal: null.
-Last EH closed, waiting before shutting down
-[16:51:11] Last EH closed, waiting before shutting down
-Got delay-shutdown request while in shutdown timeout, delaying
-[16:51:17] Got delay-shutdown request while in shutdown timeout, delaying
-Cancelling previous shutdown timeout
-[16:51:17] Cancelling previous shutdown timeout
-[16:51:18] [127.0.0.1][a4b71139][ManagementConnection] New connection established.
-[16:51:18] [127.0.0.1][4148dc18][ExtensionHostConnection] New connection established.
-[16:51:18] [127.0.0.1][4148dc18][ExtensionHostConnection] <13099> Launched Extension Host Process.
-[16:51:26] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
-%c[IPC Library: File Watcher (chokidar)] %cUnhandled Promise Rejection:  color: blue color:  Canceled: Canceled
-    at Object.t.canceled (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/vs/platform/files/node/watcher/unix/watcherApp.js:7:362)
-    at u.cancel (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/vs/platform/files/node/watcher/unix/watcherApp.js:30:896)
-    at t.ThrottledDelayer.cancel (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/vs/platform/files/node/watcher/unix/watcherApp.js:31:270)
-    at Object.stop (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/vs/platform/files/node/watcher/unix/watcherApp.js:139:140)
-    at p.stop (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/vs/platform/files/node/watcher/unix/watcherApp.js:140:809)
-    at FSWatcher.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/vs/platform/files/node/watcher/unix/watcherApp.js:140:671)
-    at FSWatcher.emit (events.js:200:13)
-    at FSWatcher._handleError (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/index.js:625:10)
-    at NodeFsHandler._boundHandleError (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/lib/nodefs-handler.js:302:43)
-    at createFsWatchInstance (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/lib/nodefs-handler.js:120:5)
-    at setFsWatchListener (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/lib/nodefs-handler.js:165:15)
-    at NodeFsHandler._watchWithNodeFs (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/lib/nodefs-handler.js:330:14)
-    at NodeFsHandler._handleFile (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/lib/nodefs-handler.js:360:23)
-    at NodeFsHandler._addToNodeFs (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/node_modules/chokidar/lib/nodefs-handler.js:620:21)
-New EH opened, aborting shutdown
-[16:56:17] New EH opened, aborting shutdown
-Error: write EPIPE
-    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:83:16) {
-  errno: 'EPIPE',
-  code: 'EPIPE',
-  syscall: 'write'
-}
-Error: Unexpected SIGPIPE
-    at process.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/bootstrap.js:5:192)
-    at process.emit (events.js:200:13)
-Error: Unexpected SIGPIPE
-    at process.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/bootstrap.js:5:192)
-    at process.emit (events.js:200:13)
-[17:34:34] [127.0.0.1][a4b71139][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
-[19:16:46] [127.0.0.1][a4b71139][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
-[19:16:46] [127.0.0.1][a4b71139][ManagementConnection] The client has reconnected.
-[19:16:46] [127.0.0.1][4148dc18][ExtensionHostConnection] The client has reconnected.
+[15:15:19] [127.0.0.1][3ffd1b8d][ExtensionHostConnection] <4142> Launched Extension Host Process.
+[15:15:36] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[15:17:59] [127.0.0.1][405f9aa0][ManagementConnection] New connection established.
+[15:17:59] [127.0.0.1][5b059b8a][ExtensionHostConnection] New connection established.
+[15:17:59] [127.0.0.1][5b059b8a][ExtensionHostConnection] <4788> Launched Extension Host Process.
+[15:18:08] [127.0.0.1][405f9aa0][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[15:18:09] [127.0.0.1][5b059b8a][ExtensionHostConnection] <4788> Extension Host Process exited with code: 0, signal: null.
+[15:18:21] [127.0.0.1][5c6f03bc][ManagementConnection] New connection established.
+[15:18:21] [127.0.0.1][b3f05863][ExtensionHostConnection] New connection established.
+[15:18:21] [127.0.0.1][b3f05863][ExtensionHostConnection] <4971> Launched Extension Host Process.
+[15:18:31] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
