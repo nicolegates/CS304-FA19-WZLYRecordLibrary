@@ -1,58 +1,3 @@
-mysql < create_track.sq
-mysql < create_track.sql
-mysql < create_reservation.sql
-mysql
-python add.py
-deactivate
-cd ..
-source venv/bin/activate
-pip install os
-pip install dotenv
-pip -V
-pip --version
-pip install spotipy
-deactivate
-rm -r venv
-python -V
-wc-switch-python 3
-virtualenv venv
-source venv/bin/activate
-pip install pymysql
-pip install flask
-pip install spotipy
-python -V
-virtualenv venv
-python
-source venv/bin/activate
-pip install pymysql
-pip install os
-pip install --upgrade
-pip install --upgrade pip
-pip install os
-pip install dotenv
-pip install spotipy
-pip install python-dotenv
-deactivate
-cd project
-source venv/bin/activate
-python add.py
-python dbi.py
-import dbi
-python
-deactivate
-source venv/bin/activate
-python dbi.py
-python add.py
-python
-pip install pymysql
-rm -r venv
-wc-switch-python 3
-cd project
-source venv/bin/activate
-python add.py
-pip install pymysql
-python add.py
-pip install dotenv
 pip install --upgrade pip
 pip install dotenv
 pip install python-dotenv
@@ -998,3 +943,58 @@ cd
 cd alpha
 python app.py
 python app.py 1943
+cd draft
+source venv/bin/activate
+cd ..
+cd alpha
+python app.py 1943
+cd ..
+cd beta
+python app.py 1943
+cd draft
+source venv/bin/activate
+cd ..
+cd alpha
+cd ..
+mkdir beta
+cd beta
+pbpaste
+ls
+git status
+cd ..
+git status
+git add beta
+git status
+git add .
+git status
+git commit -m "started beta version, added/updated new features"
+git push origin master
+git status
+git add .
+git commit -m "."
+git push origin master
+git status
+touch cron.py
+cd alpha
+cd ..
+cd beta
+touch cron.py
+mysql
+mysql
+cd draft
+source venv/bin/activate
+cd ..
+cd ../beta
+cd ..
+cd beta
+ls
+cd cs304reclib
+cd beta
+python app.py
+python app.py 1944
+python setters.py
+python app.py 1944
+git add .
+git commit -m "(Bella) closes #34
+"
+git push origin master

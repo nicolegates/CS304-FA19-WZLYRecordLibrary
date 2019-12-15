@@ -209,3 +209,84 @@ Open repository: /students/cs304reclib
 > git for-each-ref --format %(refname) %(objectname) --sort -committerdate
 > git remote --verbose
 > git config --get commit.template
+> git show :beta/app.py
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/spotify.py
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/spotify.py
+> git show :beta/spotify.py
+> git show :beta/spotify.py
+> git show :beta/spotify.py
+> git show :beta/spotify.py
+> git show :beta/spotify.py
+> git show :beta/spotify.py
+> git show :beta/setters.py
+> git show :beta/spotify.py
+> git show :beta/setters.py
+> git show :beta/getters.py
+> git show :beta/setters.py
+> git show :beta/setters.py
+> git show :beta/setters.py
+> git show :beta/spotify.py
+> git show :beta/getters.py
+> git show :beta/setters.py
+> git show :beta/getters.py
+> git show :beta/spotify.py
+> git show :beta/add.py
+> git show :beta/spotify.py
+> git show :beta/templates/update.html
+> git show :beta/spotify.py
+> git show :beta/add.py
+> git show :beta/templates/update.html
+> git show :beta/templates/album.html
+> git show :beta/templates/update.html
+> git show :beta/templates/album.html
+> git show :beta/templates/update.html
+> git show :beta/setters.py
+> git show :beta/add.py
+> git show :beta/setters.py
+> git status -z -u
+> git show :beta/app.py
+> git show :beta/setters.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/getters.py
+> git status -z -u
+> git show :beta/app.py
+> git show :beta/getters.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git show :beta/app.py
+> git show :beta/getters.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template

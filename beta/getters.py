@@ -158,6 +158,23 @@ def getActiveReservationsByID(bid, conn):
     res = curs.fetchall()
     return res
 
+def getOverdueReservationsByID(bid, conn):
+    '''returns all overdue reservations for a particular user'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select ' +\
+                        'reservation.*, person.name, ' +\
+                        'album.name as album_name, album.artist ' +\
+                     'from reservation ' +\
+                        'inner join person ' +\
+                            'on reservation.bid = person.bid ' +\
+                        'inner join album ' +\
+                            'on reservation.aid = album.aid ' +\
+                     'where person.bid = %s ' +\
+                        'and reservation.returned = 0 ' +\
+                        'and reservation.due <= CURDATE()', [bid])
+    res = curs.fetchall()
+    return res
+
 def getAllReservationsByID(bid, conn):
     '''returns all reservations ever made by a particular user'''
     curs = dbi.dictCursor(conn)
@@ -177,3 +194,11 @@ def getOverdueEmails(conn):
                  'where reservation.due <= CURDATE() ' +\
                     'and reservation.returned = 0;')
     return curs.fetchall()
+
+def getBIDFromUsername(conn, username):
+    '''get bid from username'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('select bid from person where ' +\
+                 'username = %s', [username])
+    return curs.fetchone()
+    

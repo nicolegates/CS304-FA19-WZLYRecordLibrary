@@ -1,0 +1,20 @@
+[2019-12-14 14:01:50.450] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2019-12-14 14:01:50.450] [remoteagent] [info] Extension host agent started.
+[2019-12-14 14:01:51.028] [remoteagent] [info] [127.0.0.1][8aa5b388][ExtensionHostConnection] New connection established.
+[2019-12-14 14:01:51.055] [remoteagent] [info] [127.0.0.1][b59f4d48][ManagementConnection] New connection established.
+[2019-12-14 14:01:51.189] [remoteagent] [info] [127.0.0.1][8aa5b388][ExtensionHostConnection] <32035> Launched Extension Host Process.
+[2019-12-14 14:02:00.866] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2019-12-14 16:20:39.274] [remoteagent] [info] [127.0.0.1][b59f4d48][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2019-12-14 19:20:33.785] [remoteagent] [info] [127.0.0.1][8aa5b388][ExtensionHostConnection] <32035> Extension Host Process exited with code: 0, signal: null.
+[2019-12-14 19:20:33.787] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2019-12-14 19:20:39.280] [remoteagent] [info] [127.0.0.1][b59f4d48][ManagementConnection] The reconnection grace time of 3h has expired, so the connection will be disposed.
+[2019-12-14 19:25:33.861] [remoteagent] [info] Last EH closed, shutting down

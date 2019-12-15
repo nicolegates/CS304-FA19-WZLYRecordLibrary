@@ -1,0 +1,34 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :beta/getters.py
+> git check-ignore -v -z --stdin
+> git show :beta/add.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/spotify.py
+> git show :beta/add.py
+> git show :.npm/registry.npmjs.org/_40types_252fjquery/.cache.json
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/extensions/markdown-language-features/dist/extension.js
+> git show :alpha/data/write.py
+> git check-ignore -v -z --stdin
+> git show :beta/add.py

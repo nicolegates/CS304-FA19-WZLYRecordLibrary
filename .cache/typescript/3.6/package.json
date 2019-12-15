@@ -1,6 +1,8 @@
 {
   "private": true,
   "devDependencies": {
-    "@types/uikit": "^2.27.7"
+    "@types/node": "^12.12.17",
+    "@types/uikit": "^2.27.7",
+    "@types/vscode": "^1.41.0"
   }
 }

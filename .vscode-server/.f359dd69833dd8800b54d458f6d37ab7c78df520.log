@@ -9,22 +9,32 @@
 
 
 IP Address: 149.130.15.5
-Extension host agent listening on 39941
+Extension host agent listening on 46277
 
 
-[15:15:18] Extension host agent started.
-[15:15:19] [127.0.0.1][43ea8a94][ManagementConnection] New connection established.
-[15:15:19] [127.0.0.1][3ffd1b8d][ExtensionHostConnection] New connection established.
+[14:01:50] Extension host agent started.
+[14:01:51] [127.0.0.1][8aa5b388][ExtensionHostConnection] New connection established.
 bash: cannot set terminal process group (-1): Inappropriate ioctl for device
 bash: no job control in this shell
-[15:15:19] [127.0.0.1][3ffd1b8d][ExtensionHostConnection] <4142> Launched Extension Host Process.
-[15:15:36] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
-[15:17:59] [127.0.0.1][405f9aa0][ManagementConnection] New connection established.
-[15:17:59] [127.0.0.1][5b059b8a][ExtensionHostConnection] New connection established.
-[15:17:59] [127.0.0.1][5b059b8a][ExtensionHostConnection] <4788> Launched Extension Host Process.
-[15:18:08] [127.0.0.1][405f9aa0][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
-[15:18:09] [127.0.0.1][5b059b8a][ExtensionHostConnection] <4788> Extension Host Process exited with code: 0, signal: null.
-[15:18:21] [127.0.0.1][5c6f03bc][ManagementConnection] New connection established.
-[15:18:21] [127.0.0.1][b3f05863][ExtensionHostConnection] New connection established.
-[15:18:21] [127.0.0.1][b3f05863][ExtensionHostConnection] <4971> Launched Extension Host Process.
-[15:18:31] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[14:01:51] [127.0.0.1][b59f4d48][ManagementConnection] New connection established.
+[14:01:51] [127.0.0.1][8aa5b388][ExtensionHostConnection] <32035> Launched Extension Host Process.
+[14:02:00] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:83:16) {
+  errno: 'EPIPE',
+  code: 'EPIPE',
+  syscall: 'write'
+}
+Error: Unexpected SIGPIPE
+    at process.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/bootstrap.js:5:192)
+    at process.emit (events.js:200:13)
+Error: Unexpected SIGPIPE
+    at process.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/bootstrap.js:5:192)
+    at process.emit (events.js:200:13)
+[16:20:39] [127.0.0.1][b59f4d48][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[19:20:33] [127.0.0.1][8aa5b388][ExtensionHostConnection] <32035> Extension Host Process exited with code: 0, signal: null.
+Last EH closed, waiting before shutting down
+[19:20:33] Last EH closed, waiting before shutting down
+[19:20:39] [127.0.0.1][b59f4d48][ManagementConnection] The reconnection grace time of 3h has expired, so the connection will be disposed.
+Last EH closed, shutting down
+[19:25:33] Last EH closed, shutting down
