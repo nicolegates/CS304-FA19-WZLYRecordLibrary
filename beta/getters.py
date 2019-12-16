@@ -202,3 +202,8 @@ def getBIDFromUsername(conn, username):
                  'username = %s', [username])
     return curs.fetchone()
     
+def getAdmins(conn):
+    '''get all admins'''
+    curs = dbi.dictCursor(conn)
+    curs.execute("select username from person where is_admin = 1")
+    return curs.fetchall()
