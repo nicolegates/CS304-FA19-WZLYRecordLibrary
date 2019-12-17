@@ -16,7 +16,10 @@
 </form>
 
 <div id="update-form">
-    <p>Use "None" to set a field to null. Format must be set to 'cd' or 'record.'</p>
+    <p>Use "None" to set a field to null. Format must be set to 'cd' or 'record.'
+    If 'Autocomplete with Spotify' is selected, information from Spotify
+    will be automatically inserted where available.
+    </p>
 
     <form method=POST action="/update/{{ a['aid'] }}">
         <table>

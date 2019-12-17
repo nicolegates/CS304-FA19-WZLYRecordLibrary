@@ -1,0 +1,148 @@
+Looking for git in: git
+Using git 2.16.5 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /students/cs304reclib
+> git status -z -u
+> git show :beta/getters.py
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/setters.py
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :beta/getters.py
+> git check-ignore -v -z --stdin
+> git status -z -u
+> git show :beta/getters.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/getters.py
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git show :beta/getters.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/getters.py
+> git status -z -u
+> git show :beta/templates/album.html
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/templates/base.html
+> git show :alpha/templates/artist.html
+> git check-ignore -v -z --stdin
+> git show :beta/templates/album.html
+> git show :beta/templates/base.html
+> git show :beta/app.py
+> git show :beta/templates/album.html
+> git show :beta/templates/base.html
+> git show :beta/app.py
+> git show :beta/templates/base.html
+> git show :beta/app.py
+> git show :beta/templates/base.html
+> git show :beta/app.py
+> git show :alpha/templates/artist.html
+> git show :beta/templates/update.html
+> git show :beta/templates/base.html
+> git show :beta/templates/checkin.html
+> git show :beta/templates/update.html
+> git show :beta/templates/base.html
+> git show :beta/templates/update.html
+> git show :beta/templates/login.html
+> git show :beta/templates/update.html
+> git show :beta/getters.py
+> git show :beta/setters.py
+> git show :beta/getters.py
+> git show :beta/app.py
+> git show :beta/setters.py
+> git show :beta/add.py
+> git show :beta/templates/insert.html
+> git show :beta/templates/base.html
+> git show :beta/templates/checkin.html
+> git show :alpha/templates/artist.html
+> git show :beta/templates/insert.html
+> git show :beta/app.py
+> git status -z -u
+> git show :beta/app.py
+> git show :beta/templates/checkin.html
+> git show :beta/app.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git show :beta/app.py
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/app.py
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :beta/templates/insert.html
+> git show :beta/templates/album.html
+> git show :beta/templates/insert.html
+> git show :beta/app.py
+> git show :beta/setters.py
+> git show :beta/app.py
+> git show :beta/getters.py
+> git show :beta/app.py
+> git show :beta/templates/update.html
+> git show :beta/app.py
+> git show :beta/templates/update.html
+> git show :beta/getters.py
+> git show :beta/setters.py
+> git show :beta/getters.py
+> git show :beta/setters.py
+> git show :beta/app.py
+> git show :beta/setters.py
+> git show :beta/app.py
+> git show :beta/spotify.py
+> git show :beta/app.py

@@ -1,118 +1,3 @@
-pip install --upgrade pip
-pip install dotenv
-pip install python-dotenv
-python add.py
-pip install spotipy.oauth2
-pip install spotipy
-python add.py
-cd project
-source venv/bin/activate
-python add,py
-python add.py
-cd project
-source venv/bin/activate
-python
-python add.py
-tracklist('')
-add.py
-python add.py
-ls
-mysql
-source venv/bin/activate
-cd project
-python spotify.py
-python add.py
-ls
-deactivate
-source venv/bin/activate
-python add.py
-cd project
-source venv/bin/activate
-python add.py
-cd project
-source venv/bin/activate
-python add.py
-python
-python add.py
-mysql < create_album.sql
-mysql < create_genre.sql
-mysql < create_person.sql
-mysql < create_reservation.sql
-mysql < create_track.sql
-python add.py
-mysql
-mysql
-mysql < create_album.sql
-mysql < create_genre.sql
-mysql < create_person.sql
-mysql < create_reservation.sql
-mysql < create_track.sql
-show tables;
-mysql
-deactivate
-source venv/bin/activate
-python add.py
-python
-python add.py
-mysql
-cd project
-source venv/bin/activate
-python getters.py
-python
-python getters.py
-mysql
-cd project
-source venv/bin/activate
-mysql
-python getters.py
-mysql
-python getters.py
-mysql
-source venv/bin/activate
-cd project
-python app.py
-deactivate
-cd project
-source venv/bin/activate
-python app.py
-source venv/bin/activate
-deactivate
-cd projet
-cd project
-source venv/bin/activate
-python app.py
-logout
-mysl
-mysql
-ls
-git init
-git status
-git add .
-git add project
-git commit -m "first commit"
-git config --global user.email "ngates@wellesley.edu"
-git config --global user.name "nicolegates"
-git commit -m "first commit"
-$ git remote add origin git@github.com:nicolegates/CS304-FA19-WZLYRecordLibrary
-git remote add origin git@github.com:nicolegates/CS304-FA19-WZLYRecordLibrary
-git push -u origin master
-ssh-keygen -t rsa -b 4096 -C "ngates@wellesley.edu"
-clip < ~/.ssh/id_rsa.pub
-ls
-cd .ssh
-ls
-cat id_rsa.pub | pbcopy
-vim ida_rsa.pub
-clip < ~/.ssh/id_rsa.pub
-git remote add origin https://github.com/nicolegates/CS304-FA19-WZLYRecordLibrary
-git remote add origin git@github.com:nicolegates/CS304-FA19-WZLYRecordLibrary
-git push -u origin master
-ls
-cat id_rsa.pub
-git push -u origin master
-git pull
-git brance --set-upstream-to=origin master
-ls
 git status
 cd ..
 ls
@@ -998,3 +883,118 @@ git add .
 git commit -m "(Bella) closes #34
 "
 git push origin master
+cd beta
+mysql
+cd ..
+cd draft
+source venv/bin/activate
+cd ..
+cd beta
+python cron
+python cron.py
+cd ..
+git status
+git add .
+git commit -m "implemented cron, though it still needs to be automated"
+git push origin master
+git status
+cd beta
+printenv
+echo $EDITOR
+crontab -e
+cd ..
+cd draft
+source venv/bin/activate
+cd ..
+cd beta
+print $EDITOR
+EDITOR=emacs
+echo $EDITOR
+crontab -3
+crontab -e
+crontab -l
+crontab -e
+cd draft
+source venv/bin/activate
+cd ..
+cd beta
+crontab -e
+crontab -l
+crontab -e
+cd draft
+source venv/bin/activate
+cd ..
+cd beta
+crontab -e
+cd draft
+source venv/bin/activate
+cd ..
+cd beta
+crontab -e
+mysql
+python cron.py
+git add .
+git commit -m "(Nicole) implemented automated emails and crontab"
+git push origin master
+git status
+crontab -l
+ls -ld /students/cs304reclib/
+ls -ld /students/cs304reclib/beta/
+ls -ld /students/cs304reclib/beta/cron.py 
+more /students/cs304reclib/beta/cron.py
+cd draft
+source venv/bin/activate
+cd
+cd beta
+git clone https://github.com/app-generator/flask-now-ui-kit.git
+cd flask-now-ui-kit
+virtualenv --no-site-packages env
+.\env\Scripts\activate
+./env/Scripts/activate
+deactivate
+./env/Scripts/activate
+.\env\Scripts\activate
+source env/Scripts/activate
+source .\env\Scripts\activate
+.\env\Scripts\activate
+pip3 install -r requirements.txt
+source env/bin/activate
+pip3 install -r requirements.txt
+cd
+deactivatge
+deactivate
+$ git clone https://github.com/realpython/flask-boilerplate.git
+git clone https://github.com/realpython/flask-boilerplate.git
+cd flask-boilerplate
+virtualenv --no-site-packages env
+source env/bin/activate
+pip install -r requirements.txt
+python app.py
+cd
+cd draft
+source venv/bin/activate
+cd
+cd beta
+python app.py
+ls
+cd alpha/
+ls
+python app.py 
+source ../venv/bin/activate
+python app.py 
+deactivate 
+ls
+find ~ -name "dbi.py"
+pwd
+source ../venv/bin/activate
+printenv | grep -i env
+echo $VIRTUAL_ENV 
+deactivate 
+source ../draft/venv/bin/activate
+python app.py 
+python app.py 1943
+cp -r C:\Users\malla\Downloads\bootstrap-4.4.1-dist.zip\bootstrap-4.4.1-dist\css .
+cp -r C:/Users/malla/Downloads/bootstrap-4.4.1-dist.zip/bootstrap-4.4.1-dist/css .
+cd beta
+touch plainmail.sh
+chmod a+rx plainmail.sh

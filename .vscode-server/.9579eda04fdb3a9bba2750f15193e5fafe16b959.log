@@ -9,13 +9,27 @@
 
 
 IP Address: 149.130.15.5
-Extension host agent listening on 44477
+Extension host agent listening on 46469
 
 
-[09:54:39] Extension host agent started.
-[09:54:40] [127.0.0.1][8bfc23d8][ExtensionHostConnection] New connection established.
-[09:54:40] [127.0.0.1][2c4af673][ManagementConnection] New connection established.
+[11:39:52] Extension host agent started.
+[11:39:52] [127.0.0.1][e924d899][ExtensionHostConnection] New connection established.
+[11:39:52] [127.0.0.1][d03e9db0][ManagementConnection] New connection established.
 bash: cannot set terminal process group (-1): Inappropriate ioctl for device
 bash: no job control in this shell
-[09:54:40] [127.0.0.1][8bfc23d8][ExtensionHostConnection] <6572> Launched Extension Host Process.
-[09:55:12] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[11:39:53] [127.0.0.1][e924d899][ExtensionHostConnection] <5617> Launched Extension Host Process.
+[11:40:04] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[11:45:38] [127.0.0.1][d03e9db0][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:45:39] [127.0.0.1][e924d899][ExtensionHostConnection] <5617> Extension Host Process exited with code: 0, signal: null.
+Last EH closed, waiting before shutting down
+[11:45:39] Last EH closed, waiting before shutting down
+Got delay-shutdown request while in shutdown timeout, delaying
+[11:45:56] Got delay-shutdown request while in shutdown timeout, delaying
+Cancelling previous shutdown timeout
+[11:45:56] Cancelling previous shutdown timeout
+[11:45:56] [127.0.0.1][3d649c8e][ManagementConnection] New connection established.
+[11:45:56] [127.0.0.1][c2f764c1][ExtensionHostConnection] New connection established.
+[11:45:56] [127.0.0.1][c2f764c1][ExtensionHostConnection] <7311> Launched Extension Host Process.
+[11:46:04] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+New EH opened, aborting shutdown
+[11:50:56] New EH opened, aborting shutdown

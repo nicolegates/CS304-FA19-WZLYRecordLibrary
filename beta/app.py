@@ -221,23 +221,37 @@ def update(aid):
                                         a = album,
                                         total = len(albums))
             
+            # autofill with information from Spotify API
             if action == "Autocomplete with Spotify":
                 conn = getters.getConn('cs304reclib_db')
+
                 artistnm = form['album-artist']
                 albumnm = form['album-name']
                 fmt = form['album-format']
+
                 spotifyres = spotify.getAlbum(artistnm, albumnm)
-                props = spotify.getProps(spotifyres)
-                album_id = props['embed'].split(":")[2]
-                result = setters.updateAlbum(aid, albumnm, artistnm,
-                                             props['released'], fmt, None,
-                                             props['art'], props['embed'], album_id,
-                                             conn)
-                add.insertTracks(props['tracks'], aid, conn)
-                add.insertGenres(props['genres'], aid, conn)
-                
-                if (result == True):
-                    album = getters.getAlbumByID(aid, conn)
+
+                # if data from Spotify is available
+                if spotifyres is not False:
+                    props = spotify.getProps(spotifyres)
+                    album_id = props['embed'].split(":")[2]
+                    result = setters.updateAlbum(aid, albumnm, artistnm,
+                                                props['released'], fmt, None,
+                                                props['art'], props['embed'], album_id,
+                                                conn)
+                    add.insertTracks(props['tracks'], aid, conn)
+                    add.insertGenres(props['genres'], aid, conn)
+                    
+                    if (result == True):
+                        album = getters.getAlbumByID(aid, conn)
+                        return render_template('update.html',
+                                                incompletes = albums,
+                                                a = album,
+                                                total = len(albums))
+                # if data from Spotify is not available
+                else:
+                    flash('''Data from Spotify is not available
+                             for this album. Please update information manually.''')
                     return render_template('update.html',
                                             incompletes = albums,
                                             a = album,
@@ -247,6 +261,7 @@ def update(aid):
             if action == 'Delete Album':
                 setters.deleteAlbum(aid, conn)
                 flash("Album " + str(aid) + " was deleted")
+                albums = getters.getIncompletes(conn)
                 return render_template('update.html',
                                         incompletes = albums,
                                         a = {},
@@ -340,7 +355,7 @@ def insert():
         artist = request.form.get('album-artist')
         
         res = setters.insertAlbum(name, artist, conn)
-        aid = res['aid']
+        aid = res
 
         if res == None:
             flash("Unable to insert album. Please try again.")

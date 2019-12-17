@@ -19,11 +19,11 @@ def insertAlbum(name, artist, conn):
                         values (%s, %s, %s)''',
                         [name, artist, 'cd'])
         curs.execute('select LAST_INSERT_ID()')
-        aid = curs.fetchone()
+        aid = curs.fetchone()['LAST_INSERT_ID()']
         return aid
     except:
         return None
-
+        
 def updateAlbum(aid, name, artist, year,
                 fmt, location, art, embed,
                 spotify_album_id, conn):

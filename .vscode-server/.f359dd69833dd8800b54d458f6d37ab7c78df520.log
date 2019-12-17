@@ -9,32 +9,30 @@
 
 
 IP Address: 149.130.15.5
-Extension host agent listening on 46277
+Extension host agent listening on 34304
 
 
-[14:01:50] Extension host agent started.
-[14:01:51] [127.0.0.1][8aa5b388][ExtensionHostConnection] New connection established.
+[10:40:07] Extension host agent started.
+[10:40:08] [127.0.0.1][3943a9a0][ExtensionHostConnection] New connection established.
 bash: cannot set terminal process group (-1): Inappropriate ioctl for device
 bash: no job control in this shell
-[14:01:51] [127.0.0.1][b59f4d48][ManagementConnection] New connection established.
-[14:01:51] [127.0.0.1][8aa5b388][ExtensionHostConnection] <32035> Launched Extension Host Process.
-[14:02:00] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
-Error: write EPIPE
-    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:83:16) {
-  errno: 'EPIPE',
-  code: 'EPIPE',
-  syscall: 'write'
-}
-Error: Unexpected SIGPIPE
-    at process.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/bootstrap.js:5:192)
-    at process.emit (events.js:200:13)
-Error: Unexpected SIGPIPE
-    at process.<anonymous> (/students/cs304reclib/.vscode-server/bin/f359dd69833dd8800b54d458f6d37ab7c78df520/out/bootstrap.js:5:192)
-    at process.emit (events.js:200:13)
-[16:20:39] [127.0.0.1][b59f4d48][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
-[19:20:33] [127.0.0.1][8aa5b388][ExtensionHostConnection] <32035> Extension Host Process exited with code: 0, signal: null.
-Last EH closed, waiting before shutting down
-[19:20:33] Last EH closed, waiting before shutting down
-[19:20:39] [127.0.0.1][b59f4d48][ManagementConnection] The reconnection grace time of 3h has expired, so the connection will be disposed.
-Last EH closed, shutting down
-[19:25:33] Last EH closed, shutting down
+[10:40:08] [127.0.0.1][5c66a4e9][ManagementConnection] New connection established.
+[10:40:08] [127.0.0.1][3943a9a0][ExtensionHostConnection] <32487> Launched Extension Host Process.
+[10:40:18] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[10:42:46] [127.0.0.1][f739dd9e][ManagementConnection] New connection established.
+[10:42:46] [127.0.0.1][d83a46d3][ExtensionHostConnection] New connection established.
+[10:42:46] [127.0.0.1][d83a46d3][ExtensionHostConnection] <376> Launched Extension Host Process.
+[10:42:53] [127.0.0.1][f739dd9e][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[10:42:54] [127.0.0.1][d83a46d3][ExtensionHostConnection] <376> Extension Host Process exited with code: 0, signal: null.
+[10:43:01] [127.0.0.1][d6b402df][ManagementConnection] New connection established.
+[10:43:01] [127.0.0.1][444cbddd][ExtensionHostConnection] New connection established.
+[10:43:01] [127.0.0.1][444cbddd][ExtensionHostConnection] <488> Launched Extension Host Process.
+[10:43:12] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[11:24:04] [127.0.0.1][5c66a4e9][ManagementConnection] The client has reconnected.
+[11:24:04] [127.0.0.1][3943a9a0][ExtensionHostConnection] The client has reconnected.
+[11:36:46] [127.0.0.1][5c66a4e9][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:36:48] [127.0.0.1][3943a9a0][ExtensionHostConnection] <32487> Extension Host Process exited with code: 0, signal: null.
+[11:37:03] [127.0.0.1][a34d627a][ManagementConnection] New connection established.
+[11:37:03] [127.0.0.1][f7cc7de6][ExtensionHostConnection] New connection established.
+[11:37:03] [127.0.0.1][f7cc7de6][ExtensionHostConnection] <5111> Launched Extension Host Process.
+[11:37:13] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
