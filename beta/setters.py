@@ -12,7 +12,8 @@ def getConn(db):
 
 def insertAlbum(name, artist, conn):
     '''takes a user-inputted album and
-    adds it to the album table'''
+    adds it to the album table. If the insert
+    fails, returns None.'''
     
     try:
         name = fixThes(name, ', the')
@@ -21,28 +22,30 @@ def insertAlbum(name, artist, conn):
         artist = fixThes(artist, ', the')
 
         curs = dbi.dictCursor(conn)
-        curs.execute('insert into album (name, artist, fmt) ' +\
-                     'values (%s, %s, %s)', [name, artist, 'cd'])
-        curs.execute('select aid from album where ' +\
-                     'name = %s and artist = %s;', [name, artist])
+        curs.execute('''insert into album (name, artist, fmt)
+                        values (%s, %s, %s)''',
+                        [name, artist, 'cd'])
+        curs.execute('select LAST_INSERT_ID()')
         aid = curs.fetchone()
         return aid
     except:
         return None
 
-def updateAlbum(aid, name, artist, year, fmt,
-                location, art, embed, spotify_album_id, conn):
-    '''Updates an album. Returns True if successful, False if not.'''
+def updateAlbum(aid, name, artist, year,
+                fmt, location, art, embed,
+                spotify_album_id, conn):
+    '''Updates an album. Returns True if
+    successful, False if not.'''
     curs = dbi.dictCursor(conn)
     
     try:
-        curs.execute('update album ' +\
-                    'set name = %s, artist = %s, year = %s, ' +\
-                    'fmt = %s, location = %s, art = %s, embed = %s, ' +\
-                    'spotify_album_id = %s ' +\
-                    'where aid = %s;',
-                    [name, artist, year, fmt, location,
-                    art, embed, spotify_album_id, aid])
+        curs.execute('''update album
+                        set name = %s, artist = %s, year = %s,
+                        fmt = %s, location = %s, art = %s, embed = %s,
+                        spotify_album_id = %s
+                        where aid = %s;''',
+                        [name, artist, year, fmt, location,
+                        art, embed, spotify_album_id, aid])
         return True
     except:
         return False
@@ -59,13 +62,11 @@ def checkout(aid, bid, conn):
     due = today + timedelta(30)
 
     curs = dbi.dictCursor(conn)
-    curs.execute('insert into reservation (checkout, due, returned, aid, bid) ' +\
-                 'values (%s, %s, %s, %s, %s)', [today, due, 0, aid, bid])
-    
-    curs.execute('select due from reservation where rid = LAST_INSERT_ID()')
-    due = curs.fetchone()
-    
-    return due['due']
+    curs.execute('''insert into reservation
+                        (checkout, due, returned, aid, bid)
+                    values (%s, %s, %s, %s, %s);''',
+                    [today, due, 0, aid, bid])
+    return due
 
 def checkin(rid, conn):
     '''given a reservation ID, updates
@@ -75,21 +76,26 @@ def checkin(rid, conn):
     curs = dbi.dictCursor(conn)
     
     try:
-        curs.execute('update reservation ' +\
-                        'set returned = 1 where rid = %s;',
+        curs.execute('''update reservation
+                        set returned = 1 where rid = %s;''',
                         [rid])
-        curs.execute('select ' +\
-                        'album.name ' +\
-                        'from reservation ' +\
-                        'inner join album ' +\
-                            'on reservation.aid = album.aid ' +\
-                        'where reservation.rid = %s;', [rid])
+        curs.execute('''
+                    select album.name
+                        from reservation
+                    inner join album
+                        on reservation.aid = album.aid
+                    where reservation.rid = %s;
+                    ''', [rid])
         album = curs.fetchone()
         return album['name']
     except:
         return None
 
 def checkUser(bid, name, username, conn):
+    '''Checks whether a person is already in the
+    person table. If they are, returns False, 
+    if they are not, inserts them and returns True.'''
+    
     curs = dbi.dictCursor(conn)
 
     curs.execute('select * from person where bid = %s', [bid])

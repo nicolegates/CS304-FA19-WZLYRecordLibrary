@@ -21,17 +21,17 @@ def searchArtists(query, conn):
     '''returns all artists matching a query'''
 
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from album ' +\
-                 'where artist like %s',
-                  ['%' + query + '%'])
+    curs.execute('''select * from album
+                    where artist like %s''',
+                    ['%' + query + '%'])
     return curs.fetchall()
 
 def searchYear(query, conn):
     '''returns all albums from given year'''
 
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from album ' +\
-                 'where year = %s',
+    curs.execute('''select * from album
+                    where year = %s''',
                   [query])
     return curs.fetchall()
 
@@ -39,11 +39,12 @@ def searchGenre(query, conn):
     '''returns all albums of a specific genre'''
 
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from album a ' +\
-                 'inner join genre g ' +\
-                    'on a.aid = g.aid ' +\
-                 'where g.name like %s ' +\
-                 'group by a.aid;', ['%' + query + '%'])
+    curs.execute('''select * from album a
+                    inner join genre g
+                        on a.aid = g.aid
+                    where g.name like %s
+                    group by a.aid;''',
+                    ['%' + query + '%'])
     
     return curs.fetchall()
     
@@ -53,11 +54,12 @@ def searchTrack(query, conn):
     the query in their track list'''
 
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from album a ' +\
-                 'inner join track t ' +\
-                    'on a.aid = t.aid ' +\
-                 'where t.name like %s ' +\
-                 'group by a.aid;', ['%' + query + '%'])
+    curs.execute('''select * from album a
+                    inner join track t
+                        on a.aid = t.aid
+                    where t.name like %s
+                    group by a.aid;''',
+                    ['%' + query + '%'])
 
     return curs.fetchall()
 
@@ -77,8 +79,8 @@ def getReservation(aid, conn):
     '''gets the most recent reservation
     for a particular album id'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from reservation where aid = %s ' +\
-                  'order by due desc limit 1;', [aid])
+    curs.execute('''select * from reservation where aid = %s
+                    order by due desc limit 1;''', [aid])
     
     return curs.fetchone()
 
@@ -88,26 +90,26 @@ def getReservations(filter, conn):
     curs = dbi.dictCursor(conn)
 
     if filter == 'all':
-        curs.execute('select ' +\
-                        'reservation.*, person.name, ' +\
-                        'album.name as album_name, album.artist ' +\
-                     'from reservation ' +\
-                        'inner join person ' +\
-                            'on reservation.bid = person.bid ' +\
-                        'inner join album ' +\
-                            'on reservation.aid = album.aid;')
+        curs.execute('''select
+                        reservation.*, person.name,
+                        album.name as album_name, album.artist
+                     from reservation
+                        inner join person
+                            on reservation.bid = person.bid
+                        inner join album
+                            on reservation.aid = album.aid;''')
 
     if filter == 'overdue':
-        curs.execute('select ' +\
-                        'reservation.*, person.name, ' +\
-                        'album.name as album_name, album.artist ' +\
-                     'from reservation ' +\
-                        'inner join person ' +\
-                            'on reservation.bid = person.bid ' +\
-                        'inner join album ' +\
-                            'on reservation.aid = album.aid ' +\
-                     'where reservation.due <= CURDATE() ' +\
-                        'and reservation.returned = 0;')
+        curs.execute('''select
+                        reservation.*, person.name,
+                        album.name as album_name, album.artist
+                     from reservation
+                        inner join person
+                            on reservation.bid = person.bid
+                        inner join album
+                            on reservation.aid = album.aid
+                     where reservation.due <= CURDATE()
+                        and reservation.returned = 0;''')
     
     return curs.fetchall()
 
@@ -137,69 +139,68 @@ def getArtist(artist, conn):
 def getIncompletes(conn):
     '''returns all albums with incomplete info'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from album where ' +\
-                 'year IS NULL')
+    curs.execute('''select * from album where
+                    year IS NULL''')
     incompletes = curs.fetchall()
     return incompletes
 
 def getActiveReservationsByID(bid, conn):
     '''returns all active reservations for a particular user'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select ' +\
-                        'reservation.*, person.name, ' +\
-                        'album.name as album_name, album.artist ' +\
-                     'from reservation ' +\
-                        'inner join person ' +\
-                            'on reservation.bid = person.bid ' +\
-                        'inner join album ' +\
-                            'on reservation.aid = album.aid ' +\
-                     'where person.bid = %s ' +\
-                        'and reservation.returned = 0', [bid])
+    curs.execute('''select
+                        reservation.*, person.name,
+                        album.name as album_name, album.artist
+                    from reservation
+                        inner join person
+                            on reservation.bid = person.bid
+                        inner join album
+                            on reservation.aid = album.aid
+                    where person.bid = %s
+                        and reservation.returned = 0;''', [bid])
     res = curs.fetchall()
     return res
 
 def getOverdueReservationsByID(bid, conn):
     '''returns all overdue reservations for a particular user'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select ' +\
-                        'reservation.*, person.name, ' +\
-                        'album.name as album_name, album.artist ' +\
-                     'from reservation ' +\
-                        'inner join person ' +\
-                            'on reservation.bid = person.bid ' +\
-                        'inner join album ' +\
-                            'on reservation.aid = album.aid ' +\
-                     'where person.bid = %s ' +\
-                        'and reservation.returned = 0 ' +\
-                        'and reservation.due <= CURDATE()', [bid])
+    curs.execute('''select
+                        reservation.*, person.name,
+                        album.name as album_name, album.artist
+                    from reservation
+                        inner join person
+                            on reservation.bid = person.bid
+                        inner join album
+                            on reservation.aid = album.aid
+                    where person.bid = %s
+                        and reservation.returned = 0
+                        and reservation.due <= CURDATE()''', [bid])
     res = curs.fetchall()
     return res
 
 def getAllReservationsByID(bid, conn):
     '''returns all reservations ever made by a particular user'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select * from reservation where ' +\
-                 'bid = %s', [bid])
+    curs.execute('''select * from reservation where
+                    bid = %s''', [bid])
     res = curs.fetchall()
     return res
 
 def getOverdueEmails(conn):
     '''returns all usernames who have overdue items'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select ' \
-                    ' username ' +\
-                 'from person ' +\
-                    'inner join reservation ' +\
-                        'on reservation.bid = person.bid ' +\
-                 'where reservation.due <= CURDATE() ' +\
-                    'and reservation.returned = 0;')
+    curs.execute('''select username
+                        from person
+                    inner join reservation
+                        on reservation.bid = person.bid
+                    where reservation.due <= CURDATE()
+                    and reservation.returned = 0;''')
     return curs.fetchall()
 
 def getBIDFromUsername(conn, username):
     '''get bid from username'''
     curs = dbi.dictCursor(conn)
-    curs.execute('select bid from person where ' +\
-                 'username = %s', [username])
+    curs.execute('''select bid from person where
+                    username = %s''', [username])
     return curs.fetchone()
     
 def getAdmins(conn):
