@@ -291,8 +291,6 @@ def profile():
                             name = name,
                             now = now)
 
-# TODO
-# Implement logged in/not logged in
 @app.route('/checkin/', methods=['GET','POST'])
 def checkin():
     conn = getters.getConn('cs304reclib_db')
@@ -315,8 +313,6 @@ def checkin():
                            reservations = reservations,
                            name = name)
 
-# TODO
-# Implement logged in/not logged in
 @app.route("/checkout/", methods=['POST'])
 def checkout():
     '''Checks out a movie (using Ajax) and
@@ -343,7 +339,6 @@ def insert():
         name = request.form.get('album-name')
         artist = request.form.get('album-artist')
         
-        # expand to handle duplicates? (if album already exists)
         res = setters.insertAlbum(name, artist, conn)
         aid = res['aid']
 

@@ -44,7 +44,6 @@
             allow="encrypted-media"></iframe>
 {% endif %}
 
-<!-- show genres -->
 {% if genres != None %}
     <h1>Genres</h1>
     {% for g in genres %}
@@ -52,22 +51,23 @@
     {% endfor %}
 {% endif %}
 
-<!-- show tracks -->
-<!-- if there's no embed but there are tracks, show the tracks -->
-<!-- {% if tracks != None %}
-    <p>{{ tracks }}</p>
-{% endif %} -->
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 
     var login = document.getElementById('logged_in')['value'];
 
+    // if the user isn't logged in,
+    // hides the checkout button
     if (login == 'False') {
         $(".checkout").hide();
     }
+    // if the user is logged in,
+    // shows the checkout button
     else {
         $(".checkout").show();
+
+        // shows checkout confirmation dialogue
+        // when clicked
         $(".checkout").click(function(){
             if (confirm("Do you want to check out {{ album['name'] }}?")) {
                 var aid = "{{ album['aid'] }}"
@@ -84,7 +84,7 @@
                     alert(msg)
                 }, 'json');
             } else {
-                console.log("nooooooo")
+                console.log("No")
             }
         }); 
     }

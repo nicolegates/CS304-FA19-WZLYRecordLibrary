@@ -4,22 +4,22 @@
     <title>WZLY Record Library</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="topnav">
     <a id="active"class="active" href='/'>Home</a>
-    <a id="signin" href='/login/'>Sign In</a>
-    <a id="logout" href='/logout/'>Sign Out</a>
-    <a id="profile" href='/profile/'>Profile</a>
-    <a id="checkin" href='/checkin/'>Check in materials</a>
+    <a id="signin" href="{{ url_for('login') }}">Sign In</a>
+    <a id="logout" href="{{ url_for('logout') }}">Sign Out</a>
+    <a id="profile" href="{{ url_for('profile') }}">Profile</a>
+    <a id="checkin" href="{{ url_for('checkin') }}">Check in materials</a>
     <div class="dropdown">
         <button class="dropbtn">Admin</button>
         <div class="dropdown-content">
-            <a href='/insert/'>Insert Album</a>
-            <a href='/update/'>Delete/Update Album</a>
-            <a href='/reservation/'>View Reservations</a>
+            <a href="{{ url_for('insert') }}">Insert Album</a>
+            <a href="{{ url_for('update') }}">Delete/Update Album</a>
+            <a href="{{ url_for('reservation') }}">View Reservations</a>
         </div>
       </div>
 

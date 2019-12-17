@@ -3,13 +3,6 @@ from add import *
 from datetime import date
 from datetime import timedelta
 
-def getConn(db):
-    '''Returns a database connection for that db'''
-    dsn = dbi.read_cnf()
-    conn = dbi.connect(dsn)
-    conn.select_db(db)
-    return conn
-
 def insertAlbum(name, artist, conn):
     '''takes a user-inputted album and
     adds it to the album table. If the insert

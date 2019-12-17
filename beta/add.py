@@ -149,9 +149,6 @@ def lowData(row, conn):
     
     return aid
 
-# conn = getConn('cs304reclib_db')
-# addAlbums(conn)
-
 def updateThe(column, conn):
     '''Addresses format variations including "the"
     ex. changes "Beatles, The" to "The Beatles"'''
@@ -171,7 +168,6 @@ def updateThe(column, conn):
     # iterate through all albums where a value ends with 'the'
     for album in fixes:
         print("processing " + str(count) + " of " + str(len(fixes)))
-        print(album)
         
         fix = album[column]
         aid = album['aid']
@@ -179,7 +175,6 @@ def updateThe(column, conn):
         # check for both formats
         fix = fixThes(fix, ', the')
         fix = fixThes(fix, ',the')
-        print(fix)
         
         if column == 'name':
             curs.execute("update album set name = %s where aid = %s", [fix, aid])
@@ -189,10 +184,14 @@ def updateThe(column, conn):
         count += 1
 
 def fixThes(name, phrase):
-    
+    '''Given an album name and a 'The'
+    variation to look for (',The' or ', The'),
+    reformats the string to place 'The' at 
+    the beginning and returns it
+    '''
     if phrase in name.lower():
-        i = name.lower().rfind(phrase)
-        # the phrase is the last part of the name
+        i = name.lower().rfind(phrase) 
+        # if the phrase is the last part of the name
         if i == (len(name) - len(phrase)):
             name = 'The ' + name[:i]
     

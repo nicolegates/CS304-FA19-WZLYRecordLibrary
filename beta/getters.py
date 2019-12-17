@@ -8,8 +8,7 @@ def getConn(db):
     return conn
 
 def searchAlbums(query, conn):
-    '''adds tracks and their order
-    to track table'''
+    '''returns all albums matching a query'''
 
     curs = dbi.dictCursor(conn)
     curs.execute('select * from album where name like %s',
@@ -64,7 +63,8 @@ def searchTrack(query, conn):
     return curs.fetchall()
 
 def getAlbumByID(aid, conn):
-    '''returns an album with that id'''
+    '''returns a dictionary representation
+    of an album matching provided id'''
     curs = dbi.dictCursor(conn)
     curs.execute('select * from album where aid = %s', [aid])
     return curs.fetchone()
@@ -114,8 +114,9 @@ def getReservations(filter, conn):
     return curs.fetchall()
 
 def getGenres(aid, conn):
-    '''gets genres for an album
-    given album's id'''
+    '''returns a list of dictionaries
+    containing the name of the genre and
+    the album's ID'''
     curs = dbi.dictCursor(conn)
     curs.execute('select * from genre where aid = %s', [aid])
     
@@ -208,3 +209,7 @@ def getAdmins(conn):
     curs = dbi.dictCursor(conn)
     curs.execute("select username from person where is_admin = 1")
     return curs.fetchall()
+
+# conn = getConn('cs304reclib_db')
+# genres = getGenres(14168, conn)
+# print(genres)
