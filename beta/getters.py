@@ -210,6 +210,19 @@ def getAdmins(conn):
     curs.execute("select username from person where is_admin = 1")
     return curs.fetchall()
 
-# conn = getConn('cs304reclib_db')
-# genres = getGenres(14168, conn)
-# print(genres)
+def isAdmin(username, conn):
+    '''checks if user is an admin'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('''select is_admin
+                    from person where username = %s''',
+                [username])
+    if curs.fetchone()['is_admin'] == 1:
+        return True
+    else:
+        return False
+
+def getGenreList(conn):
+    '''gets all genres'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('''select distinct name from genre''')
+    return curs.fetchall()

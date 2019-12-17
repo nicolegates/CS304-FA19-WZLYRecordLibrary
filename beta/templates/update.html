@@ -16,9 +16,10 @@
 </form>
 
 <div id="update-form">
-    <p>Use "None" to set a field to null. Format must be set to 'cd' or 'record.'
+    <p>Use "None" to set a field to null. <b>Format</b> must be set to 'cd' or 'record.'
     If 'Autocomplete with Spotify' is selected, information from Spotify
-    will be automatically inserted where available.
+    will be automatically inserted where available. For <b>Album Art</b>, please insert
+    a link to a valid .png or .jpg file. <b>Spotify Embed</b> must be in the following format: spotify:album:1MmVkhiwTH0BkNOU3nw5d3
     </p>
 
     <form method=POST action="/update/{{ a['aid'] }}">

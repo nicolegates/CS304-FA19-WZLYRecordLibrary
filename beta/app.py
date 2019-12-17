@@ -23,16 +23,8 @@ app.config['CAS_SERVER'] = 'https://login.wellesley.edu:443'
 app.config['CAS_AFTER_LOGIN'] = 'logged_in'
 app.config['CAS_LOGIN_ROUTE'] = '/module.php/casserver/cas.php/login'
 app.config['CAS_LOGOUT_ROUTE'] = '/module.php/casserver/cas.php/logout'
-# need to figure out which port we can use
 app.config['CAS_AFTER_LOGOUT'] = 'http://cs.wellesley.edu:1943/'
 app.config['CAS_VALIDATE_ROUTE'] = '/module.php/casserver/serviceValidate.php'
-# app.config['CAS_AFTER_LOGOUT'] = 'after_logout'
-
-# app.secret_key = os.getenv('secret_key')
-# app.secret_key = ''.join([ random.choice(('ABCDEFGHIJKLMNOPQRSTUVXYZ' +
-#                                           'abcdefghijklmnopqrstuvxyz' +
-#                                           '0123456789'))
-#                            for i in range(20) ])
 
 app.config['TRAP_BAD_REQUEST_ERRORS'] = True
 
@@ -40,6 +32,8 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = True
 def index():
     if 'CAS_USERNAME' in session:
         is_logged_in = True
+        conn = getters.getConn('cs304reclib_db')
+        session['admin'] = getters.isAdmin(session['CAS_USERNAME'], conn)
     else:
         is_logged_in = False
 
@@ -110,19 +104,13 @@ def album(aid):
 def artist(artist):
     conn = getters.getConn('cs304reclib_db')
     albums = getters.getArtist(artist, conn)
-    
-    if len(albums) > 0:
-        return render_template('artist.html',
-                                artist=artist,
-                                albums=albums )
-    else:
-        # Need to implement error page
-        print('Show error page')
-        return redirect(request.referrer)
+
+    return render_template('artist.html',
+                            artist=artist,
+                            albums=albums )
 
 @app.route('/login/', methods=['GET','POST'])
 def login():
-    # return redirect(url_for('index'))
     if '_CAS_TOKEN' in session:
         token = session['_CAS_TOKEN']
     if 'CAS_USERNAME' in session:
@@ -154,18 +142,27 @@ def logged_in():
 
     setters.checkUser(bid, name, username, conn)
     return redirect(url_for('index'))
-    # return redirect(request.referrer)
 
 @app.route('/after_logout/')
 def after_logout():
     flash('Successfully logged out!')
     return redirect(url_for('index'))
-    # return redirect(request.referrer)
 
 @app.route('/update/<aid>', methods=['GET','POST'])
 @app.route('/update/', defaults={'aid': None}, methods=['GET','POST'])
 def update(aid):
     '''ADMIN FEATURE'''
+
+    # boots user back to home page
+    # if they're not logged in or
+    if 'CAS_USERNAME' not in session:
+        flash("Please log in before using this feature.")
+        return redirect(url_for('index'))
+    # if they're not an admin 
+    if (session['admin'] == False):
+        flash("Sorry, you do not have permission to access this page.")
+        return redirect(url_for('index'))
+
     conn = getters.getConn('cs304reclib_db')
     
     # get albums with incomplete fields
@@ -244,6 +241,7 @@ def update(aid):
                     
                     if (result == True):
                         album = getters.getAlbumByID(aid, conn)
+                        flash(albumnm + " successfully updated with data from Spotify.")
                         return render_template('update.html',
                                                 incompletes = albums,
                                                 a = album,
@@ -274,6 +272,15 @@ def update(aid):
 
 @app.route('/reservation/', methods=['GET','POST'])
 def reservation():
+    # boots user back to home page
+    # if they're not logged in or
+    if 'CAS_USERNAME' not in session:
+        flash("Please log in before using this feature.")
+        return redirect(url_for('index'))
+    # if they're not an admin 
+    if (session['admin'] == False):
+        flash("Sorry, you do not have permission to access this page.")
+        return redirect(url_for('index'))
 
     conn = getters.getConn('cs304reclib_db')
     res = getters.getReservations('all', conn)
@@ -295,19 +302,33 @@ def reservation():
 
 @app.route('/profile/', methods=['GET','POST'])
 def profile():
+    # boots user back to home page
+    # if they're not logged in
+    if 'CAS_USERNAME' not in session:
+        flash("Please log in before using this feature.")
+        return redirect(url_for('index'))
+
     conn = getters.getConn('cs304reclib_db')
     bid = session['CAS_ATTRIBUTES']['cas:id']
     name = session['CAS_ATTRIBUTES']['cas:givenName']
     res = getters.getActiveReservationsByID(bid, conn)
     now = datetime.date.today()
+    genres = getters.getGenreList(conn)
 
     return render_template('profile.html',
                             reservations = res,
                             name = name,
-                            now = now)
+                            now = now,
+                            genres = genres)
 
 @app.route('/checkin/', methods=['GET','POST'])
 def checkin():
+    # boots user back to home page
+    # if they're not logged in
+    if 'CAS_USERNAME' not in session:
+        flash("Please log in before using this feature.")
+        return redirect(url_for('index'))
+
     conn = getters.getConn('cs304reclib_db')
     
     bid = session['CAS_ATTRIBUTES']['cas:id']
@@ -332,6 +353,11 @@ def checkin():
 def checkout():
     '''Checks out a movie (using Ajax) and
     sends confirmation as JSON response'''
+    # boots user back to home page
+    # if they're not logged in
+    if 'CAS_USERNAME' not in session:
+        flash("Please log in before using this feature.")
+        return redirect(url_for('index'))
 
     conn = getters.getConn('cs304reclib_db')
 
@@ -342,12 +368,18 @@ def checkout():
     
     return jsonify(due=due)
 
-@app.route('/admin/', methods=['GET','POST'])
-def admin():
-    return redirect(url_for('index'))
-
 @app.route('/insert/', methods=['GET','POST'])
 def insert():
+    # boots user back to home page
+    # if they're not logged in or
+    if 'CAS_USERNAME' not in session:
+        flash("Please log in before using this feature.")
+        return redirect(url_for('index'))
+    # if they're not an admin 
+    if (session['admin'] == False):
+        flash("Sorry, you do not have permission to access this page.")
+        return redirect(url_for('index'))
+
     conn = getters.getConn('cs304reclib_db')
     
     if request.method == 'POST':
