@@ -2,16 +2,64 @@
 
 {% block content %}
 
-<h1>Showing reservations for {{ name }}:</h1>
+<div id="show-genres">
+    <h1>{{name}}'s Top 3 Genres:</h1>
+    <h2>{{genreOne}}, {{genreTwo}}, {{genreThree}}</h2>
+    
+    <button id="update-button">Update Preferences</button>
+</div>
 
-<!-- <form method=POST action='/profile/'>
-    <label for="reservation-view">Choose a view:</label>
-    <select id="reservation-view" name="reservation-view">
-        <option value="all">All</option>
-        <option value="overdue">Overdue</option>
-    </select>
-    <input type="submit" class="submit-btn" name="submit-btn" value="Choose">
-</form> -->
+<div id="update-genres">
+    <p>Update your favorite genres to see personalized recommendations:</p>
+    <form method=POST action='/profile/'>
+        <div class="form-row">
+        <select id="genre1" name="genre1" class="dropdown" >
+            <label for='first'>First</label>
+            <option value="first" name="first" id="first">First</option>
+            {% for genre in genres %}
+            <option value="{{genre['name']}}">{{genre['name']}}</option>
+            {% endfor %}
+        </select><br></br>
+        <select id="genre2" name="genre2" class="dropdown" >
+            <label for='second'>Second</label>
+            <option value="second" name="second" id="second">Second</option>
+            {% for genre in genres %}
+            <option value="{{genre['name']}}">{{genre['name']}}</option>            
+            {% endfor %}
+        </select><br></br>
+        <select id="genre3" name="genre3" class="dropdown" >
+            <label for='third'>Third</label>
+            <option value="third" name="third" id="third">Third</option>
+            {% for genre in genres %}
+            <option value="{{genre['name']}}">{{genre['name']}}</option>            
+            {% endfor %}
+        </select><br></br>
+        <input type="submit" class="btn btn-light" name="submit" value="submit">
+    </div>
+    </form>
+</div>
+<br>
+<h1>Recommended albums for {{name}}:</h1>
+    <ul class="grid">
+        {% for r in results %}
+        <li class="tile">
+            <a href="{{ url_for('album', aid=r['aid']) }}">
+                {% if r['art'] != None%}
+                <img class="cover" src={{ r['art'] }}></img>
+                {% else %}
+                <img class="cover" src="{{ url_for('static', filename='../static/defaultrecord.png') }}"></img>
+                {% endif %}
+            </a>
+            <p class="detail">{{ r['name'] }} by {{ r['artist'] }}</p>
+            {% if r['year'] != None %}
+            <p class="year">{{ r['year'] }}</p>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+
+<h1>Showing reservations for {{ name }}:</h1>
 
 <table>
     <tr>
@@ -40,4 +88,30 @@
     {% endfor %}
 </table>
       
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    var genre1 = "{{ genreOne }}"
+
+    $("#show-genres").hide()
+    $("#update-genres").hide()
+
+    // if the user has added genres,
+    // show their preferences
+    if (genre1 != 'None'){
+        $("#show-genres").show();
+    }
+    // if the user hasn't added genres,
+    // show the update form
+    else {
+        $("#update-genres").show();
+    }
+
+    // if the user wants to update
+    // their genres, show the form
+    $("#update-button").click(function() {
+        $("#update-genres").toggle();
+    });
+</script>
+
 {% endblock %}

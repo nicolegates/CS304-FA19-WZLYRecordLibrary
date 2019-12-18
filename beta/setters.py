@@ -122,3 +122,18 @@ def insertGenres(aid, genres, conn):
     for g in genrelist:
         curs.execute('insert into genre (name, aid)' +\
                      'values (%s, %s)', [g, aid])
+
+def updateUserGenres(bid, genre1, genre2, genre3, conn):
+    '''updates user's genre preferences'''
+    
+    try:
+        curs = dbi.dictCursor(conn)
+        curs.execute('''update person
+                        set genre1 = %s,
+                            genre2 = %s,
+                            genre3 = %s
+                        where bid = %s;''', [genre1, genre2, genre3, bid])
+        return True
+    except:
+        return False
+

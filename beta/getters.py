@@ -224,5 +224,24 @@ def isAdmin(username, conn):
 def getGenreList(conn):
     '''gets all genres'''
     curs = dbi.dictCursor(conn)
-    curs.execute('''select distinct name from genre''')
+    curs.execute('''select distinct `name` from genre
+                    order by `name`''')
+    return curs.fetchall()
+
+def getUserGenres(conn, bid):
+    '''gets users top genres'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('''select genre1, genre2, genre3 from person
+                    where bid=%s''', [bid])
+    return curs.fetchone()
+
+def getRecommendedAlbums(conn, genre1, genre2, genre3):
+    '''gets random albums from the users top genres'''
+    curs = dbi.dictCursor(conn)
+    curs.execute('''select * from album 
+                    inner join genre
+                    on album.aid = genre.aid
+                    where genre.name = %s or genre.name = %s or genre.name = %s
+                    order by RAND() 
+                    limit 5''', (genre1, genre2, genre3))
     return curs.fetchall()

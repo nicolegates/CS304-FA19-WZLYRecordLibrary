@@ -272,6 +272,8 @@ def update(aid):
 
 @app.route('/reservation/', methods=['GET','POST'])
 def reservation():
+    '''ADMIN FEATURE'''
+
     # boots user back to home page
     # if they're not logged in or
     if 'CAS_USERNAME' not in session:
@@ -304,22 +306,67 @@ def reservation():
 def profile():
     # boots user back to home page
     # if they're not logged in
+
     if 'CAS_USERNAME' not in session:
         flash("Please log in before using this feature.")
         return redirect(url_for('index'))
-
+    
     conn = getters.getConn('cs304reclib_db')
     bid = session['CAS_ATTRIBUTES']['cas:id']
     name = session['CAS_ATTRIBUTES']['cas:givenName']
+
+    
     res = getters.getActiveReservationsByID(bid, conn)
+
     now = datetime.date.today()
+    
     genres = getters.getGenreList(conn)
+    userGenrePrefs = getters.getUserGenres(conn, bid)
+    userGenre1 = userGenrePrefs['genre1']
+    userGenre2 = userGenrePrefs['genre2']
+    userGenre3 = userGenrePrefs['genre3']
+    
+    if userGenre1 is not None \
+        and userGenre2 is not None \
+        and userGenre3 is not None:
+        results = getters.getRecommendedAlbums(conn, userGenre1, userGenre2, userGenre3)
+    else:
+        results = getters.getRandomAlbums(conn)
+    
+    if request.method == 'POST':
+        form = request.form
+        genre1 = form['genre1']
+        genre2 = form['genre2']
+        genre3 = form['genre3']  
+
+        conn = getters.getConn('cs304reclib_db')
+        success = setters.updateUserGenres(bid, genre1, genre2, genre3, conn)
+
+        if success:
+            flash("Genre preferences updated successfully.")
+
+            # retrieve user prefs again, since they've been updated
+            userGenrePrefs = getters.getUserGenres(conn, bid)
+            results = getters.getRecommendedAlbums(conn, genre1, genre2, genre3)
+            return render_template('profile.html',
+                                    reservations = res,
+                                    now = now,
+                                    name = name,
+                                    genres = genres,
+                                    genreOne = userGenrePrefs['genre1'],
+                                    genreTwo = userGenrePrefs['genre2'],
+                                    genreThree = userGenrePrefs['genre3'],
+                                    results = results)
 
     return render_template('profile.html',
                             reservations = res,
-                            name = name,
                             now = now,
-                            genres = genres)
+                            name = name,
+                            genres = genres,
+                            genreOne = userGenrePrefs['genre1'], 
+                            genreTwo = userGenrePrefs['genre2'],
+                            genreThree = userGenrePrefs['genre3'],
+                            results = results)
 
 @app.route('/checkin/', methods=['GET','POST'])
 def checkin():
@@ -351,8 +398,8 @@ def checkin():
 
 @app.route("/checkout/", methods=['POST'])
 def checkout():
-    '''Checks out a movie (using Ajax) and
-    sends confirmation as JSON response'''
+    '''Checks out an album (using Ajax) and
+    sends due date as JSON response'''
     # boots user back to home page
     # if they're not logged in
     if 'CAS_USERNAME' not in session:

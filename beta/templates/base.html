@@ -110,13 +110,25 @@
     {% endblock %}
 
     {% block footer %}
+    <footer>
+        <ul class="validators">
+            <li><a href="//validator.w3.org/check?uri=referer"><img 
+                src="//cs.wellesley.edu/~cs204/Icons/valid-html5v2.png"
+                alt="Valid HTML 5"
+                title="Valid HTML 5"  
+                height="31" width="88"/></a></li>
+        
+        <li><a href="//jigsaw.w3.org/css-validator/check/referer"><img 
+                style="border:0;width:88px;height:31px"
+                src="//cs.wellesley.edu/~cs204/Icons/vcss.gif"
+                alt="Valid CSS!"/></a></li>
+        </ul>
+    </footer>
+    {% endblock %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script>
-
         var login = document.getElementById('logged_in')['value'];
 
         if (login == 'False') {
@@ -143,12 +155,7 @@
         }
     </script>
 
-    {% endblock %}
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
