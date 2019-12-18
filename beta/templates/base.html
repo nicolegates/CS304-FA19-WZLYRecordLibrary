@@ -36,22 +36,18 @@
                 <li class="nav-item">
                     <a class="nav-link" id="checkin" href="{{ url_for('checkin') }}">Check in materials</a>
                 </li>
-                <li class="nav-item dropdown" id="admin-features">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ url_for('insert') }}">Insert Album</a>
-                        <a class="dropdown-item" href="{{ url_for('update') }}">Delete/Update Album</a>
-                        <a class="dropdown-item" href="{{ url_for('reservation') }}">View Reservations</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" id="insert" href="{{ url_for('insert') }}">Insert Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="update" href="{{ url_for('update') }}">Update Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="reservation" href="{{ url_for('reservation') }}">Reservations</a>
                 </li>
             </ul>
         </div>
     </nav>
-
-
 
     <div id='flashes'>
         {% with messages = get_flashed_messages() %}
@@ -137,20 +133,26 @@
             $("#profile").hide();
             $("#checkin").hide();
             $("#signin").show();
-            $("#admin-features").hide();
+            $("#insert").hide();
+            $("#update").hide();
+            $("#reservation").hide();
         }
         else {
             $("#signin").hide();
             $("#logout").show();
             $("#profile").show();
             $("#checkin").show();
-            $("#admin-features").hide();
+            $("#insert").hide();
+            $("#update").hide();
+            $("#reservation").hide();
 
             // checks whether the user is an admin
             // and hides/shows admin features
             admin = "{{ session['admin'] }}";
             if (admin == 'True') {
-                $("#admin-features").show();
+                $("#insert").show();
+                $("#update").show();
+                $("#reservation").show();
             }
         }
     </script>

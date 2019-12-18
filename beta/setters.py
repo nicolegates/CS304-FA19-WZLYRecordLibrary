@@ -100,7 +100,6 @@ def checkUser(bid, name, username, conn):
                      'values (%s, %s, %s, 0)', [bid, name, username])
         return True
     
-
 def insertTracks(aid, tracks, conn):
     '''takes a user-inputted list of tracks
     and updates the track table'''
